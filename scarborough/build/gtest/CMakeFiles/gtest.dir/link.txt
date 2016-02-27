@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -O2 -g -DNDEBUG   -shared -Wl,-soname,libgtest.so -o /home/ubuntu/workspace/sandbox/scarborough/lib/libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/ubuntu/workspace/sandbox/scarborough/build/gtest/src -lpthread -Wl,-rpath,/home/ubuntu/workspace/sandbox/scarborough/build/gtest/src 

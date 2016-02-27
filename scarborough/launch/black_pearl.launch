@@ -1,0 +1,11 @@
+<launch>
+	
+	<group ns="black_pearl1">
+		<node pkg="black_pearl" name="soft" type="listener"/>
+	</group>
+	
+	<group ns="black_pearl1">
+		<node pkg="black_pearl" name="Arduino" type="ArdComm"/>
+	</group>
+	
+</launch>
