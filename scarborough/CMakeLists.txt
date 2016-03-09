@@ -28,26 +28,35 @@ rosbuild_genmsg()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
-##############################################################################
-#ArdComm Executable
-##############################################################################
-#link libraries for ArdComm(src/arduino_comm.cpp)
-FIND_LIBRARY(LOCAL_LIBS libserial.so libserial.a  /usr/local/lib/)
 
+
+
+
+#############################################################################
+#Example talker and listeners
+#############################################################################
 #rosbuild_add_executable(talker src/talker.cpp)
-rosbuild_add_executable(listener src/listener.cpp)
+#rosbuild_add_executable(listener src/listener.cpp)
+
+##############################################################################
+#Ardi2c Executable
+##############################################################################
+#link libraries for ArdI2C(src/arduino_comm.cpp)
+FIND_LIBRARY(LOCAL_LIBS libserial.so libserial.a  /usr/local/lib/)
 
 #Add ArdComm executable and add required external libraries for it.
 
-rosbuild_add_executable(ArdComm src/Arduino_Communications/arduino_comm.cpp)
-target_link_libraries(ArdComm ${LOCAL_LIBS})
+rosbuild_add_executable(ArdI2C src/Arduino_Communications/arduino_i2c.cpp
+							   src/Arduino_Communications/arduino_comm.cpp
+							   src/Arduino_Communications/I2Cdev.cpp)
+target_link_libraries(ArdI2C ${LOCAL_LIBS})
 
-######################################################################################
+##############################################################################
 #IMU Executable
-#####################################################################################
+##############################################################################
 
 #This executable will be used for getting IMU data from the IMU and publishing it.
 rosbuild_add_executable(IMU src/IMU/IMU.cpp
 						src/IMU/MPU6050.cpp
-						src/IMU/I2Cdev.cpp
-						)
+						src/IMU/I2Cdev.cpp)
+

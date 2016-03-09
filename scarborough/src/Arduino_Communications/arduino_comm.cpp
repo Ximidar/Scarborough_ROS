@@ -9,38 +9,6 @@
 
 //serial stream is used for opening and using comm ports
 SerialStream port;
-//ArdComm is used to communicate with the arduino
-ArdComm ardcomm;
-//ArdI2C is for communicating with the arduino over the i2c bus. TODO
-//ArdI2C ardi2c;
-
-
-int main(int argc, char **argv){
-
-	ros::init(argc, argv, "arduino_chatter");
-
-	ros::NodeHandle n;
-
-	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>("arduino_chatter", 1000);
-
-	//initialize the port for sending and receiving.
-	ardcomm.init();
-
-	//check ros to see if it is still active
-	while(ros::ok()){
-
-		/*TODO
-		 * populate the data types from the arduino comm port
-		 * Determine future things to pull from the arduino over the comm port
-		 */
-		ardcomm.interperet_message(ardcomm.motor.motor);
-
-		ard_pub.publish(ardcomm.motor);
-
-		ros::spinOnce();
-	}
-
-}
 
 ArdComm::ArdComm(){
 	handshake = false;
@@ -71,8 +39,9 @@ string ArdComm::listen(){
 		 * line. TODO
 		 */
 		 message_count++;
-		if ( message_count > 200){
-			cout << "ERROR MESSAGE OVER 200 CHARACTERS!!!";
+		 //cout << message << endl;
+		if ( message_count > 1000){
+			cout << "ERROR MESSAGE OVER 1000 CHARACTERS!!!";
 			message = "";
 			break;
 		}
@@ -114,9 +83,9 @@ void ArdComm::init(){
  * the '\' is for the listen() function which uses it to find the end of a line.
  * TODO (Matt Pedler) Find other things that need to be pulled from the comm port
  */
-void ArdComm::interperet_message(boost::array<double, 6ul>& motor){
-	message = listen();
+void ArdComm::interperet_message(string message){
 
+	cout << message << endl;
 	while( message != ""){
 		pos = message.find(delimiter);
 		parse = message.substr(0, pos);
@@ -125,12 +94,12 @@ void ArdComm::interperet_message(boost::array<double, 6ul>& motor){
 			switch(parse[i]){
 
 			case 'M':
-				cout << "Case M Found!" << endl;
+				//cout << "Case M Found!" << endl;
 
 				if(atoi(parse.substr(1,2).c_str()) >= 0 && atoi(parse.substr(1,2).c_str()) <=5 ){
 
 					//populate the correct motor with the correct value
-					motor[atoi(parse.substr(1,2).c_str())] = atof(message.substr(3,pos).c_str());
+					motor.motor[atoi(parse.substr(1,2).c_str())] = atof(message.substr(3,pos).c_str());
 
 					//set cursor to next variable location.
 					i = pos;
@@ -144,7 +113,10 @@ void ArdComm::interperet_message(boost::array<double, 6ul>& motor){
 				break;
 
 			default:
-				cout << "default hit \n";
+				cout << "default hit \n" << message;
+				i = pos;
+				//erase parsed values
+				message.erase(0 , pos + delimiter.length());
 				break;
 			}//end switch
 		}//end for

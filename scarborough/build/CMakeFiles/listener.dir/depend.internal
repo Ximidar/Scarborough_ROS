@@ -3,6 +3,7 @@
 
 CMakeFiles/listener.dir/src/listener.cpp.o
  ../msg_gen/cpp/include/scarborough/Motor_Speed.h
+ ../msg_gen/cpp/include/scarborough/YPR.h
  /home/ubuntu/workspace/sandbox/scarborough/src/listener.cpp
  /opt/ros/jade/include/XmlRpcDecl.h
  /opt/ros/jade/include/XmlRpcValue.h

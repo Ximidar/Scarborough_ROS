@@ -8,6 +8,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "scarborough/Motor_Speed.h"
+#include "scarborough/YPR.h"
 #include <string>
 
 using namespace std;
@@ -22,6 +23,14 @@ void chatterCallback(const scarborough::Motor_Speed& msg)
 {
 	for(int i =0 ; i < 6 ; i++){
 		ROS_INFO("I heard: [%s]", boost::lexical_cast<std::string>(msg.motor[i]).c_str());
+	}
+
+}
+
+void getdata(const scarborough::YPR& msg){
+	for(int i=0;i<2;i++){
+
+		ROS_INFO("I heard: [%s]", boost::lexical_cast<std::string>(msg.YPR[i]).c_str());
 	}
 
 }
@@ -64,8 +73,8 @@ int main(int argc, char **argv)
    * away the oldest ones.
    */
   //ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
-  ros::Subscriber ard = arduino.subscribe("arduino_chatter", 1000, chatterCallback);
-
+  //ros::Subscriber ard = arduino.subscribe("arduino_chatter", 1000, chatterCallback);
+  ros::Subscriber ard = arduino.subscribe("IMU_DATA", 200, getdata);
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
    * callbacks will be called from within this thread (the main one).  ros::spin()

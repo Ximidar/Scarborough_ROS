@@ -4,8 +4,8 @@
  *  Created on: Feb 12, 2016
  *      Author: ubuntu
  */
-#define NO_I2C
-//#define NORMAL_OP
+//#define NO_I2C
+#define NORMAL_OP
 
 #include "IMU.h"
 //TODO create a debug function that will override addressing the i2c bus since some computers don't have a usable one.
@@ -14,21 +14,25 @@ IMU imu;
 
 //TODO this main needs to have a ROS publisher attached to it.
 int main(int argc, char **argv) {
-	ros::init(argc, argv, "arduino_chatter");
+	cout << "initializing ROS" << endl;
+	ros::init(argc, argv, "IMU_Chatter");
 
 	ros::NodeHandle n;
 
-	ros::Publisher ard_pub = n.advertise<scarborough::YPR>("IMU_DATA", 200);
+	ros::Publisher imu_pub = n.advertise<scarborough::YPR>("IMU_DATA", 200);
+
+//Do normal operations if normal op is defined
 #ifdef NORMAL_OP
+	cout << "Initializing IMU" << endl;
     imu.IMU_init();
 
     while(ros::ok()){
     	imu.read_IMU();
 
-    	ard_pub.publish(imu.ypr_ROS.YPR);
+    	imu_pub.publish(imu.ypr_ROS.YPR);
 
     	ros::spinOnce();
-    	//loop_rate.sleep();
+
     }
 #endif
 //if there's no I2C on the computer then use this to spit out some numbers.
@@ -148,7 +152,7 @@ void IMU::read_IMU(){
 	                            << " "
 	                            << imu.ypr_ROS.YPR[1]
 							    << " "
-							    << imu.ypr_ROS.YPR[2] << endl;
+							    << imu.ypr_ROS.YPR[2];
 	        #endif
 
 	        #ifdef OUTPUT_READABLE_REALACCEL
