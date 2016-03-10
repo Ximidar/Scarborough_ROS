@@ -96,10 +96,10 @@ void ArdComm::interperet_message(string message){
 			case 'M':
 				//cout << "Case M Found!" << endl;
 
-				if(atoi(parse.substr(1,2).c_str()) >= 0 && atoi(parse.substr(1,2).c_str()) <=5 ){
+				if(atoi(parse.substr(1,2).c_str()) >= 0 && atoi(parse.substr(1,2).c_str()) <=6 ){
 
 					//populate the correct motor with the correct value
-					motor.motor[atoi(parse.substr(1,2).c_str())] = atof(message.substr(3,pos).c_str());
+					motor.motor[atoi(parse.substr(1,2).c_str()) - 1] = atof(message.substr(3,pos).c_str());
 
 					//set cursor to next variable location.
 					i = pos;

@@ -22,6 +22,9 @@
 #include "I2Cdev.h"
 #include "scarborough/YPR.h"
 #include <math.h>
+#include <stdint.h>
+#include <inttypes.h>
+#include <unistd.h>
 
 using namespace std;
 

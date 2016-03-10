@@ -34,7 +34,7 @@ int main(int argc, char **argv){
 	ros::NodeHandle n;
 
 	ros::Subscriber imu;
-	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>("ARD_I2C", 1000);
+	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>("ARD_I2C", 200);
 
 	i2c.init(); // does nothing.
 
@@ -49,6 +49,7 @@ int main(int argc, char **argv){
 
 		//read message from arduino and parse it
 		ardcomm.interperet_message(i2c.ardRead());
+		//cout << i2c.ardRead() << endl;
 
 		//publish motor data to the ARD_I2C
 		ard_pub.publish(ardcomm.motor);
@@ -145,7 +146,7 @@ string ArdI2C::ardRead(){
 	 m6s = "";
 
 	//load all strings with variables from the arduino read.
-	for(int j = 0; j<128;j++){
+	for(int j = 0; j<30;j++){
 		if(m1[j] != delim){
 			m1s += m1[j];
 		}
@@ -167,8 +168,11 @@ string ArdI2C::ardRead(){
 	}
 
 	//load all individual strings into one big string
+	//cout << " M1: " << m1 << endl;
 	arduino_message = m1s + m2s + m3s + m4s + m5s + m6s;
 
+	//output to console for debug purposes.
+	cout << arduino_message << endl;
 	return arduino_message;
 }
 
