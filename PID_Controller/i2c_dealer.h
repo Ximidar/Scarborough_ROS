@@ -2,6 +2,7 @@
 #define I2C_DEALER_H
 
 #include <Arduino.h>
+#include <math.h>
 
 //variable definitions
 #define YAW 0

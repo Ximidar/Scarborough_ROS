@@ -156,7 +156,7 @@ string ArdI2C::ardRead(){
 			m3s += m3[j];
 		}
 		if(m4[j] != delim){
-			m14 += m4[j];
+			m4s += m4[j];
 		}
 		if(m5[j] != delim){
 			m5s += m5[j];

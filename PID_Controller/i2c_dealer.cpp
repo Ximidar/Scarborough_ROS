@@ -16,8 +16,7 @@ void i2c::first_num(int variable, int reference[4]){
       switch(variable){
 
         //Yaw case
-        case 0:
-          
+        case 0:          
           set_y((double)(reference[1] * 256) + reference[2]);
           switcher = false;
           break;
