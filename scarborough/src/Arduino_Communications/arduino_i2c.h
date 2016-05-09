@@ -10,8 +10,16 @@
 
 //definitions for I2Cdev
 #define ARDUINO_DEV_ADDR 0x04
-#define ARDUINO_REG_ADDR 0x00
-#define ARDUINO_LENGTH 0x04
+
+//definitions for PID control aggression
+#define AGRESSIVE 0
+#define MEDIUM 1
+#define FINE 2
+
+//definitions for updating desired
+#define YAW 0
+#define DEPTH 1
+
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
@@ -35,14 +43,19 @@ public:
 	void ardWrite(double imu_data[3]); //write the current IMU data to the arduino over the i2c bus
 	string ardRead();
 	void init(); //this will initialize the i2c bus for the arduino.
+	void update_desired(int type, int value);
+	void pid_Control(int motor, int mode);
+	void pid_monitor();
 
 private:
 	unsigned long concat(unsigned long x, unsigned long y); //concatenates two unsigned numbers
 
 	int orientation; //1=Y, 2=P, 3=R can't use zero
 	int sign; //1 = negative 2 = positive
-	double number;
+
 	int final_reference[2];
+	int desired_yaw;
+	int desired_depth;
 
 	//read from arduino variables
 	uint8_t m1[30];

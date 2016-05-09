@@ -95,7 +95,7 @@ void ArdComm::interperet_message(string message){
 
 			case 'M':
 				//cout << "Case M Found!" << endl;
-
+				//check if the addressed variable is within the appropriate array bounds
 				if(atoi(parse.substr(1,2).c_str()) >= 0 && atoi(parse.substr(1,2).c_str()) <=6 ){
 
 					//populate the correct motor with the correct value

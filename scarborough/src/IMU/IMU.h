@@ -89,10 +89,13 @@ public:
 	IMU();
 	void IMU_init();
 	void read_IMU();
+	void set_zero();
 
 	//variables
 	scarborough::YPR ypr_ROS;
 	double debug_d;
+	float ypr_offset[3];
+
 
 
 

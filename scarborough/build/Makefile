@@ -166,6 +166,19 @@ IMU/fast:
 .PHONY : IMU/fast
 
 #=============================================================================
+# Target rules for targets named Motor_Controller
+
+# Build rule for target.
+Motor_Controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Motor_Controller
+.PHONY : Motor_Controller
+
+# fast build rule for target.
+Motor_Controller/fast:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/build
+.PHONY : Motor_Controller/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -634,6 +647,54 @@ src/IMU/MPU6050.cpp.s:
 	$(MAKE) -f CMakeFiles/IMU.dir/build.make CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.s
 .PHONY : src/IMU/MPU6050.cpp.s
 
+src/Motor_Controls/I2Cdev.o: src/Motor_Controls/I2Cdev.cpp.o
+.PHONY : src/Motor_Controls/I2Cdev.o
+
+# target to build an object file
+src/Motor_Controls/I2Cdev.cpp.o:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/I2Cdev.cpp.o
+.PHONY : src/Motor_Controls/I2Cdev.cpp.o
+
+src/Motor_Controls/I2Cdev.i: src/Motor_Controls/I2Cdev.cpp.i
+.PHONY : src/Motor_Controls/I2Cdev.i
+
+# target to preprocess a source file
+src/Motor_Controls/I2Cdev.cpp.i:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/I2Cdev.cpp.i
+.PHONY : src/Motor_Controls/I2Cdev.cpp.i
+
+src/Motor_Controls/I2Cdev.s: src/Motor_Controls/I2Cdev.cpp.s
+.PHONY : src/Motor_Controls/I2Cdev.s
+
+# target to generate assembly for a file
+src/Motor_Controls/I2Cdev.cpp.s:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/I2Cdev.cpp.s
+.PHONY : src/Motor_Controls/I2Cdev.cpp.s
+
+src/Motor_Controls/motors.o: src/Motor_Controls/motors.cpp.o
+.PHONY : src/Motor_Controls/motors.o
+
+# target to build an object file
+src/Motor_Controls/motors.cpp.o:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors.cpp.o
+.PHONY : src/Motor_Controls/motors.cpp.o
+
+src/Motor_Controls/motors.i: src/Motor_Controls/motors.cpp.i
+.PHONY : src/Motor_Controls/motors.i
+
+# target to preprocess a source file
+src/Motor_Controls/motors.cpp.i:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors.cpp.i
+.PHONY : src/Motor_Controls/motors.cpp.i
+
+src/Motor_Controls/motors.s: src/Motor_Controls/motors.cpp.s
+.PHONY : src/Motor_Controls/motors.s
+
+# target to generate assembly for a file
+src/Motor_Controls/motors.cpp.s:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors.cpp.s
+.PHONY : src/Motor_Controls/motors.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -642,6 +703,7 @@ help:
 	@echo "... depend"
 	@echo "... ArdI2C"
 	@echo "... IMU"
+	@echo "... Motor_Controller"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_genmsg_py"
@@ -691,6 +753,12 @@ help:
 	@echo "... src/IMU/MPU6050.o"
 	@echo "... src/IMU/MPU6050.i"
 	@echo "... src/IMU/MPU6050.s"
+	@echo "... src/Motor_Controls/I2Cdev.o"
+	@echo "... src/Motor_Controls/I2Cdev.i"
+	@echo "... src/Motor_Controls/I2Cdev.s"
+	@echo "... src/Motor_Controls/motors.o"
+	@echo "... src/Motor_Controls/motors.i"
+	@echo "... src/Motor_Controls/motors.s"
 .PHONY : help
 
 

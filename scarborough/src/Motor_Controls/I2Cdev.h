@@ -49,6 +49,10 @@ THE SOFTWARE.
 #define FALSE	(0==1)
 #endif
 
+#include <stdint.h>
+#include <inttypes.h>
+#include <iostream>
+
 class I2Cdev {
     public:
         I2Cdev();

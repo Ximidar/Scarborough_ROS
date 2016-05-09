@@ -1,9 +1,13 @@
 (cl:defpackage scarborough-msg
   (:use )
   (:export
-   "<YPR>"
-   "YPR"
    "<MOTOR_SPEED>"
    "MOTOR_SPEED"
+   "<DESIRED_DIRECTIONS>"
+   "DESIRED_DIRECTIONS"
+   "<YPR>"
+   "YPR"
+   "<KILL_SWITCH>"
+   "KILL_SWITCH"
   ))
 

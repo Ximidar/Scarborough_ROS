@@ -12,7 +12,7 @@
 //declare imu object
 IMU imu;
 
-//TODO this main needs to have a ROS publisher attached to it.
+
 int main(int argc, char **argv) {
 	cout << "initializing ROS" << endl;
 	ros::init(argc, argv, "IMU_Chatter");
@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
 #ifdef NORMAL_OP
 	cout << "Initializing IMU" << endl;
     imu.IMU_init();
+    //imu.set_zero(); // many offsets have calculated this number as YPR_OFFSET: -13.1352 -0.686341 -0.702521
 
     while(ros::ok()){
     	imu.read_IMU();
@@ -61,6 +62,10 @@ int main(int argc, char **argv) {
 
 IMU::IMU(){
 	dmpReady = false;
+
+	ypr_offset[0] = -13.1352;
+	ypr_offset[1] = -0.686341;
+	ypr_offset[2] = -0.702521;
 
 }
 
@@ -145,9 +150,11 @@ void IMU::read_IMU(){
 	            mpu.dmpGetGravity(&gravity, &q);
 	            mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 	            //printf("ypr  %7.2f %7.2f %7.2f    ", ypr[0] * 180/M_PI, ypr[1] * 180/M_PI, ypr[2] * 180/M_PI);
-	            imu.ypr_ROS.YPR[0] =  ypr[0] * 180/M_PI;
-	            imu.ypr_ROS.YPR[1] =  ypr[1] * 180/M_PI;
-	            imu.ypr_ROS.YPR[2] =  ypr[2] * 180/M_PI;
+	            imu.ypr_ROS.YPR[0] =  (ypr[0] * 180/M_PI) - ypr_offset[0];
+	            imu.ypr_ROS.YPR[1] =  (ypr[1] * 180/M_PI) - ypr_offset[1];
+	            imu.ypr_ROS.YPR[2] =  (ypr[2] * 180/M_PI) - ypr_offset[2];
+
+	            //output current rotation
 	            cout << "YPR: " << imu.ypr_ROS.YPR[0]
 	                            << " "
 	                            << imu.ypr_ROS.YPR[1]
@@ -177,6 +184,51 @@ void IMU::read_IMU(){
 
 	        printf("\n");
 	    }
+}
+/*
+ * This function waits for the IMU to settle then sets the zero point for the entire class.
+ *
+ */
+
+void IMU::set_zero(){
+	cout << "Setting Zero\n";
+	for(int i = 0; i < 50000; i++){
+		// if programming failed, don't try to do anything
+		if (!dmpReady) return;
+		// get current FIFO count
+		fifoCount = mpu.getFIFOCount();
+
+		if (fifoCount == 1024) {
+			// reset so we can continue cleanly
+			mpu.resetFIFO();
+			printf("FIFO overflow!\n");
+
+			// otherwise, check for DMP data ready interrupt (this should happen frequently)
+		} else if (fifoCount >= 42) {
+			// read a packet from FIFO
+			mpu.getFIFOBytes(fifoBuffer, packetSize);
+
+			// display Euler angles in degrees
+			mpu.dmpGetQuaternion(&q, fifoBuffer);
+			mpu.dmpGetGravity(&gravity, &q);
+			mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+			//printf("ypr  %7.2f %7.2f %7.2f    ", ypr[0] * 180/M_PI, ypr[1] * 180/M_PI, ypr[2] * 180/M_PI);
+			ypr_offset[0] =  ypr[0] * 180/M_PI;
+			ypr_offset[1] =  ypr[1] * 180/M_PI;
+			ypr_offset[2] =  ypr[2] * 180/M_PI;
+			cout <<"\r" << i ;
+
+
+		}
+	}
+	cout << "\nYPR_OFFSET: " <<  ypr_offset[0]
+						   << " "
+				           <<  ypr_offset[1]
+						   << " "
+						   <<  ypr_offset[2]
+						   <<"\n";
+
+
 }
 
 

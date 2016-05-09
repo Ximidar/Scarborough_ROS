@@ -60,3 +60,9 @@ rosbuild_add_executable(IMU src/IMU/IMU.cpp
 						src/IMU/MPU6050.cpp
 						src/IMU/I2Cdev.cpp)
 
+##############################################################################
+#Motor Executable
+##############################################################################
+
+rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors.cpp
+										 src/Motor_Controls/I2Cdev.cpp)

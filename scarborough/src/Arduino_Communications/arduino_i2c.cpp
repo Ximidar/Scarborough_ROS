@@ -74,6 +74,8 @@ ArdI2C::ArdI2C(){
 	 m4s = "";
 	 m5s = "";
 	 m6s = "";
+	 desired_yaw = 0;
+	 desired_depth = 4;
 
 }
 //use this if ever needed... It used to do something but is now a ghost of algorithms past
@@ -168,7 +170,7 @@ string ArdI2C::ardRead(){
 	}
 
 	//load all individual strings into one big string
-	//cout << " M1: " << m1 << endl;
+
 	arduino_message = m1s + m2s + m3s + m4s + m5s + m6s;
 
 	//output to console for debug purposes.
@@ -176,6 +178,145 @@ string ArdI2C::ardRead(){
 	return arduino_message;
 }
 
+
+/*
+ * This function will update the desired yaw(reg 9) and desired depth (reg 10)
+ * Then write it to the arduino.
+ */
+void ArdI2C::update_desired(int type, int value){
+
+	switch(type){
+
+		case YAW:
+			i2cdev.writeWord(4, 9, (uint16_t)value);
+			desired_yaw = value;
+			break;
+
+		case DEPTH:
+			i2cdev.writeWord(4, 10, (uint16_t)value);
+			desired_depth = value;
+			break;
+	}
+
+}
+
+/*
+ * This function writes to the i2c bus the values for kp, ki, and kd. The number it writes
+ * will be divided by 100 on the arduino side so 100 would turn into 1, while 25 would turn into 0.25.
+ * This is because we cannot send doubles and its such a small number that it works well this way.
+ *
+ * TODO Matt Pedler: In the future we need to expand this to be able to switch any motors PID value
+ * TODO Matt Pedler: check the registers on this to make sure they are the correct ones
+ */
+
+void ArdI2C::pid_Control(int motor, int mode){
+
+	//Set up bool for switching
+	bool switcher = false;
+
+	int kp_addr;
+	int ki_addr;
+	int kd_addr;
+
+	//detirmine motor addresses TODO Matt Pedler
+	while(switcher != true){
+			switch(motor){
+			case 1:
+				kp_addr = 6;
+				ki_addr = 7;
+				kd_addr = 8;
+				switcher = false;
+				break;
+
+			case 2:
+				kp_addr = 6;
+				ki_addr = 7;
+				kd_addr = 8;
+				switcher = false;
+				break;
+
+			case 3:
+				kp_addr = 6;
+				ki_addr = 7;
+				kd_addr = 8;
+				switcher = false;
+				break;
+
+			case 4:
+				kp_addr = 6;
+				ki_addr = 7;
+				kd_addr = 8;
+				switcher = false;
+				break;
+
+			case 5:
+				kp_addr = 6;
+				ki_addr = 7;
+				kd_addr = 8;
+				switcher = false;
+				break;
+
+			case 6:
+				kp_addr = 6;
+				ki_addr = 7;
+				kd_addr = 8;
+				switcher = false;
+				break;
+			}
+		}
+	switcher = false;
+
+	//set up while loop for switching
+	while(switcher != true){
+		switch(mode){
+		case AGRESSIVE:
+			i2cdev.writeWord(4, (uint8_t)kp_addr, 100);
+			i2cdev.writeWord(4, (uint8_t)ki_addr, 100);
+			i2cdev.writeWord(4, (uint8_t)kd_addr, 100);
+			switcher = true;
+			break;
+		case MEDIUM:
+			i2cdev.writeWord(4, (uint8_t)kp_addr, 100);
+			i2cdev.writeWord(4, (uint8_t)ki_addr, 25);
+			i2cdev.writeWord(4, (uint8_t)kd_addr, 5);
+			switcher = true;
+			break;
+
+		case FINE:
+			i2cdev.writeWord(4, (uint8_t)kp_addr, 100);
+			i2cdev.writeWord(4, (uint8_t)ki_addr, 5);
+			i2cdev.writeWord(4, (uint8_t)kd_addr, 1);
+			switcher = true;
+			break;
+		}
+	}
+
+}
+
+/*
+ * This function monitors desired values vs reference values and changes the PID state accordingly
+ */
+
+void ArdI2C::pid_monitor(){
+
+	double disparity = fabs(imu_data[0] - desired_yaw);
+
+	if(disparity > 10){
+
+		pid_Control(1, AGRESSIVE);
+		pid_Control(2, AGRESSIVE);
+
+	}
+	else if(disparity <= 9 && disparity > 5){
+		pid_Control(1, MEDIUM);
+		pid_Control(2, MEDIUM);
+	}
+	else if(disparity <= 5){
+		pid_Control(1, FINE);
+		pid_Control(2, FINE);
+	}
+
+}
 
 
 

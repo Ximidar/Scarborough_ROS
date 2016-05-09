@@ -4,7 +4,9 @@ FILE(REMOVE_RECURSE
   "../src/scarborough/msg"
   "CMakeFiles/ROSBUILD_genmsg_cpp"
   "../msg_gen/cpp/include/scarborough/Motor_Speed.h"
+  "../msg_gen/cpp/include/scarborough/Desired_Directions.h"
   "../msg_gen/cpp/include/scarborough/YPR.h"
+  "../msg_gen/cpp/include/scarborough/Kill_Switch.h"
 )
 
 # Per-language clean rules from dependency scanning.

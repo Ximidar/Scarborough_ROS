@@ -15,15 +15,34 @@
 #ifndef HAL_H_
 #define HAL_H_
 
+#include <iostream>
+#include "ros/ros.h"
+#include "scarborough/Desired_Directions"
+
+using namespace std;
 // TODO include data types here.
+#define YAW 0
+#define PITCH 1
+#define ROLL 2
+#define DEPTH 3
 
 
-class hal{
+class Hal{
 	public:
-		hal();
-		void collect(); //collect all information. This means all imu data, vision data, and depth data.
+		Hal();
+		void init();
+		void collection(); //collect all information. This means all imu data, vision data, and depth data.
 		void process(); //process what the information means, for example if we find an orange square and an obstacle we want to go to the obstacle
 		void decide(); // Decide will actually change the state of the machine.
+		void update_desired(int address, int value); // updates desired ypr
+
+	private:
+		ros::NodeHandle n;
+		ros::Publisher desired_direction;
+		ros::Subscriber current_direction;
+		scarborough::Desired_Directions directions;
+
+
 };
 
 

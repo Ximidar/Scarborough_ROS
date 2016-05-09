@@ -5,7 +5,9 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/ROSBUILD_genmsg_py"
   "../src/scarborough/msg/__init__.py"
   "../src/scarborough/msg/_Motor_Speed.py"
+  "../src/scarborough/msg/_Desired_Directions.py"
   "../src/scarborough/msg/_YPR.py"
+  "../src/scarborough/msg/_Kill_Switch.py"
 )
 
 # Per-language clean rules from dependency scanning.

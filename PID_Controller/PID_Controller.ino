@@ -10,7 +10,6 @@ i2c i2c1;
 
 //variables for the i2c exchange
 int reference [4] = {0,0,0,0};
-bool switcher;
 bool positive;
 String sender = "";
 int reg = 0;
@@ -21,7 +20,8 @@ double m1_desired,  m2_desired,  m3_desired,  m4_desired,  m5_desired,  m6_desir
        m1_in,       m2_in,       m3_in,       m4_in,       m5_in,       m6_in,
        m1_out,      m2_out,      m3_out,      m4_out,      m5_out,      m6_out;
 
-double kp = 1, ki = 0.05, kd = 0.25; //we can set this for each motor if nessesary. for right now we will only set one setting for all motors
+ //we can set this for each motor if nessesary. for right now we will only set one setting for all motors
+double kp = 1, ki = 0.05, kd = 0.25;
 
 
 //left / right
@@ -37,9 +37,9 @@ PID m6(&m6_in, &m6_out, &m6_desired, kp, ki, kd, DIRECT);
 
 void setup() {
   
-  Wire.begin(SLAVE);
-  Wire.onReceive(readROS);
-  Wire.onRequest(writeROS);
+  Wire.begin(SLAVE); //set up the arduino as a slave
+  Wire.onReceive(readROS); //function for handling receiving instructions
+  Wire.onRequest(writeROS); //function for handling writing to ROS
 
 
   //initial desireds for all motors
@@ -50,7 +50,7 @@ void setup() {
   m5_desired = 0;
   m6_desired = 0;
 
-  //make desireds for all objects. 
+  //set limits for all motors 
   m1.SetOutputLimits(-32000, 32000);
   m2.SetOutputLimits(-32000, 32000);
   m3.SetOutputLimits(-32000, 32000);
@@ -87,6 +87,13 @@ void loop(){
   m5.Compute();
   m6.Compute();
 
+  m1.SetTunings(kp, ki, kd);
+  m2.SetTunings(kp, ki, kd);
+  m3.SetTunings(kp, ki, kd);
+  m4.SetTunings(kp, ki, kd);
+  m5.SetTunings(kp, ki, kd);
+  m6.SetTunings(kp, ki, kd);
+
     
 }
 
@@ -97,115 +104,120 @@ void readROS(int byteC){
      reference[i] = 0;
   }
 
-
+  //This while loop reads all available bytes over the i2c bus then stores them into reference[]
+  //reference is composed of three values, reference[0] is the addressed register, then reference[1] and reference[2] are the numbers for the register
+  //look further on to see how to extract the number out of reference.
   while(Wire.available()){
 
       reference[count] = Wire.read();
       count++;
 
-    }
-  switcher = true;
-  while(switcher == true){
+  }
+
+  
     switch(reference[0]){
       ///////////////////////////////////Write Requests//////////////////////////////
+
+
+      ///////////////////////////////////YPR WRITES/////////////////////////////////
      //first number for yaw
       case 0:       
-        i2c1.first_num(YAW, reference);
-        switcher = false;
+        i2c1.first_num(YAW, reference);        
         break;
+        
      //second number for yaw
       case 1:        
-        i2c1.second_num(YAW, reference);
-        switcher = false;
+        i2c1.second_num(YAW, reference);        
         break;
+        
       //first number for pitch
       case 2:        
-        i2c1.first_num(PITCH, reference);
-        switcher = false;
+        i2c1.first_num(PITCH, reference);        
         break;
+        
       //second number for pitch
       case 3:        
-        i2c1.second_num(PITCH, reference);
-        switcher = false;
+        i2c1.second_num(PITCH, reference);        
         break;
+        
       //first number for roll
       case 4:        
-        i2c1.first_num(ROLL, reference);
-        switcher = false;
+        i2c1.first_num(ROLL, reference);        
         break;
+        
       //second number for roll
       case 5:        
-        i2c1.second_num(ROLL, reference);
-        switcher = false;
+        i2c1.second_num(ROLL, reference);        
         break;
+
+
+      ///////////////////////////////////////////PID WRITES///////////////////////////////
       //update kp
       case 6:        
-        kp = (double)(reference[1] * 256) + reference[2];
-        switcher = false;
+        kp = (double)(reference[1] * 256) + reference[2];        
         break;
+        
       //update ki
       case 7:        
-        ki = (double)(reference[1] * 256) + reference[2];
-        switcher = false;
+        ki = (double)(reference[1] * 256) + reference[2];        
         break;
+        
       //update kd
       case 8:        
-        kd = (double)(reference[1] * 256) + reference[2];
-        switcher = false;
+        kd = (double)(reference[1] * 256) + reference[2];        
         break;
+
+
+      /////////////////////////////////DESIRED WRITES///////////////////////////////
       //update desired yaw
-      case 9:
+      case 9:        
         m1_desired = (double)(reference[1] * 256) + reference[2];
         m2_desired = (double)(reference[1] * 256) + reference[2];
-        switcher = false;
         break;
-      
+
+      //update desired depth
+      case 10:        
+        m3_desired = (double)(reference[1] * 256) + reference[2];
+        m4_desired = (double)(reference[1] * 256) + reference[2];
+        m5_desired = (double)(reference[1] * 256) + reference[2];
+        m6_desired = (double)(reference[1] * 256) + reference[2];
 
       ////////////////////////////Read Requests///////////////////////////  
       //motor1
       case 51:
-        //writeROS();
-        reg = 1;
-        switcher = false;
-        break;
-      //motor1
-      case 52:
-        //writeROS();
-        reg = 2;
-        switcher = false;
+        reg = 1;        
         break;
       //motor2
-      case 53:
-        //writeROS();
-        reg = 3;
-        switcher = false;
+      case 52:
+        reg = 2;        
         break;
       //motor3
+      case 53:
+        reg = 3;        
+        break;
+      //motor4
       case 54:
-        //writeROS();
-        reg = 4;
-        switcher = false;
+        reg = 4;        
         break;
-      //motor 4
+      //motor5
       case 55:
-        //writeROS();
-        reg = 5;
-        switcher = false;
+        reg = 5;        
         break;
-      //motor 5
+      //motor 6
       case 56:
-        //writeROS();
-        reg = 6;
-        switcher = false;
+        reg = 6;        
         break;
+
+
+      //////////////////////////////////////////DEFAULT///////////////////////////////////////////////////// 
       //in case something messes up heres a default value that will be hit
-      default:       
-        switcher = false;
+      default:          
         break;
     }
-  }
+  
 }
 
+//This function writes motor values to ROS with strings
 void writeROS(){
  
   sender = "";

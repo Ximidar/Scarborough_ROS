@@ -3,6 +3,7 @@
 
 i2c::i2c(){
   switcher = true;
+  switcher1 = true;
   y=0;
   p=0;
   r=0;

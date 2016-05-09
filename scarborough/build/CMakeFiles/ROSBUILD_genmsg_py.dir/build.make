@@ -48,10 +48,12 @@ include CMakeFiles/ROSBUILD_genmsg_py.dir/progress.make
 CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 
 ../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Motor_Speed.py
+../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Desired_Directions.py
 ../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_YPR.py
+../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Kill_Switch.py
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/__init__.py"
-	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/ubuntu/workspace/sandbox/scarborough/msg/Motor_Speed.msg /home/ubuntu/workspace/sandbox/scarborough/msg/YPR.msg
+	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/ubuntu/workspace/sandbox/scarborough/msg/Motor_Speed.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Desired_Directions.msg /home/ubuntu/workspace/sandbox/scarborough/msg/YPR.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Kill_Switch.msg
 
 ../src/scarborough/msg/_Motor_Speed.py: ../msg/Motor_Speed.msg
 ../src/scarborough/msg/_Motor_Speed.py: /opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -83,6 +85,36 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Motor_Speed.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Motor_Speed.msg
 
+../src/scarborough/msg/_Desired_Directions.py: ../msg/Desired_Directions.msg
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/roslib/cmake/../../../lib/roslib/gendeps
+../src/scarborough/msg/_Desired_Directions.py: ../manifest.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/cpp_common/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rostime/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/roscpp_traits/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/roscpp_serialization/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/genmsg/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/genpy/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/message_runtime/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/std_msgs/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/catkin/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/gencpp/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/geneus/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/genlisp/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/message_generation/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rosbuild/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rosconsole/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rosgraph_msgs/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/xmlrpcpp/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/roscpp/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rosgraph/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rospack/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/roslib/package.xml
+../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rospy/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Desired_Directions.py"
+	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Desired_Directions.msg
+
 ../src/scarborough/msg/_YPR.py: ../msg/YPR.msg
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/roslib/cmake/../../../lib/roslib/gendeps
@@ -109,14 +141,46 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/rospack/package.xml
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/roslib/package.xml
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/rospy/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_YPR.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/YPR.msg
+
+../src/scarborough/msg/_Kill_Switch.py: ../msg/Kill_Switch.msg
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/roslib/cmake/../../../lib/roslib/gendeps
+../src/scarborough/msg/_Kill_Switch.py: ../manifest.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/cpp_common/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rostime/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/roscpp_traits/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/roscpp_serialization/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/genmsg/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/genpy/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/message_runtime/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/std_msgs/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/catkin/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/gencpp/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/geneus/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/genlisp/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/message_generation/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rosbuild/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rosconsole/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rosgraph_msgs/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/xmlrpcpp/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/roscpp/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rosgraph/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rospack/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/roslib/package.xml
+../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rospy/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Kill_Switch.py"
+	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Kill_Switch.msg
 
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/_Motor_Speed.py
+ROSBUILD_genmsg_py: ../src/scarborough/msg/_Desired_Directions.py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/_YPR.py
+ROSBUILD_genmsg_py: ../src/scarborough/msg/_Kill_Switch.py
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py.dir/build.make
 .PHONY : ROSBUILD_genmsg_py
 

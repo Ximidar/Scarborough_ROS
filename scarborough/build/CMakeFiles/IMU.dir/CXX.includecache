@@ -28,32 +28,6 @@ ros/macros.h
 ros/assert.h
 ../msg_gen/cpp/include/scarborough/ros/assert.h
 
-/home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.cpp
-stdio.h
--
-stdint.h
--
-stdlib.h
--
-fcntl.h
--
-unistd.h
--
-string.h
--
-errno.h
--
-sys/ioctl.h
--
-sys/types.h
--
-sys/stat.h
--
-linux/i2c-dev.h
--
-I2Cdev.h
-/home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.h
-
 /home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.h
 
 /home/ubuntu/workspace/sandbox/scarborough/src/IMU/IMU.cpp
@@ -85,20 +59,6 @@ I2Cdev.h
 /home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.h
 MPU6050_6Axis_MotionApps20.h
 /home/ubuntu/workspace/sandbox/scarborough/src/IMU/MPU6050_6Axis_MotionApps20.h
-
-/home/ubuntu/workspace/sandbox/scarborough/src/IMU/MPU6050.cpp
-stdio.h
--
-stdlib.h
--
-unistd.h
--
-string.h
--
-stdint.h
--
-MPU6050.h
-/home/ubuntu/workspace/sandbox/scarborough/src/IMU/MPU6050.h
 
 /home/ubuntu/workspace/sandbox/scarborough/src/IMU/MPU6050.h
 I2Cdev.h
