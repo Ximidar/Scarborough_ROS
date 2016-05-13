@@ -24,17 +24,17 @@ struct Motor_Speed_ {
   Motor_Speed_()
   : motor()
   {
-    motor.assign(0.0);
+    motor.assign(0);
   }
 
   Motor_Speed_(const ContainerAllocator& _alloc)
   : motor()
   {
-    motor.assign(0.0);
+    motor.assign(0);
   }
 
-  typedef boost::array<double, 6>  _motor_type;
-  boost::array<double, 6>  motor;
+  typedef boost::array<int32_t, 6>  _motor_type;
+  boost::array<int32_t, 6>  motor;
 
 
   typedef boost::shared_ptr< ::scarborough::Motor_Speed_<ContainerAllocator> > Ptr;
@@ -64,12 +64,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::scarborough::Motor_Speed_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "886f50c7efee6d57fd09029e75bafc63";
+    return "f5f634e2dbc972b6b32d53a35c45b514";
   }
 
   static const char* value(const  ::scarborough::Motor_Speed_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x886f50c7efee6d57ULL;
-  static const uint64_t static_value2 = 0xfd09029e75bafc63ULL;
+  static const uint64_t static_value1 = 0xf5f634e2dbc972b6ULL;
+  static const uint64_t static_value2 = 0xb32d53a35c45b514ULL;
 };
 
 template<class ContainerAllocator>
@@ -86,7 +86,7 @@ template<class ContainerAllocator>
 struct Definition< ::scarborough::Motor_Speed_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "float64[6] motor\n\
+    return "int32[6] motor\n\
 \n\
 ";
   }
@@ -129,7 +129,7 @@ struct Printer< ::scarborough::Motor_Speed_<ContainerAllocator> >
     for (size_t i = 0; i < v.motor.size(); ++i)
     {
       s << indent << "  motor[" << i << "]: ";
-      Printer<double>::stream(s, indent + "  ", v.motor[i]);
+      Printer<int32_t>::stream(s, indent + "  ", v.motor[i]);
     }
   }
 };

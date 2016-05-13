@@ -13,7 +13,11 @@
 #include <iostream>
 #include "scarborough/Motor_Speed.h"
 #include "ros/ros.h"
+#include <stdlib.h>
+#include <algorithm>
+#include <string>
 
+using namespace std;
 
 /*
  * This class is used to set the PID motor values from the arduino to the individual motors.
@@ -25,14 +29,16 @@ class Motors{
 public:
 	void init();
 	void set_motor_speed();
-	void get_motor_values(double motor_raw[6]);
+	void get_motor_values(int motor_raw[6]);
 	int arraySize(double array[]);
+	int i2cConvert(int address);
+	int motor_val[6];
 
 private:
 	//functions
 
 	//variables if needed
-	int motor_val[6];
+
 
 
 

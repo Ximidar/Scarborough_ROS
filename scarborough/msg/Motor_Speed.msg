@@ -1,1 +1,1 @@
-float64[6] motor
+int32[6] motor

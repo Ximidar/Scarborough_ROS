@@ -78,10 +78,8 @@ void ArdComm::init(){
 
 /*
  * This function takes the message from the arduino then parses the statement.
- * a standard statement is M0:123.235;M4:544.23523;M1:665;\ this will break apart this statement
+ * a standard statement is M0:123.235;M4:544.23523;M1:665; this will break apart this statement
  * into an array. the individual statements are broken up by the ";" delimiter
- * the '\' is for the listen() function which uses it to find the end of a line.
- * TODO (Matt Pedler) Find other things that need to be pulled from the comm port
  */
 void ArdComm::interperet_message(string message){
 
@@ -99,7 +97,7 @@ void ArdComm::interperet_message(string message){
 				if(atoi(parse.substr(1,2).c_str()) >= 0 && atoi(parse.substr(1,2).c_str()) <=6 ){
 
 					//populate the correct motor with the correct value
-					motor.motor[atoi(parse.substr(1,2).c_str()) - 1] = atof(message.substr(3,pos).c_str());
+					motor.motor[atoi(parse.substr(1,2).c_str()) - 1] = atoi(message.substr(3,pos).c_str());
 
 					//set cursor to next variable location.
 					i = pos;
@@ -107,6 +105,7 @@ void ArdComm::interperet_message(string message){
 					message.erase(0 , pos + delimiter.length());
 				}//end if
 				else{
+					//reading next char will destroy the bad data by causing a default to occur.
 					cout << "number is not within the bounds of the array" << endl;
 				}
 

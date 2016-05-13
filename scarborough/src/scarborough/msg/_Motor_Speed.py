@@ -7,14 +7,14 @@ import struct
 
 
 class Motor_Speed(genpy.Message):
-  _md5sum = "886f50c7efee6d57fd09029e75bafc63"
+  _md5sum = "f5f634e2dbc972b6b32d53a35c45b514"
   _type = "scarborough/Motor_Speed"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64[6] motor
+  _full_text = """int32[6] motor
 
 """
   __slots__ = ['motor']
-  _slot_types = ['float64[6]']
+  _slot_types = ['int32[6]']
 
   def __init__(self, *args, **kwds):
     """
@@ -34,9 +34,9 @@ class Motor_Speed(genpy.Message):
       super(Motor_Speed, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.motor is None:
-        self.motor = [0.,0.,0.,0.,0.,0.]
+        self.motor = [0,0,0,0,0,0]
     else:
-      self.motor = [0.,0.,0.,0.,0.,0.]
+      self.motor = [0,0,0,0,0,0]
 
   def _get_types(self):
     """
@@ -50,7 +50,7 @@ class Motor_Speed(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_6d.pack(*self.motor))
+      buff.write(_struct_6i.pack(*self.motor))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -62,8 +62,8 @@ class Motor_Speed(genpy.Message):
     try:
       end = 0
       start = end
-      end += 48
-      self.motor = _struct_6d.unpack(str[start:end])
+      end += 24
+      self.motor = _struct_6i.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -89,11 +89,11 @@ class Motor_Speed(genpy.Message):
     try:
       end = 0
       start = end
-      end += 48
-      self.motor = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=6)
+      end += 24
+      self.motor = numpy.frombuffer(str[start:end], dtype=numpy.int32, count=6)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_6d = struct.Struct("<6d")
+_struct_6i = struct.Struct("<6i")

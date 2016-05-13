@@ -51,6 +51,10 @@ int main(int argc, char **argv){
 		ardcomm.interperet_message(i2c.ardRead());
 		//cout << i2c.ardRead() << endl;
 
+
+			cout  <<"motor: "<< ardcomm.motor<< "\n";
+
+
 		//publish motor data to the ARD_I2C
 		ard_pub.publish(ardcomm.motor);
 
