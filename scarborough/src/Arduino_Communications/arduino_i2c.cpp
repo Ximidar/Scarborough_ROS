@@ -52,7 +52,7 @@ int main(int argc, char **argv){
 		//cout << i2c.ardRead() << endl;
 
 
-			cout  <<"motor: "<< ardcomm.motor<< "\n";
+		//cout  <<"motor: "<< ardcomm.motor<< "\n";
 
 
 		//publish motor data to the ARD_I2C
@@ -84,6 +84,11 @@ ArdI2C::ArdI2C(){
 }
 //use this if ever needed... It used to do something but is now a ghost of algorithms past
 void ArdI2C::init(){
+
+
+	//when started this will set the desired yaw to 0 and the desired depth to 4 feet
+	update_desired(YAW, 0);
+	update_desired(DEPTH, 4);
 
 
 
@@ -271,8 +276,9 @@ void ArdI2C::pid_Control(int motor, int mode){
 	switcher = false;
 
 	//set up while loop for switching
-	while(switcher != true){
-		switch(mode){
+
+	switch(mode){
+
 		case AGRESSIVE:
 			i2cdev.writeWord(4, (uint8_t)kp_addr, 100);
 			i2cdev.writeWord(4, (uint8_t)ki_addr, 100);
@@ -292,8 +298,8 @@ void ArdI2C::pid_Control(int motor, int mode){
 			i2cdev.writeWord(4, (uint8_t)kd_addr, 1);
 			switcher = true;
 			break;
-		}
 	}
+
 
 }
 

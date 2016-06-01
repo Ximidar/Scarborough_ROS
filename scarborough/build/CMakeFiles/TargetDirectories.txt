@@ -1,4 +1,5 @@
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/ArdI2C.dir
+/home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/Depth_Sensor.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/IMU.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/Motor_Controller.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir

@@ -153,6 +153,19 @@ ArdI2C/fast:
 .PHONY : ArdI2C/fast
 
 #=============================================================================
+# Target rules for targets named Depth_Sensor
+
+# Build rule for target.
+Depth_Sensor: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Depth_Sensor
+.PHONY : Depth_Sensor
+
+# fast build rule for target.
+Depth_Sensor/fast:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/build
+.PHONY : Depth_Sensor/fast
+
+#=============================================================================
 # Target rules for targets named IMU
 
 # Build rule for target.
@@ -575,6 +588,78 @@ src/Arduino_Communications/arduino_i2c.cpp.s:
 	$(MAKE) -f CMakeFiles/ArdI2C.dir/build.make CMakeFiles/ArdI2C.dir/src/Arduino_Communications/arduino_i2c.cpp.s
 .PHONY : src/Arduino_Communications/arduino_i2c.cpp.s
 
+src/Depth_Sensor/DepthSensor.o: src/Depth_Sensor/DepthSensor.cpp.o
+.PHONY : src/Depth_Sensor/DepthSensor.o
+
+# target to build an object file
+src/Depth_Sensor/DepthSensor.cpp.o:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/DepthSensor.cpp.o
+.PHONY : src/Depth_Sensor/DepthSensor.cpp.o
+
+src/Depth_Sensor/DepthSensor.i: src/Depth_Sensor/DepthSensor.cpp.i
+.PHONY : src/Depth_Sensor/DepthSensor.i
+
+# target to preprocess a source file
+src/Depth_Sensor/DepthSensor.cpp.i:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/DepthSensor.cpp.i
+.PHONY : src/Depth_Sensor/DepthSensor.cpp.i
+
+src/Depth_Sensor/DepthSensor.s: src/Depth_Sensor/DepthSensor.cpp.s
+.PHONY : src/Depth_Sensor/DepthSensor.s
+
+# target to generate assembly for a file
+src/Depth_Sensor/DepthSensor.cpp.s:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/DepthSensor.cpp.s
+.PHONY : src/Depth_Sensor/DepthSensor.cpp.s
+
+src/Depth_Sensor/I2Cdev.o: src/Depth_Sensor/I2Cdev.cpp.o
+.PHONY : src/Depth_Sensor/I2Cdev.o
+
+# target to build an object file
+src/Depth_Sensor/I2Cdev.cpp.o:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/I2Cdev.cpp.o
+.PHONY : src/Depth_Sensor/I2Cdev.cpp.o
+
+src/Depth_Sensor/I2Cdev.i: src/Depth_Sensor/I2Cdev.cpp.i
+.PHONY : src/Depth_Sensor/I2Cdev.i
+
+# target to preprocess a source file
+src/Depth_Sensor/I2Cdev.cpp.i:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/I2Cdev.cpp.i
+.PHONY : src/Depth_Sensor/I2Cdev.cpp.i
+
+src/Depth_Sensor/I2Cdev.s: src/Depth_Sensor/I2Cdev.cpp.s
+.PHONY : src/Depth_Sensor/I2Cdev.s
+
+# target to generate assembly for a file
+src/Depth_Sensor/I2Cdev.cpp.s:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/I2Cdev.cpp.s
+.PHONY : src/Depth_Sensor/I2Cdev.cpp.s
+
+src/Depth_Sensor/anchor.o: src/Depth_Sensor/anchor.cpp.o
+.PHONY : src/Depth_Sensor/anchor.o
+
+# target to build an object file
+src/Depth_Sensor/anchor.cpp.o:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/anchor.cpp.o
+.PHONY : src/Depth_Sensor/anchor.cpp.o
+
+src/Depth_Sensor/anchor.i: src/Depth_Sensor/anchor.cpp.i
+.PHONY : src/Depth_Sensor/anchor.i
+
+# target to preprocess a source file
+src/Depth_Sensor/anchor.cpp.i:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/anchor.cpp.i
+.PHONY : src/Depth_Sensor/anchor.cpp.i
+
+src/Depth_Sensor/anchor.s: src/Depth_Sensor/anchor.cpp.s
+.PHONY : src/Depth_Sensor/anchor.s
+
+# target to generate assembly for a file
+src/Depth_Sensor/anchor.cpp.s:
+	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/anchor.cpp.s
+.PHONY : src/Depth_Sensor/anchor.cpp.s
+
 src/IMU/I2Cdev.o: src/IMU/I2Cdev.cpp.o
 .PHONY : src/IMU/I2Cdev.o
 
@@ -702,6 +787,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... ArdI2C"
+	@echo "... Depth_Sensor"
 	@echo "... IMU"
 	@echo "... Motor_Controller"
 	@echo "... ROSBUILD_genmsg_cpp"
@@ -744,6 +830,15 @@ help:
 	@echo "... src/Arduino_Communications/arduino_i2c.o"
 	@echo "... src/Arduino_Communications/arduino_i2c.i"
 	@echo "... src/Arduino_Communications/arduino_i2c.s"
+	@echo "... src/Depth_Sensor/DepthSensor.o"
+	@echo "... src/Depth_Sensor/DepthSensor.i"
+	@echo "... src/Depth_Sensor/DepthSensor.s"
+	@echo "... src/Depth_Sensor/I2Cdev.o"
+	@echo "... src/Depth_Sensor/I2Cdev.i"
+	@echo "... src/Depth_Sensor/I2Cdev.s"
+	@echo "... src/Depth_Sensor/anchor.o"
+	@echo "... src/Depth_Sensor/anchor.i"
+	@echo "... src/Depth_Sensor/anchor.s"
 	@echo "... src/IMU/I2Cdev.o"
 	@echo "... src/IMU/I2Cdev.i"
 	@echo "... src/IMU/I2Cdev.s"

@@ -274,7 +274,7 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
 
 //Path to a file.
-_file_name:FILEPATH=/home/ubuntu/workspace/sandbox/scarborough/src/Motor_Controls/I2Cdev.cpp
+_file_name:FILEPATH=/home/ubuntu/workspace/sandbox/scarborough/src/Depth_Sensor/I2Cdev.cpp
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/jade/share/catkin/cmake

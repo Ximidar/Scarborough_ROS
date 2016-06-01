@@ -66,3 +66,13 @@ rosbuild_add_executable(IMU src/IMU/IMU.cpp
 
 rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors.cpp
 										 src/Motor_Controls/I2Cdev.cpp)
+										 
+##############################################################################
+#Motor Executable
+##############################################################################
+
+rosbuild_add_executable(Depth_Sensor src/Depth_Sensor/DepthSensor.cpp
+									 src/Depth_Sensor/anchor.cpp
+									 src/Depth_Sensor/I2Cdev.cpp)
+									 
+ 

@@ -1,0 +1,28 @@
+/*
+ * DepthSensor.cpp
+ *
+ *  Created on: May 31, 2016
+ *      Author: ximidar
+ */
+#include "anchor.h"
+
+Anchor depthSensor;
+
+void start(){
+	depthSensor.init();
+
+	//set fluid density. 997 for freshwater 1029 for saltwater
+	depthSensor.setFluidDensity(997);
+
+}
+
+int main(int argc, char **argv){
+
+	ros::init(argc, argv, "DEPTH_SENSOR");
+	ros::NodeHandle depth;
+
+	ros::Publisher ard_pub = n.advertise<scarborough::Depth>("DEPTH", 200);
+}
+
+
+
