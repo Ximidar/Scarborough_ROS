@@ -5,7 +5,7 @@
  *      Author: sdcr
  */
 
-#include "anchor.h";
+#include "anchor.h"
 
 #define ANCHOR_ADDR 0x76
 #define ANCHOR_RESET 0x1E
@@ -26,14 +26,16 @@ void Anchor::init(){
 	usleep(1000);
 
 	for(uint8_t i = 0 ; i < 8; i++){
+		uint8_t temp;
+		i2cdev.readByte(ANCHOR_ADDR, ANCHOR_PROM_READ + i * 2, &temp);
 
-		i2cdev.readByte(ANCHOR_ADDR, ANCHOR_PROM_READ + i * 2, C[i]);
-
+		//load C
+		C[i] = (temp << 8 | temp);
 	}
 
 	uint8_t crcRead = C[0] >> 12;
 
-	uint8_t crcCalculated = crc4((uint16_t *)C);
+	uint8_t crcCalculated = crc4(C);
 
 	//this is dumb. Blue robotics programming guy is dumb
 	if(crcCalculated == crcRead){
@@ -51,26 +53,34 @@ void Anchor::read(){
 	i2cdev.writeWord(ANCHOR_ADDR, ANCHOR_CONVERT_D1_8192, 0 );
 	usleep(20);
 
-	uint8_t * tempStore;
+	uint8_t tempStore[3];
+
 	D1 = 0;
 	for(int i = 0; i < 3 ; i++){
 
-		i2cdev.readByte(ANCHOR_ADDR, ANCHOR_ADC_READ, tempStore);
+		i2cdev.readByte(ANCHOR_ADDR, ANCHOR_ADC_READ, &tempStore[i]);
 
-		D1 += tempStore;
+
 	}
+	//TODO Matt Pedler - Verify that this is actually making the right number
+	//change D1 to right value
+
+	D1 = tempStore[1] + (tempStore[2] * 256);
 
 	i2cdev.writeWord(ANCHOR_ADDR, ANCHOR_CONVERT_D2_8192, 0 );
 	usleep(20);
 
 	D2 = 0;
+
 	for(int i = 0; i < 3 ; i++){
 
-		i2cdev.readByte(ANCHOR_ADDR, ANCHOR_ADC_READ, tempStore);
+		i2cdev.readByte(ANCHOR_ADDR, ANCHOR_ADC_READ, &tempStore[i]);
 
-		D2 += tempStore;
+
 	}
 
+
+	D2 = tempStore[1] + (tempStore[2] * 256);
 	calculate();
 
 
@@ -80,14 +90,14 @@ void Anchor::read(){
 
 void Anchor::readTestCase(){
 
-	C[0] = (uint8_t *)0;
-	C[1] = (uint8_t *)34982;
-	C[2] = (uint8_t *)36352;
-	C[3] = (uint8_t *)20328;
-	C[4] = (uint8_t *)22354;
-	C[5] = (uint8_t *)26646;
-	C[6] = (uint8_t *)26146;
-	C[7] = (uint8_t *)0;
+	C[0] = 0;
+	C[1] = 34982;
+	C[2] = 36352;
+	C[3] = 20328;
+	C[4] = 22354;
+	C[5] = 26646;
+	C[6] = 26146;
+	C[7] = 0;
 
 	D1 = 4958179;
 	D2 = 6815414;

@@ -3,6 +3,9 @@
  *
  *  Created on: May 30, 2016
  *      Author: sdcr
+ *
+*    This is made with reference to Blue Robotics Github page. Almost none of this program is original content
+*    Here's the reference: https://github.com/bluerobotics/BlueRobotics_MS5837_Library
  */
 
 #ifndef SRC_DEPTH_SENSOR_ANCHOR_H_
@@ -42,10 +45,10 @@ public:
 	//void Anchor();
 
 private:
-	uint8_t * C[8];
+	uint16_t C[8];
 	uint32_t D1, D2;
-	int32_t TEMP;
-	int32_t P;
+	int TEMP;
+	int P;
 
 	float fluidDensity;
 
