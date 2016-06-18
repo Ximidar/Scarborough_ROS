@@ -5,9 +5,10 @@
  *      Author: ximidar
  */
 #include "anchor.h"
+#include "scarborough/Depth.h"
 
 Anchor depthSensor;
-//scarborough::Depth realDepth;
+scarborough::Depth realDepth;
 
 void start(){
 	depthSensor.init();
@@ -24,14 +25,14 @@ int main(int argc, char **argv){
 
 	//initialize ros
 	ros::init(argc, argv, "DEPTH");
-	//ros::NodeHandle depth;
+	ros::NodeHandle depth;
 
-	//ros::Publisher depth_pub = depth.advertise<scarborough::Depth>("DEPTH", 200);
+	ros::Publisher depth_pub = depth.advertise<scarborough::Depth>("DEPTH", 200);
 
 	while(ros::ok()){
-		//realDepth = depthSensor.depth();
+		realDepth.depth = depthSensor.depth();
 
-		//depth_pub.publish(realDepth);
+		depth_pub.publish(realDepth);
 
 		//spin once to let ROS you are alive.
 		ros::spinOnce();

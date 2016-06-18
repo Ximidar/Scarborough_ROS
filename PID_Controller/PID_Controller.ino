@@ -2,8 +2,10 @@
 
 #include "i2c_dealer.h"
 #include "PID_v1.h"
+#include "power.h"
 
 i2c i2c1;
+Power power(7,8,9,10);
 
 
 #define SLAVE 0x04 
@@ -80,6 +82,7 @@ void loop(){
   m5_in = i2c1.get_r();
   m6_in = i2c1.get_r();
 
+  //calculate PID
   m1.Compute();
   m2.Compute();
   m3.Compute();
@@ -87,12 +90,16 @@ void loop(){
   m5.Compute();
   m6.Compute();
 
+  //set Updated tunings to all motors
   m1.SetTunings(kp, ki, kd);
   m2.SetTunings(kp, ki, kd);
   m3.SetTunings(kp, ki, kd);
   m4.SetTunings(kp, ki, kd);
   m5.SetTunings(kp, ki, kd);
   m6.SetTunings(kp, ki, kd);
+
+  //monitor the killSwtich
+  power.monitor_killswitch();
 
     
 }
@@ -181,7 +188,37 @@ void readROS(int byteC){
         m4_desired = (double)(reference[1] * 256) + reference[2];
         m5_desired = (double)(reference[1] * 256) + reference[2];
         m6_desired = (double)(reference[1] * 256) + reference[2];
+        break;
+      //update desired pitch
+      case 11:
 
+      break;
+
+      //update desired roll
+      case 12:
+
+      break;
+
+      //update throttle
+      case 13:
+
+      break;
+
+
+      /////////////////////////////////POWER WRITES/////////////////////////////////
+      //enable or disable power
+      case 14:
+
+        //if the reference == 0 disable power
+        if(  ((double)(reference[1] * 256) + reference[2]) == 0 ){
+          power.set_killswitch(POWER_OFF);
+        }//otherwise if reference = 1 enable power
+        else if(  ((double)(reference[1] * 256) + reference[2]) == 1 ){
+          power.set_killswitch(POWER_ON);
+        }
+        
+        
+      break;
       ////////////////////////////Read Requests///////////////////////////  
       //motor1
       case 51:
@@ -207,6 +244,10 @@ void readROS(int byteC){
       case 56:
         reg = 6;        
         break;
+      //read power state
+      case 57:
+        reg = 7;
+        break;
 
 
       //////////////////////////////////////////DEFAULT///////////////////////////////////////////////////// 
@@ -227,24 +268,37 @@ void writeROS(){
     sender = "M1:" + String(m1_out,0) + ";";  
     Wire.write(sender.c_str());
   }
-  if(reg == 2){
+  
+  else if(reg == 2){
      sender = "M2:"+ String(m2_out,0) + ";";
      Wire.write(sender.c_str());
   }
-  if(reg == 3){
+  else if(reg == 3){
     sender = "M3:" + String(m3_out,0) + ";";
     Wire.write(sender.c_str());
   }
-  if(reg == 4){
+  else if(reg == 4){
     sender = "M4:" + String(m4_out,0) + ";";
     Wire.write(sender.c_str());
   }
-  if(reg == 5){
+  else if(reg == 5){
     sender = "M5:" + String(m5_out,0) + ";";
     Wire.write(sender.c_str());
   }
-  if(reg == 6){
+  else if(reg == 6){
     sender = "M6:" + String(m6_out,0) + ";";
+    Wire.write(sender.c_str());
+  }
+  //////////////////////////////////////Power Reads/////////////////////////////////////////////////
+  else if(reg == 7){
+    int kill = 999; // default kill to a large number. if this is seen on the other side its a mistake;
+    if(power.return_killswitch == POWER_OFF){
+      kill = 0;
+    }
+    else if(power.return_killswitch == POWER_ON){
+      kill = 1;
+    }
+    sender = "K" + String(kill,0) + ";";
     Wire.write(sender.c_str());
   }
 
