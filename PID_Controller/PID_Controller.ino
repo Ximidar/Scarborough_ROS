@@ -1,14 +1,16 @@
-#include <Wire.h>
+#include <i2c_t3.h>
 
+#include "Depth_Sensor.h"
 #include "i2c_dealer.h"
 #include "PID_v1.h"
 #include "power.h"
 
 i2c i2c;
 Power power(7,8,9,10);
+//MS5837 depth_Sensor;
 
 
-#define SLAVE 0x04 
+#define SLAVE 0x05 
 
 //variables for the i2c exchange
 int reference [4] = {0,0,0,0};
@@ -25,8 +27,8 @@ int reg = 0;
 //PID values for YPR
 double yaw_desired, pitch_desired, roll_desired, depth_desired,
        yaw_in,      pitch_in,      roll_in,      depth_in,
-       yaw_out,     pitch_out,     roll_out,     depth_out,
-       yaw_R_out,   pitch_R_out,   roll_R_out;
+       yaw_out,     pitch_out,     roll_out,     depth_out;
+     
 
 //values for throttle
 double throttle;
@@ -44,106 +46,104 @@ double roll_kp = 1, roll_ki = 0.5, roll_kd = 0.25;
 //PID for depth
 double depth_kp = 1, depth_ki = 0.5 , depth_kd = 0.25;
 
+//double for the max output
 double outMIN, outMAX;
 
+//constants that are not really constants yet
+double YAW_CONST = 5, 
+       PITCH_CONST = 5,
+       ROLL_CONST = 5,
+       DEPTH_CONST = 5;
 
+//set up LED so we know the board is working
+int led = 13;
 
-//left / right
-//PID m1(&m1_in, &m1_out, &m1_desired, kp, ki, kd, DIRECT);
-//PID m2(&m2_in, &m2_out, &m2_desired, kp, ki, kd, DIRECT);
-//
-////dive motors
-//PID m3(&m3_in, &m3_out, &m3_desired, kp, ki, kd, DIRECT);
-//PID m4(&m4_in, &m4_out, &m4_desired, kp, ki, kd, DIRECT);
-//PID m5(&m5_in, &m5_out, &m5_desired, kp, ki, kd, DIRECT);
-//PID m6(&m6_in, &m6_out, &m6_desired, kp, ki, kd, DIRECT);
-
+//All PID being used
 PID yaw(&yaw_in, &yaw_out, &yaw_desired, yaw_kp, yaw_ki, yaw_kd, DIRECT);
-PID yaw_R(&yaw_in, &yaw_out, &yaw_desired, yaw_kp, yaw_ki, yaw_kd, REVERSE);
-
 PID pitch(&pitch_in, &pitch_out, &pitch_desired, pitch_kp, pitch_ki, pitch_kd, DIRECT);
-PID pitch_R(&pitch_in, &pitch_out, &pitch_desired, pitch_kp, pitch_ki, pitch_kd, REVERSE);
-
 PID roll(&roll_in, &roll_out, &roll_desired, roll_kp, roll_ki, roll_kd, DIRECT);
-PID roll_R(&roll_in, &roll_out, &roll_desired, roll_kp, roll_ki, roll_kd, REVERSE);
-
 PID depth(&depth_in, &depth_out, &depth_desired, depth_kp, depth_ki, depth_kd, DIRECT);
 
 
 void setup() {
-  
-  Wire.begin(SLAVE); //set up the arduino as a slave
+
+  //set up i2c slave on teensy pins 18 and 19 
+  Wire.begin(I2C_SLAVE, 0x44, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_100); //set up the teensy as a slave
   Wire.onReceive(readROS); //function for handling receiving instructions
   Wire.onRequest(writeROS); //function for handling writing to ROS
 
+  //Wire1.begin(I2C_MASTER, 0x00, I2C_PINS_29_30, I2C_PULLUP_INT, I2C_RATE_100);
+
+  //initialize depth sensor
+  //depth_Sensor.init();
+  //depth_Sensor.setFluidDensity(997);
+  
   //initialize desired values for all axises
   yaw_desired = 0;
   pitch_desired = 0;
   roll_desired = 0;
   depth_desired = 0;
+  outMIN = -32000.00;
+  outMAX = 32000.00;
 
   //set limits for all outputs
   yaw.SetOutputLimits(-100, 100);
-  yaw_R.SetOutputLimits(-100, 100);
   pitch.SetOutputLimits(-100, 100);
-  pitch_R.SetOutputLimits(-100, 100);
   roll.SetOutputLimits(-100, 100);
-  roll_R.SetOutputLimits(-100, 100);
   depth.SetOutputLimits(-100,100);
 
   //turn on all calcutrons
   yaw.SetMode(AUTOMATIC);
-  yaw_R.SetMode(AUTOMATIC);
   pitch.SetMode(AUTOMATIC);
-  pitch_R.SetMode(AUTOMATIC);
   roll.SetMode(AUTOMATIC);
-  roll_R.SetMode(AUTOMATIC);
   depth.SetMode(AUTOMATIC);
 
   //initialize throttle
   throttle = 0;
 
-
+  //set up led
+  pinMode(led, OUTPUT);
+  digitalWrite(led, HIGH);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////Main Loop////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void loop(){
-  outMIN = -32000;
-  outMAX = 32000;
+  
   //get reference for YPR
   yaw_in = i2c.get_y();  
   pitch_in = i2c.get_p();
   roll_in = i2c.get_r();
-  //depth_in = 
+
+  //get reference for depth
+  //depth_Sensor.read();
+  //depth_in = depth_Sensor.depth();
 
   yaw.Compute();
-  yaw_R.Compute();
   pitch.Compute();
-  pitch_R.Compute();
   roll.Compute();
-  roll_R.Compute();
-
   depth.Compute();
 
   //calculate the final motor speeds
-
   //left/right
   m1 = throttle + ((yaw_out/100.00) * 32000);
-  m2 = throttle + ((yaw_R_out/100.00) * 32000);
+  m2 = throttle + ((yaw_out/100.00) * 32000);
 
   //dive motors
-
+  //need to fix this
   m3 = (pitch_out/100.00 * 32000) + (roll_out/100.00 * 32000) + (depth_out/100.00 * 32000);
-  m4 = (pitch_out/100.00 * 32000) + (roll_R_out/100.00 * 32000) + (depth_out/100.00 * 32000);
-  m5 = (pitch_R_out/100.00 * 32000) + (roll_out/100.00 * 32000) + (depth_out/100.00 * 32000);
-  m6 = (pitch_R_out/100.00 * 32000) + (roll_R_out/100.00 * 32000) + (depth_out/100.00 * 32000);
+  m4 = (pitch_out/100.00 * 32000) + + (depth_out/100.00 * 32000);
+  m5 = (roll_out/100.00 * 32000) + (depth_out/100.00 * 32000);
+  m6 = (depth_out/100.00 * 32000);
 
   //do a final check to see if motor speeds are valid
-  clamper(m1);
-  clamper(m2);
-  clamper(m3);
-  clamper(m4);
-  clamper(m5);
-  clamper(m6);
+  m1 = clamper(m1);
+  m2 = clamper(m2);
+  m3 = clamper(m3);
+  m4 = clamper(m4);
+  m5 = clamper(m5);
+  m6 = clamper(m6);
   
   //monitor the killSwtich
   power.monitor_killswitch();
@@ -152,7 +152,7 @@ void loop(){
 }
 
 // read ROS is used to write to the registers that are in the switch statement.
-void readROS(int byteC){
+void readROS(size_t byteC){
   int count = 0;
   for(int i = 0; i < 4 ; i++){
      reference[i] = 0;
@@ -292,6 +292,10 @@ void readROS(int byteC){
       case 57:
         reg = 7;
         break;
+      //read current depth
+      case 58:
+        reg = 8;
+        break;
 
 
       //////////////////////////////////////////DEFAULT///////////////////////////////////////////////////// 
@@ -342,8 +346,11 @@ void writeROS(){
     else if(power.return_killswitch() == POWER_ON){
       kill = 1;
     }
-    sender = "K" + String(kill,0) + ";";
+    sender = "K:" + String(kill,0) + ";";
     Wire.write(sender.c_str());
+  }
+  else if(reg == 8){
+    sender = "D:" + String(depth_in,0) + ";";
   }
 
     
