@@ -1,0 +1,3 @@
+bool bouy_found
+float32 bouy_heading[3]
+string color

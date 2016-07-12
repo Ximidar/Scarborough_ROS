@@ -17,6 +17,7 @@
 #include <iostream>
 #include "I2Cdev.h"
 #include "MPU6050_6Axis_MotionApps20.h"
+#include "../HandlerNames/HANDLER_NAMES.h"
 
 using namespace std;
 // class default I2C address is 0x68

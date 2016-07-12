@@ -7,15 +7,15 @@ import struct
 
 
 class Desired_Directions(genpy.Message):
-  _md5sum = "f1d1f76242de856e3a44fa6454dab1b8"
+  _md5sum = "b52e1a589c56fcea3b3260406f15fe61"
   _type = "scarborough/Desired_Directions"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """int32 address
-int32 value
-
+  _full_text = """float32[3] rotation
+int32 throttle
+float32 depth
 """
-  __slots__ = ['address','value']
-  _slot_types = ['int32','int32']
+  __slots__ = ['rotation','throttle','depth']
+  _slot_types = ['float32[3]','int32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +25,7 @@ int32 value
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       address,value
+       rotation,throttle,depth
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -34,13 +34,16 @@ int32 value
     if args or kwds:
       super(Desired_Directions, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.address is None:
-        self.address = 0
-      if self.value is None:
-        self.value = 0
+      if self.rotation is None:
+        self.rotation = [0.,0.,0.]
+      if self.throttle is None:
+        self.throttle = 0
+      if self.depth is None:
+        self.depth = 0.
     else:
-      self.address = 0
-      self.value = 0
+      self.rotation = [0.,0.,0.]
+      self.throttle = 0
+      self.depth = 0.
 
   def _get_types(self):
     """
@@ -54,8 +57,9 @@ int32 value
     :param buff: buffer, ``StringIO``
     """
     try:
+      buff.write(_struct_3f.pack(*self.rotation))
       _x = self
-      buff.write(_struct_2i.pack(_x.address, _x.value))
+      buff.write(_struct_if.pack(_x.throttle, _x.depth))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -66,10 +70,13 @@ int32 value
     """
     try:
       end = 0
+      start = end
+      end += 12
+      self.rotation = _struct_3f.unpack(str[start:end])
       _x = self
       start = end
       end += 8
-      (_x.address, _x.value,) = _struct_2i.unpack(str[start:end])
+      (_x.throttle, _x.depth,) = _struct_if.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -82,8 +89,9 @@ int32 value
     :param numpy: numpy python module
     """
     try:
+      buff.write(self.rotation.tostring())
       _x = self
-      buff.write(_struct_2i.pack(_x.address, _x.value))
+      buff.write(_struct_if.pack(_x.throttle, _x.depth))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
 
@@ -95,13 +103,17 @@ int32 value
     """
     try:
       end = 0
+      start = end
+      end += 12
+      self.rotation = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=3)
       _x = self
       start = end
       end += 8
-      (_x.address, _x.value,) = _struct_2i.unpack(str[start:end])
+      (_x.throttle, _x.depth,) = _struct_if.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_2i = struct.Struct("<2i")
+_struct_3f = struct.Struct("<3f")
+_struct_if = struct.Struct("<if")

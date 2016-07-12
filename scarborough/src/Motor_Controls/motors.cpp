@@ -9,6 +9,8 @@
 
 I2Cdev i2cdev;
 Motors motors;
+Handler handler;
+
 
 
 /*
@@ -25,26 +27,34 @@ void getdata(const scarborough::Motor_Speed& msg){
 	//send values to class variable for further analysis
 
 }
+void getdata_kill(const scarborough::Kill_Switch& msg){
+
+	motors.killer = msg.killed;
+
+}
 
 int main(int argc, char **argv){
 
 	//initialize ROS
-	ros::init(argc, argv, "MOTORS");
+	ros::init(argc, argv, handler.MOTOR_CHATTER);
 
 	//Make node handler
 	ros::NodeHandle motor_handle;
 	ros::Subscriber motor_subscriber;
+	ros::Subscriber kill_Switch;
 	motors.init();
 
 	//main loop
 	while(ros::ok()){
 
+		kill_Switch = motor_handle.subscribe(handler.KILL, 200, getdata_kill);
 
-		motor_subscriber = motor_handle.subscribe("ARD_I2C", 200, getdata);
-		for(int i = 0; i < 6 ; i++){
-			cout << i << " : "<< motors.motor_val[i] << endl;
+		//if the kill switch isn't connected dont write to the motors.
+		if(motors.check_kill_switch()){
+			motor_subscriber = motor_handle.subscribe(handler.MOTORS, 200, getdata);
+			motors.set_motor_speed();
 		}
-		motors.set_motor_speed();
+
 
 		ros::spinOnce();
 	}
@@ -55,11 +65,6 @@ int main(int argc, char **argv){
  */
 void Motors::init(){
 
-	//Motors need to be set to zero before use
-//	for(int i= 0; i<6;i++){
-//		i2cdev.writeWord(i2cConvert(i+33), 0, (uint16_t)motor_val[i] );
-//	}
-	i2cdev.writeWord(i2cConvert(38), 0, (uint16_t) 0);
 
 
 }
@@ -134,6 +139,12 @@ int Motors::i2cConvert(int address){
 	}
 	//return the decimal int number we can use to access the device on the i2c
 	return temp;
+
+}
+
+bool Motors::check_kill_switch(){
+
+	return killer;
 
 }
 

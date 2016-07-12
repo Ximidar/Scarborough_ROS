@@ -22,22 +22,29 @@ struct Desired_Directions_ {
   typedef Desired_Directions_<ContainerAllocator> Type;
 
   Desired_Directions_()
-  : address(0)
-  , value(0)
+  : rotation()
+  , throttle(0)
+  , depth(0.0)
   {
+    rotation.assign(0.0);
   }
 
   Desired_Directions_(const ContainerAllocator& _alloc)
-  : address(0)
-  , value(0)
+  : rotation()
+  , throttle(0)
+  , depth(0.0)
   {
+    rotation.assign(0.0);
   }
 
-  typedef int32_t _address_type;
-  int32_t address;
+  typedef boost::array<float, 3>  _rotation_type;
+  boost::array<float, 3>  rotation;
 
-  typedef int32_t _value_type;
-  int32_t value;
+  typedef int32_t _throttle_type;
+  int32_t throttle;
+
+  typedef float _depth_type;
+  float depth;
 
 
   typedef boost::shared_ptr< ::scarborough::Desired_Directions_<ContainerAllocator> > Ptr;
@@ -67,12 +74,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::scarborough::Desired_Directions_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "f1d1f76242de856e3a44fa6454dab1b8";
+    return "b52e1a589c56fcea3b3260406f15fe61";
   }
 
   static const char* value(const  ::scarborough::Desired_Directions_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xf1d1f76242de856eULL;
-  static const uint64_t static_value2 = 0x3a44fa6454dab1b8ULL;
+  static const uint64_t static_value1 = 0xb52e1a589c56fceaULL;
+  static const uint64_t static_value2 = 0x3b3260406f15fe61ULL;
 };
 
 template<class ContainerAllocator>
@@ -89,9 +96,9 @@ template<class ContainerAllocator>
 struct Definition< ::scarborough::Desired_Directions_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "int32 address\n\
-int32 value\n\
-\n\
+    return "float32[3] rotation\n\
+int32 throttle\n\
+float32 depth\n\
 ";
   }
 
@@ -111,8 +118,9 @@ template<class ContainerAllocator> struct Serializer< ::scarborough::Desired_Dir
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
-    stream.next(m.address);
-    stream.next(m.value);
+    stream.next(m.rotation);
+    stream.next(m.throttle);
+    stream.next(m.depth);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -130,10 +138,16 @@ struct Printer< ::scarborough::Desired_Directions_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const  ::scarborough::Desired_Directions_<ContainerAllocator> & v) 
   {
-    s << indent << "address: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.address);
-    s << indent << "value: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.value);
+    s << indent << "rotation[]" << std::endl;
+    for (size_t i = 0; i < v.rotation.size(); ++i)
+    {
+      s << indent << "  rotation[" << i << "]: ";
+      Printer<float>::stream(s, indent + "  ", v.rotation[i]);
+    }
+    s << indent << "throttle: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.throttle);
+    s << indent << "depth: ";
+    Printer<float>::stream(s, indent + "  ", v.depth);
   }
 };
 

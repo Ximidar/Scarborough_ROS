@@ -16,31 +16,82 @@
 #define HAL_H_
 
 #include <iostream>
+#include "timer.h"
 #include "ros/ros.h"
 #include "scarborough/Desired_Directions"
+#include "scarborough/YPR.h"
+#include "scarborough/Kill_Switch.h"
+#include "scarborough/Depth.h"
+#include "../HandlerNames/HANDLER_NAMES.h"
+
+
 
 using namespace std;
-// TODO include data types here.
-#define YAW 0
-#define PITCH 1
-#define ROLL 2
-#define DEPTH 3
+
 
 
 class Hal{
 	public:
+	//different states
+		enum Hal_State {
+			MAINTAIN_HDD,
+			UPDATE_HDD,
+
+			//PATH MARKER
+			PATH_DETECT,
+
+
+			//GATE
+			GATE_DETECT,
+			GATE_FLOURISH,
+			GATE_FINISH,
+
+			//BOUY
+			BOUY_BUMP,
+			BACKUP,
+			BOUY_SEARCH,
+			BOUY_FINISH,
+
+			//RESET
+			RESET,
+			HALT
+		};
 		Hal();
 		void init();
-		void collection(); //collect all information. This means all imu data, vision data, and depth data.
-		void process(); //process what the information means, for example if we find an orange square and an obstacle we want to go to the obstacle
-		void decide(); // Decide will actually change the state of the machine.
-		void update_desired(int address, int value); // updates desired ypr
+		void update_state(Hal_State state);
+		void update_desired(); // updates desired ypr
+		void reset();
+		void state_loop(Hal_State state);
+		void set_killer(bool _killed);
+
+
+		Hal_State check_status();
+
+		bool killed;
+
+		Timer time;
+
+		//desired values
+
+		//bool flags
+		bool bouy_state;
+		bool gate_state;
+		bool path_state;
+
+		Hal_State current_state;
+
+		//desired message
+		scarborough::Desired_Directions desired;
+
+
+
+
 
 	private:
 		ros::NodeHandle n;
 		ros::Publisher desired_direction;
-		ros::Subscriber current_direction;
-		scarborough::Desired_Directions directions;
+
+
 
 
 };

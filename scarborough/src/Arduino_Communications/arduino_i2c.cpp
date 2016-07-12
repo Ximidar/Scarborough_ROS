@@ -11,6 +11,7 @@ I2Cdev i2cdev;
 
 ArdI2C i2c;
 ArdComm ardcomm;
+Handler handler;
 
 double imu_data[3];
 
@@ -29,12 +30,14 @@ void getdata(const scarborough::YPR& msg){
 //Main function for ArdI2C executable
 int main(int argc, char **argv){
 
-	ros::init(argc, argv, "ARD_I2C");
+	ros::init(argc, argv, handler.ARD_I2C_CHATTER);
 	ros::NodeHandle IMU;
 	ros::NodeHandle n;
 
 	ros::Subscriber imu;
-	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>("ARD_I2C", 200);
+	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>(handler.MOTORS, 200);
+	ros::Publisher depth_pub = n.advertise<scarborough::Depth>(handler.DEPTH_SENSOR, 200);
+	ros::Publisher kill_pub = n.advertise<scarborough::Kill_Switch>(handler.KILL, 200);
 
 	i2c.init(); // does nothing.
 
@@ -42,21 +45,25 @@ int main(int argc, char **argv){
 	while(ros::ok()){
 
 		//get IMU data
-		imu = IMU.subscribe("IMU_DATA", 200, getdata);
+		imu = IMU.subscribe(handler.MOTORS, 200, getdata);
 
 		//write imu data to the arduino
 		i2c.ardWrite(imu_data);
 
+		string teensy_message = i2c.ardRead();
+		cout << teensy_message << " change "<< endl;
+
 		//read message from arduino and parse it
-		ardcomm.interperet_message(i2c.ardRead());
-		//cout << i2c.ardRead() << endl;
-
-
-		//cout  <<"motor: "<< ardcomm.motor<< "\n";
-
+		ardcomm.interperet_message(teensy_message);
+		teensy_message = "";
 
 		//publish motor data to the ARD_I2C
 		ard_pub.publish(ardcomm.motor);
+		depth_pub.publish(ardcomm.depth);
+		kill_pub.publish(ardcomm.kill_switch);
+		cout << ardcomm.motor << endl;
+		cout << ardcomm.depth << endl;
+		cout << ardcomm.kill_switch << endl;
 
 		//spin once to let ROS you are alive.
 		ros::spinOnce();
@@ -70,14 +77,7 @@ int main(int argc, char **argv){
 ArdI2C::ArdI2C(){
 	orientation = 0;
 	sign = 0;
-	delim = 255;
-	arduino_message = "";
-	 m1s = "";
-	 m2s = "";
-	 m3s = "";
-	 m4s = "";
-	 m5s = "";
-	 m6s = "";
+	delim = 0; //On the arduino this delimiter should be 255 on teensy it is 0
 	 desired_yaw = 0;
 	 desired_depth = 4;
 
@@ -139,13 +139,28 @@ void ArdI2C::ardWrite(double imu_data[3]){
  */
 string ArdI2C::ardRead(){
 
+	string m1s, m2s ,m3s, m4s, m5s, m6s, ks, ds;
+	string arduino_message;
+
+	//read from arduino variables
+	uint8_t m1[20];
+	uint8_t m2[20];
+	uint8_t m3[20];
+	uint8_t m4[20];
+	uint8_t m5[20];
+	uint8_t m6[20];
+	uint8_t k[20];
+	uint8_t d[20];
+
 	//read all registeries from the arduino
-	i2cdev.readBytes(4, 51, 30, m1);
-	i2cdev.readBytes(4, 52, 30, m2);
-	i2cdev.readBytes(4, 53, 30, m3);
-	i2cdev.readBytes(4, 54, 30, m4);
-	i2cdev.readBytes(4, 55, 30, m5);
-	i2cdev.readBytes(4, 56, 30, m6);
+	i2cdev.readBytes(0x04, 51, 20, m1);
+	i2cdev.readBytes(0x04, 52, 20, m2);
+	i2cdev.readBytes(0x04, 53, 20, m3);
+	i2cdev.readBytes(0x04, 54, 20, m4);
+	i2cdev.readBytes(0x04, 55, 20, m5);
+	i2cdev.readBytes(0x04, 56, 20, m6);
+	i2cdev.readBytes(0x04, 57, 20, k);
+	i2cdev.readBytes(0x04, 58, 20, d);
 
 	//make all variable strings be nothing.
 	arduino_message = "";
@@ -155,9 +170,12 @@ string ArdI2C::ardRead(){
 	 m4s = "";
 	 m5s = "";
 	 m6s = "";
+	 ks = "";
+	 ds = "";
+
 
 	//load all strings with variables from the arduino read.
-	for(int j = 0; j<30;j++){
+	for(int j = 0; j<20;j++){
 		if(m1[j] != delim){
 			m1s += m1[j];
 		}
@@ -176,14 +194,19 @@ string ArdI2C::ardRead(){
 		if(m6[j] != delim){
 			m6s += m6[j];
 		}
+		if(k[j] != delim){
+			ks += k[j];
+		}
+		if(d[j] != delim){
+			ds += d[j];
+		}
 	}
 
 	//load all individual strings into one big string
 
-	arduino_message = m1s + m2s + m3s + m4s + m5s + m6s;
+	arduino_message = m1s + m2s + m3s + m4s + m5s + m6s + ks + ds;
 
 	//output to console for debug purposes.
-	cout << arduino_message << endl;
 	return arduino_message;
 }
 

@@ -1,2 +1,3 @@
-int32 desired
-int32 value
+float32[3] rotation
+int32 throttle
+float32 depth

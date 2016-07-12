@@ -38,6 +38,9 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/ubuntu/workspace/sandbox/scarborough
 
@@ -49,8 +52,8 @@ CMAKE_BINARY_DIR = /home/ubuntu/workspace/sandbox/scarborough/build
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
-	/usr/bin/cmake -i .
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -153,17 +156,17 @@ ArdI2C/fast:
 .PHONY : ArdI2C/fast
 
 #=============================================================================
-# Target rules for targets named Depth_Sensor
+# Target rules for targets named Hal
 
 # Build rule for target.
-Depth_Sensor: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Depth_Sensor
-.PHONY : Depth_Sensor
+Hal: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Hal
+.PHONY : Hal
 
 # fast build rule for target.
-Depth_Sensor/fast:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/build
-.PHONY : Depth_Sensor/fast
+Hal/fast:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/build
+.PHONY : Hal/fast
 
 #=============================================================================
 # Target rules for targets named IMU
@@ -588,77 +591,53 @@ src/Arduino_Communications/arduino_i2c.cpp.s:
 	$(MAKE) -f CMakeFiles/ArdI2C.dir/build.make CMakeFiles/ArdI2C.dir/src/Arduino_Communications/arduino_i2c.cpp.s
 .PHONY : src/Arduino_Communications/arduino_i2c.cpp.s
 
-src/Depth_Sensor/DepthSensor.o: src/Depth_Sensor/DepthSensor.cpp.o
-.PHONY : src/Depth_Sensor/DepthSensor.o
+src/Hal9000/Hal_Main.o: src/Hal9000/Hal_Main.cpp.o
+.PHONY : src/Hal9000/Hal_Main.o
 
 # target to build an object file
-src/Depth_Sensor/DepthSensor.cpp.o:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/DepthSensor.cpp.o
-.PHONY : src/Depth_Sensor/DepthSensor.cpp.o
+src/Hal9000/Hal_Main.cpp.o:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/Hal_Main.cpp.o
+.PHONY : src/Hal9000/Hal_Main.cpp.o
 
-src/Depth_Sensor/DepthSensor.i: src/Depth_Sensor/DepthSensor.cpp.i
-.PHONY : src/Depth_Sensor/DepthSensor.i
+src/Hal9000/Hal_Main.i: src/Hal9000/Hal_Main.cpp.i
+.PHONY : src/Hal9000/Hal_Main.i
 
 # target to preprocess a source file
-src/Depth_Sensor/DepthSensor.cpp.i:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/DepthSensor.cpp.i
-.PHONY : src/Depth_Sensor/DepthSensor.cpp.i
+src/Hal9000/Hal_Main.cpp.i:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/Hal_Main.cpp.i
+.PHONY : src/Hal9000/Hal_Main.cpp.i
 
-src/Depth_Sensor/DepthSensor.s: src/Depth_Sensor/DepthSensor.cpp.s
-.PHONY : src/Depth_Sensor/DepthSensor.s
+src/Hal9000/Hal_Main.s: src/Hal9000/Hal_Main.cpp.s
+.PHONY : src/Hal9000/Hal_Main.s
 
 # target to generate assembly for a file
-src/Depth_Sensor/DepthSensor.cpp.s:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/DepthSensor.cpp.s
-.PHONY : src/Depth_Sensor/DepthSensor.cpp.s
+src/Hal9000/Hal_Main.cpp.s:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/Hal_Main.cpp.s
+.PHONY : src/Hal9000/Hal_Main.cpp.s
 
-src/Depth_Sensor/I2Cdev.o: src/Depth_Sensor/I2Cdev.cpp.o
-.PHONY : src/Depth_Sensor/I2Cdev.o
+src/Hal9000/hal.o: src/Hal9000/hal.cpp.o
+.PHONY : src/Hal9000/hal.o
 
 # target to build an object file
-src/Depth_Sensor/I2Cdev.cpp.o:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/I2Cdev.cpp.o
-.PHONY : src/Depth_Sensor/I2Cdev.cpp.o
+src/Hal9000/hal.cpp.o:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/hal.cpp.o
+.PHONY : src/Hal9000/hal.cpp.o
 
-src/Depth_Sensor/I2Cdev.i: src/Depth_Sensor/I2Cdev.cpp.i
-.PHONY : src/Depth_Sensor/I2Cdev.i
-
-# target to preprocess a source file
-src/Depth_Sensor/I2Cdev.cpp.i:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/I2Cdev.cpp.i
-.PHONY : src/Depth_Sensor/I2Cdev.cpp.i
-
-src/Depth_Sensor/I2Cdev.s: src/Depth_Sensor/I2Cdev.cpp.s
-.PHONY : src/Depth_Sensor/I2Cdev.s
-
-# target to generate assembly for a file
-src/Depth_Sensor/I2Cdev.cpp.s:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/I2Cdev.cpp.s
-.PHONY : src/Depth_Sensor/I2Cdev.cpp.s
-
-src/Depth_Sensor/anchor.o: src/Depth_Sensor/anchor.cpp.o
-.PHONY : src/Depth_Sensor/anchor.o
-
-# target to build an object file
-src/Depth_Sensor/anchor.cpp.o:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/anchor.cpp.o
-.PHONY : src/Depth_Sensor/anchor.cpp.o
-
-src/Depth_Sensor/anchor.i: src/Depth_Sensor/anchor.cpp.i
-.PHONY : src/Depth_Sensor/anchor.i
+src/Hal9000/hal.i: src/Hal9000/hal.cpp.i
+.PHONY : src/Hal9000/hal.i
 
 # target to preprocess a source file
-src/Depth_Sensor/anchor.cpp.i:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/anchor.cpp.i
-.PHONY : src/Depth_Sensor/anchor.cpp.i
+src/Hal9000/hal.cpp.i:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/hal.cpp.i
+.PHONY : src/Hal9000/hal.cpp.i
 
-src/Depth_Sensor/anchor.s: src/Depth_Sensor/anchor.cpp.s
-.PHONY : src/Depth_Sensor/anchor.s
+src/Hal9000/hal.s: src/Hal9000/hal.cpp.s
+.PHONY : src/Hal9000/hal.s
 
 # target to generate assembly for a file
-src/Depth_Sensor/anchor.cpp.s:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/src/Depth_Sensor/anchor.cpp.s
-.PHONY : src/Depth_Sensor/anchor.cpp.s
+src/Hal9000/hal.cpp.s:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/hal.cpp.s
+.PHONY : src/Hal9000/hal.cpp.s
 
 src/IMU/I2Cdev.o: src/IMU/I2Cdev.cpp.o
 .PHONY : src/IMU/I2Cdev.o
@@ -787,7 +766,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... ArdI2C"
-	@echo "... Depth_Sensor"
+	@echo "... Hal"
 	@echo "... IMU"
 	@echo "... Motor_Controller"
 	@echo "... ROSBUILD_genmsg_cpp"
@@ -830,15 +809,12 @@ help:
 	@echo "... src/Arduino_Communications/arduino_i2c.o"
 	@echo "... src/Arduino_Communications/arduino_i2c.i"
 	@echo "... src/Arduino_Communications/arduino_i2c.s"
-	@echo "... src/Depth_Sensor/DepthSensor.o"
-	@echo "... src/Depth_Sensor/DepthSensor.i"
-	@echo "... src/Depth_Sensor/DepthSensor.s"
-	@echo "... src/Depth_Sensor/I2Cdev.o"
-	@echo "... src/Depth_Sensor/I2Cdev.i"
-	@echo "... src/Depth_Sensor/I2Cdev.s"
-	@echo "... src/Depth_Sensor/anchor.o"
-	@echo "... src/Depth_Sensor/anchor.i"
-	@echo "... src/Depth_Sensor/anchor.s"
+	@echo "... src/Hal9000/Hal_Main.o"
+	@echo "... src/Hal9000/Hal_Main.i"
+	@echo "... src/Hal9000/Hal_Main.s"
+	@echo "... src/Hal9000/hal.o"
+	@echo "... src/Hal9000/hal.i"
+	@echo "... src/Hal9000/hal.s"
 	@echo "... src/IMU/I2Cdev.o"
 	@echo "... src/IMU/I2Cdev.i"
 	@echo "... src/IMU/I2Cdev.s"

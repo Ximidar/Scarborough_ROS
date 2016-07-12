@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include "I2Cdev.h"
 #include "scarborough/YPR.h"
+#include "../HandlerNames/HANDLER_NAMES.h"
 #include <math.h>
 #include <stdint.h>
 #include <inttypes.h>
@@ -57,16 +58,7 @@ private:
 	int desired_yaw;
 	int desired_depth;
 
-	//read from arduino variables
-	uint8_t m1[30];
-	uint8_t m2[30];
-	uint8_t m3[30];
-	uint8_t m4[30];
-	uint8_t m5[30];
-	uint8_t m6[30];
 	uint8_t delim;
-	string m1s, m2s ,m3s, m4s, m5s, m6s;
-	string arduino_message;
 
 
 };

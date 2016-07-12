@@ -1,0 +1,118 @@
+/*
+ * hal.cpp
+ *
+ *  Created on: Feb 25, 2016
+ *      Author: sdcr
+ */
+#include "hal.h"
+
+
+
+Hal::Hal(){
+
+	//initialize
+	bouy_state = false;
+	gate_state = false;
+	path_state = false;
+	//setup all variables here.
+//	desired_direction = n.advertise<scarborough::Desired_Directions>(handler.HAL, 200);
+//	current_direction = n.subscribe<scarborough::YPR>(handler.IMU, 200, getdata);
+}
+
+void Hal::init(){
+	current_state = RESET;
+	update_state(UPDATE_HDD);
+}
+
+void Hal::update_state(Hal_State state){
+	current_state = state;
+}
+void Hal::update_desired(double rotation[3], int throttle, double depth){
+
+	for(int i = 0; i < 3 ; i++){
+		desired.rotation[i] = rotation[i];
+	}
+
+	desired.throttle = throttle;
+
+	desired.depth = depth;
+
+}
+
+void Hal::reset(){
+	if(killed){
+		update_state(hal.HALT);
+	}
+	else{
+		update_state(hal.UPDATE_HDD);
+	}
+	bouy_state = false;
+	gate_state = false;
+	path_state = false;
+
+	double init_rotation[3] = {0,0,0};
+	int init_throttle = 0;
+	double init_depth = 0;
+	update_desired(init_rotation, init_throttle, init_depth);
+	init();
+}
+
+void Hal::state_loop(Hal_State state){
+
+	switch(state){
+	case MAINTAIN_HDD:
+
+		break;
+	case UPDATE_HDD:
+
+		break;
+
+	/////////////////////////////////////////PATH MARKER///////////////////////////
+	case PATH_DETECT:
+
+		break;
+
+
+	///////////////////////////////////////////GATE////////////////////////////////
+	case GATE_DETECT:
+
+		break;
+	case GATE_FLOURISH:
+
+		break;
+	case GATE_FINISH:
+
+		break;
+
+	////////////////////////////////////////////BOUY////////////////////////////
+	case BOUY_BUMP:
+
+		break;
+	case BACKUP:
+
+		break;
+	case BOUY_SEARCH:
+
+		break;
+	case BOUY_FINISH:
+
+		break;
+
+				//RESET
+	case RESET:
+		reset();
+
+		break;
+	}
+
+}
+
+void Hal::set_killer(bool _killed){
+	killed = _killed;
+}
+
+
+
+
+
+

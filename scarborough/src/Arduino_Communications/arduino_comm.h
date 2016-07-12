@@ -10,6 +10,8 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "scarborough/Motor_Speed.h"
+#include "scarborough/Kill_Switch.h"
+#include "scarborough/Depth.h"
 #include "scarborough/YPR.h"
 #include <sstream>
 #include <iostream>
@@ -29,10 +31,13 @@ class ArdComm{
 		string listen();
 		std_msgs::String msg;
 		scarborough::Motor_Speed motor;
+		scarborough::Kill_Switch kill_switch;
+		scarborough::Depth depth;
 		void init(); //initialize comm port not used currently since i2c communication works
 		ArdComm();
 		void interperet_message(string message);
 		inline bool pathExists (const std::string& name);
+		string trim(string& str);
 
 
 	private:

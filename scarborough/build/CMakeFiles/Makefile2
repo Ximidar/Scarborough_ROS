@@ -46,6 +46,9 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = /usr/bin/cmake-gui
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /home/ubuntu/workspace/sandbox/scarborough
 
@@ -88,38 +91,38 @@ clean: CMakeFiles/ArdI2C.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/Depth_Sensor.dir
+# Target rules for target CMakeFiles/Hal.dir
 
 # All Build rule for target.
-CMakeFiles/Depth_Sensor.dir/all: CMakeFiles/rosbuild_precompile.dir/all
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/depend
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  4 5 6
-	@echo "Built target Depth_Sensor"
-.PHONY : CMakeFiles/Depth_Sensor.dir/all
+CMakeFiles/Hal.dir/all: CMakeFiles/rosbuild_precompile.dir/all
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/depend
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  4 5
+	@echo "Built target Hal"
+.PHONY : CMakeFiles/Hal.dir/all
 
 # Include target in all.
-all: CMakeFiles/Depth_Sensor.dir/all
+all: CMakeFiles/Hal.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Depth_Sensor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles 19
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Depth_Sensor.dir/all
+CMakeFiles/Hal.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles 18
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Hal.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles 0
-.PHONY : CMakeFiles/Depth_Sensor.dir/rule
+.PHONY : CMakeFiles/Hal.dir/rule
 
 # Convenience name for target.
-Depth_Sensor: CMakeFiles/Depth_Sensor.dir/rule
-.PHONY : Depth_Sensor
+Hal: CMakeFiles/Hal.dir/rule
+.PHONY : Hal
 
 # clean rule for target.
-CMakeFiles/Depth_Sensor.dir/clean:
-	$(MAKE) -f CMakeFiles/Depth_Sensor.dir/build.make CMakeFiles/Depth_Sensor.dir/clean
-.PHONY : CMakeFiles/Depth_Sensor.dir/clean
+CMakeFiles/Hal.dir/clean:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/clean
+.PHONY : CMakeFiles/Hal.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/Depth_Sensor.dir/clean
+clean: CMakeFiles/Hal.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -129,7 +132,7 @@ clean: CMakeFiles/Depth_Sensor.dir/clean
 CMakeFiles/IMU.dir/all: CMakeFiles/rosbuild_precompile.dir/all
 	$(MAKE) -f CMakeFiles/IMU.dir/build.make CMakeFiles/IMU.dir/depend
 	$(MAKE) -f CMakeFiles/IMU.dir/build.make CMakeFiles/IMU.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  7 8 9
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  6 7 8
 	@echo "Built target IMU"
 .PHONY : CMakeFiles/IMU.dir/all
 
@@ -164,7 +167,7 @@ clean: CMakeFiles/IMU.dir/clean
 CMakeFiles/Motor_Controller.dir/all: CMakeFiles/rosbuild_precompile.dir/all
 	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/depend
 	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  10 11
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  9 10
 	@echo "Built target Motor_Controller"
 .PHONY : CMakeFiles/Motor_Controller.dir/all
 
@@ -199,7 +202,7 @@ clean: CMakeFiles/Motor_Controller.dir/clean
 CMakeFiles/ROSBUILD_genmsg_cpp.dir/all: CMakeFiles/rosbuild_premsgsrvgen.dir/all
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make CMakeFiles/ROSBUILD_genmsg_cpp.dir/depend
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make CMakeFiles/ROSBUILD_genmsg_cpp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  12 13 14 15 16
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  11 12 13 14 15
 	@echo "Built target ROSBUILD_genmsg_cpp"
 .PHONY : CMakeFiles/ROSBUILD_genmsg_cpp.dir/all
 
@@ -230,7 +233,7 @@ clean: CMakeFiles/ROSBUILD_genmsg_cpp.dir/clean
 CMakeFiles/ROSBUILD_genmsg_lisp.dir/all: CMakeFiles/rosbuild_premsgsrvgen.dir/all
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_lisp.dir/build.make CMakeFiles/ROSBUILD_genmsg_lisp.dir/depend
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_lisp.dir/build.make CMakeFiles/ROSBUILD_genmsg_lisp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  17 18 19 20 21
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  16 17 18 19 20
 	@echo "Built target ROSBUILD_genmsg_lisp"
 .PHONY : CMakeFiles/ROSBUILD_genmsg_lisp.dir/all
 
@@ -261,7 +264,7 @@ clean: CMakeFiles/ROSBUILD_genmsg_lisp.dir/clean
 CMakeFiles/ROSBUILD_genmsg_py.dir/all: CMakeFiles/rosbuild_premsgsrvgen.dir/all
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/depend
 	$(MAKE) -f CMakeFiles/ROSBUILD_genmsg_py.dir/build.make CMakeFiles/ROSBUILD_genmsg_py.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  22 23 24 25 26 27
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  21 22 23 24 25 26
 	@echo "Built target ROSBUILD_genmsg_py"
 .PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/all
 
@@ -936,7 +939,7 @@ gtest/preinstall:
 gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  28
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  27
 	@echo "Built target gtest"
 .PHONY : gtest/CMakeFiles/gtest.dir/all
 
@@ -967,7 +970,7 @@ clean: gtest/CMakeFiles/gtest.dir/clean
 gtest/CMakeFiles/gtest_main.dir/all: gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  29
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles  28
 	@echo "Built target gtest_main"
 .PHONY : gtest/CMakeFiles/gtest_main.dir/all
 

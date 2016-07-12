@@ -12,14 +12,14 @@
 //declare imu object
 IMU imu;
 
-
+Handler handler;
 int main(int argc, char **argv) {
 	cout << "initializing ROS" << endl;
-	ros::init(argc, argv, "IMU_Chatter");
+	ros::init(argc, argv, handler.IMU_CHATTER);
 
 	ros::NodeHandle n;
 
-	ros::Publisher imu_pub = n.advertise<scarborough::YPR>("IMU_DATA", 200);
+	ros::Publisher imu_pub = n.advertise<scarborough::YPR>(handler.IMU, 200);
 
 //Do normal operations if normal op is defined
 #ifdef NORMAL_OP

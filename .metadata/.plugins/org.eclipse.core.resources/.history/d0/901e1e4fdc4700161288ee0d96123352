@@ -1,0 +1,34 @@
+/*
+ * Hal_Main.cpp
+
+ *
+ *  Created on: Jul 11, 2016
+ *      Author: ximidar
+ */
+
+
+void getdata_YPR(const scarborough::YPR& msg){
+	for(int i=0;i<2;i++){
+		//cout << "casting to double" << endl;
+		imu_data[i] = boost::lexical_cast<double>(msg.YPR[i]);
+
+	}
+
+}
+
+
+void getdata_KILL(const scarborough::Kill_Switch& msg){
+
+
+}
+
+void getdata_DEPTH(const scarborough::YPR& msg){
+	for(int i=0;i<2;i++){
+		//cout << "casting to double" << endl;
+		imu_data[i] = boost::lexical_cast<double>(msg.YPR[i]);
+
+	}
+
+}
+
+

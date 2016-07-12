@@ -83,16 +83,27 @@ void ArdComm::init(){
  */
 void ArdComm::interperet_message(string message){
 
-	cout << message << endl;
-	while( message != ""){
-		pos = message.find(delimiter);
-		parse = message.substr(0, pos);
-		for(unsigned int i = 0 ; i < parse.length() ; i++){
+	string corrected = "";
+	for(int j = 0 ; j < message.length() ; j++){
+
+		if(message[j] != NULL){
+			corrected += message[j];
+
+		}
+	}
+	cout << corrected << endl;
+	while( corrected != ""){
+		pos = corrected.find(delimiter);
+		parse = corrected.substr(0, pos +1);
+
+		for(int i = 0 ; i < parse.length() ; i++){
+			//cout << parse << " Parse  POS: " <<pos << " i" << i << " Parse[i] = " << parse[i];
+			//cout << " message length" << corrected.length();
 
 			switch(parse[i]){
 
 			case 'M':
-				//cout << "Case M Found!" << endl;
+				//cout << "Case M Found! " << parse;
 				//check if the addressed variable is within the appropriate array bounds
 				if(atoi(parse.substr(1,2).c_str()) >= 0 && atoi(parse.substr(1,2).c_str()) <=6 ){
 
@@ -102,7 +113,7 @@ void ArdComm::interperet_message(string message){
 					//set cursor to next variable location.
 					i = pos;
 					//erase parsed values
-					message.erase(0 , pos + delimiter.length());
+					corrected.erase(0 , pos + delimiter.length());
 				}//end if
 				else{
 					//reading next char will destroy the bad data by causing a default to occur.
@@ -111,11 +122,48 @@ void ArdComm::interperet_message(string message){
 
 				break;
 
-			default:
-				cout << "default hit \n" << message;
+				//reading in a K message looks like "K:1;" or "K:0;" which is the only two messages that should be!
+			case 'K':
+				//cout << "Case K Found";
+				if(atoi(parse.substr(2,pos).c_str()) >1 || atoi(parse.substr(2,pos).c_str()) < 0){
+					cout << "Invalid Code Must be a 0 or 1" << endl;
+				}
+				else{
+					int _kill_switch = atoi(parse.substr(2,pos).c_str());
+
+					switch(_kill_switch){
+					case 1:
+						kill_switch.killed = true;
+						break;
+					case 0:
+						kill_switch.killed = false;
+						break;
+					default:
+						break;
+					}
+				}
+				//set cursor to next variable location.
 				i = pos;
 				//erase parsed values
-				message.erase(0 , pos + delimiter.length());
+				corrected.erase(0 , pos + delimiter.length());
+				break;
+				//A depth message should look like this "D:0.7;"
+			case 'D':
+				//cout << "Case D found" << endl;
+				depth.depth = atof(parse.substr(2, pos).c_str());
+
+				//set cursor to next variable location.
+				i = pos;
+				//erase parsed values
+				corrected.erase(0 , pos + delimiter.length());
+				break;
+
+			default:
+
+				cout << "default " << parse;
+				i = pos;
+				//erase parsed values
+				corrected.erase(0 , pos + delimiter.length());
 				break;
 			}//end switch
 		}//end for
@@ -127,6 +175,13 @@ void ArdComm::interperet_message(string message){
 inline bool ArdComm::pathExists (const std::string& name) {
   struct stat buffer;
   return (stat (name.c_str(), &buffer) == 0);
+}
+
+string ArdComm::trim(string& str)
+{
+    size_t first = str.find_first_not_of(' ');
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last-first+1));
 }
 
 

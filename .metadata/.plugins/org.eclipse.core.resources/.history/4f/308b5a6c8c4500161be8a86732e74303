@@ -1,0 +1,125 @@
+/*
+ * arduino_i2c.cpp
+ *
+ *  Created on: Feb 1, 2016
+ *      Author: sdcr
+ */
+#include "arduino_i2c.h"
+#include <termios.h>
+#include<stdio.h>
+#include <unistd.h>
+
+
+I2Cdev i2cdev;
+
+ArdI2C i2c;
+
+int i2cConvert(int address){
+
+	//load int into string stream
+	stringstream ss;
+	ss << address;
+	string ss_return;
+	//load ss into string
+	ss >> ss_return;
+
+	int length;
+
+	//get length of the string
+	length = ss_return.length();
+	int temp = 0;
+	int _length = length;
+
+	//this will convert the number from hex to decimal
+	//this only works for hex numbers that do not contain a letter in them.
+
+	for(int i = 0; i < length ;i++){
+
+		//add a modifier based upon where it is at in the string
+		int moder = (16 * (_length -1));
+		//if the modifier is zero make it 1
+		moder = max(moder, 1);
+
+		//convert the string from the hex number to the decimal int
+		temp += atoi(ss_return.substr(i,1).c_str()) * moder;
+		_length--;
+
+		//cout << temp << " / " << atoi(ss_return.substr(i,1).c_str())  << " / " << moder<< endl;
+
+	}
+	//return the decimal int number we can use to access the device on the i2c
+	return temp;
+
+}
+
+int getch()
+{
+	static struct termios oldt, newt;
+	tcgetattr( STDIN_FILENO, &oldt);           // save old settings
+	newt = oldt;
+	newt.c_lflag &= ~(ICANON);                 // disable buffering
+	newt.c_cc[VMIN] = 0; newt.c_cc[VTIME] = 0;
+	tcsetattr( STDIN_FILENO, TCSANOW, &newt);  // apply new settings
+
+	int c = getchar();  // read character (non-blocking)
+
+	tcsetattr( STDIN_FILENO, TCSANOW, &oldt);  // restore old settings
+	return c;
+}
+
+
+
+
+int main(int argc, char **argv) {
+
+
+	uint8_t message[10];
+
+	for(int i = 51 ; i <59; i++)
+	i2cdev.readBytes(0x04, i, 10, message);
+
+	cout << message << endl;
+
+
+}
+
+ArdI2C::ArdI2C() {
+	orientation = 0;
+	sign = 0;
+
+}
+//this will initialize the i2c bus for the arduino.
+void ArdI2C::init() {
+	//initialize class variables
+
+	orientation = 0;
+	sign = 0;
+	//number = {0,0,0};
+	address[0] = ARDUINO_DEV_ADDR;
+	address[1] = ARDUINO_REG_ADDR;
+	address[2] = 1;
+
+}
+// This will query the correct ROS stream to get the IMU data
+void ArdI2C::get_accel_info() {
+
+}
+
+void ArdI2C::ardWrite(int write, int addr) {
+
+
+	//cout << "writing I2C" << endl;
+
+	i2cdev.writeWord(38 , (uint8_t)addr ,(uint16_t)write);
+
+	return;
+}
+
+unsigned long ArdI2C::concat(unsigned long x, unsigned long y) {
+	unsigned long power = 10;
+	while (y >= power) {
+		power *= 10;
+	}
+	return x * power + y;
+}
+
