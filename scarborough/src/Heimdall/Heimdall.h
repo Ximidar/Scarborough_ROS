@@ -22,6 +22,8 @@
 #include "Helper_Functions/pathmarker.hpp"
 #include "Helper_Functions/Scarborough_Vision.hpp"
 #include "scarborough/Vision_objects.h"
+#include "../HandlerNames/HANDLER_NAMES.h"
+#include "ros/ros.h"
 
 using namespace std;
 using namespace cv;
@@ -34,8 +36,8 @@ public:
 			SHOW_VIDEO,
 			HIDE_VIDEO
 		};
-	void init();
-	void hemdall_bouy(gui interface);
+	bool init();
+	void heimdall_bouy(gui interface);
 
 
 
@@ -46,6 +48,19 @@ public:
 
 	VideoCapture forward;
 	VideoCapture downward;
+
+	//variables for sharing object data
+
+	scarborough::Vision_objects path_marker;
+	scarborough::Vision_objects bouy;
+	scarborough::Vision_objects gate;
+
+	const string BOUY = "BOUY";
+	const string GATE = "GATE";
+	const string PATH_MARKER = "PATH_MARKER";
+	const string RED = "RED";
+	const string GREEN = "GREEN";
+	const string YELLOW = "YELLOW";
 
 
 	/// Global variables

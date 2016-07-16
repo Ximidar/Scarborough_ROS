@@ -15,13 +15,14 @@ Heimdall::Heimdall(){
 	downward.open(2);
 }
 
-void Heimdall::init(){
+bool Heimdall::init(){
 	 cout<<"Time at starting is 0 sec"<<endl;
 
 	    string filename = "/Users/Somi/Desktop/_Recordings_/underwatertest.mp4";
 
 	    if(!forward.isOpened() || !downward.isOpened()){
-	    	cout << "Connect the freaking cameras" << endl;
+	    	cout << "Connect the freaking cameras BITCH -Shubhankar Agarwal 2016 SDCR" << endl;
+	    	return false;
 	    }
 
 	    forward >> src;
@@ -30,11 +31,13 @@ void Heimdall::init(){
 	    if(! src.data )                              // Check for invalid input
 	    {
 	        cout <<  "Could not open or find the image" << std::endl ;
+	        return false;
 	    }
+	    return true;
 }
 
 
-void Heimdall::hemdall_bouy(gui interface){
+void Heimdall::heimdall_bouy(gui interface){
 	vector<Point2i> cent_i(1);
 	//initialize time variables
 	 struct timeval tv0,tv1;
@@ -78,6 +81,10 @@ void Heimdall::hemdall_bouy(gui interface){
 
 	 fastNlMeansDenoising(detect_r , detect_r , 100, 3, 31);
 	  //  imshow( "Display red", detect_r );
+
+	 bouy.color = Heimdall::YELLOW;
+	 bouy.rotation = {10,10,10};
+	 bouy.object = Heimdall::GATE;
 
 
 	 vector<Point> red_vec = vision.all_bouy(detect_r , final_image,   yawI ,  cent_i , area1 ,  thresh , max_thresh , rng ,  framecounter   , contours , red_bouy);
