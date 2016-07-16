@@ -63,6 +63,9 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_YPR.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Kill_Switch.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Kill_Switch.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Vision_objects.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Vision_objects.lisp
 
 ../msg_gen/lisp/Motor_Speed.lisp: ../msg/Motor_Speed.msg
 ../msg_gen/lisp/Motor_Speed.lisp: /opt/ros/jade/share/roslisp/rosbuild/scripts/genmsg_lisp.py
@@ -234,6 +237,40 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Kill_Switch.lisp
 
 ../msg_gen/lisp/_package_Kill_Switch.lisp: ../msg_gen/lisp/Kill_Switch.lisp
 
+../msg_gen/lisp/Vision_objects.lisp: ../msg/Vision_objects.msg
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/roslisp/rosbuild/scripts/genmsg_lisp.py
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/roslib/cmake/../../../lib/roslib/gendeps
+../msg_gen/lisp/Vision_objects.lisp: ../manifest.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/cpp_common/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/rostime/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/roscpp_traits/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/roscpp_serialization/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/genmsg/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/genpy/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/message_runtime/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/std_msgs/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/catkin/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/gencpp/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/geneus/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/genlisp/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/message_generation/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/rosbuild/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/rosconsole/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/rosgraph_msgs/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/xmlrpcpp/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/roscpp/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/rosgraph/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/rospack/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/roslib/package.xml
+../msg_gen/lisp/Vision_objects.lisp: /opt/ros/jade/share/rospy/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/lisp/Vision_objects.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_Vision_objects.lisp"
+	/opt/ros/jade/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Vision_objects.msg
+
+../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/Vision_objects.lisp
+
+../msg_gen/lisp/_package_Vision_objects.lisp: ../msg_gen/lisp/Vision_objects.lisp
+
 ROSBUILD_genmsg_lisp: CMakeFiles/ROSBUILD_genmsg_lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Motor_Speed.lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
@@ -250,6 +287,9 @@ ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_YPR.lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Kill_Switch.lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
 ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Kill_Switch.lisp
+ROSBUILD_genmsg_lisp: ../msg_gen/lisp/Vision_objects.lisp
+ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package.lisp
+ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_Vision_objects.lisp
 ROSBUILD_genmsg_lisp: CMakeFiles/ROSBUILD_genmsg_lisp.dir/build.make
 .PHONY : ROSBUILD_genmsg_lisp
 

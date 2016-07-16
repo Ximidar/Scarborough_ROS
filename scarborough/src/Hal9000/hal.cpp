@@ -6,7 +6,7 @@
  */
 #include "hal.h"
 
-
+Handler scarborough_handler1;
 
 Hal::Hal(){
 
@@ -20,9 +20,9 @@ Hal::Hal(){
 }
 
 void Hal::init(){
-	current_state = RESET;
+	current_state = Hal::RESET;
 	update_state(UPDATE_HDD);
-	desired_direction = n.advertise<scarborough::Desired_Directions>(handler.DESIRED, 200);
+	desired_direction = n.advertise<scarborough::Desired_Directions>(scarborough_handler1.DESIRED, 200);
 }
 
 void Hal::update_state(Hal_State state){
@@ -37,10 +37,10 @@ void Hal::update_desired(){
 
 void Hal::reset(){
 	if(killed){
-		update_state(hal.HALT);
+		update_state(Hal::HALT);
 	}
 	else{
-		update_state(hal.UPDATE_HDD);
+		update_state(Hal::UPDATE_HDD);
 		bouy_state = false;
 		gate_state = false;
 		path_state = false;
@@ -70,7 +70,7 @@ void Hal::state_loop(Hal_State state){
 		break;
 	case UPDATE_HDD:
 		update_desired();
-		update_state(hal.MAINTAIN_HDD);
+		update_state(Hal::MAINTAIN_HDD);
 		break;
 
 	/////////////////////////////////////////PATH MARKER///////////////////////////
@@ -112,7 +112,7 @@ void Hal::state_loop(Hal_State state){
 
 	case HALT:
 		if(!killed){
-			update_state(hal.RESET);
+			update_state(Hal::RESET);
 		}
 		break;
 	}

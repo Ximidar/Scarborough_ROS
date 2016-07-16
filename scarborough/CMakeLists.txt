@@ -73,5 +73,15 @@ rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors.cpp
 
 rosbuild_add_executable(Hal src/Hal9000/Hal_Main.cpp
 							 src/Hal9000/hal.cpp)
-									 
+
+##############################################################################
+#Heimdall Executable
+##############################################################################
+#find openCV							 
+find_package( OpenCV REQUIRED )		 
+
+rosbuild_add_executable(Heimdall src/Heimdall/Heimdall_main.cpp
+								 src/Heimdall/Heimdall.cpp
+								 src/Heimdall/Helper_Functions/Scarborough_Vision.cpp)
+target_link_libraries(Heimdall ${OpenCV_LIBS})					 
  

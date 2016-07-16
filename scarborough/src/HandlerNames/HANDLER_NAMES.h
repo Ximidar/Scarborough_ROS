@@ -22,7 +22,9 @@ public:
 	const string MOTORS = "MOTORS";
 	const string DESIRED = "DESIRED";
 	const string HAL = "HAL";
+	const string CV_MESSAGES = "CV_MESSAGES";
 	//chatter names
+	const string HEMDALL_CHATTER = "HEIMDALL_CHATTER";
 	const string ARD_I2C_CHATTER = "ARD_I2C_CHATTER";
 	const string IMU_CHATTER = "IMU_CHATTER";
 	const string MOTOR_CHATTER = "MOTOR_CHATTER";

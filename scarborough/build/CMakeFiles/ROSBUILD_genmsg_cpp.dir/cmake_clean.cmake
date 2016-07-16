@@ -8,6 +8,7 @@ FILE(REMOVE_RECURSE
   "../msg_gen/cpp/include/scarborough/Desired_Directions.h"
   "../msg_gen/cpp/include/scarborough/YPR.h"
   "../msg_gen/cpp/include/scarborough/Kill_Switch.h"
+  "../msg_gen/cpp/include/scarborough/Vision_objects.h"
 )
 
 # Per-language clean rules from dependency scanning.

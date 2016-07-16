@@ -53,6 +53,7 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Depth.h
 CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Desired_Directions.h
 CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/YPR.h
 CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Kill_Switch.h
+CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_objects.h
 
 ../msg_gen/cpp/include/scarborough/Motor_Speed.h: ../msg/Motor_Speed.msg
 ../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -204,12 +205,43 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Kill_Switch.h
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Kill_Switch.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Kill_Switch.msg
 
+../msg_gen/cpp/include/scarborough/Vision_objects.h: ../msg/Vision_objects.msg
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roslib/cmake/../../../lib/roslib/gendeps
+../msg_gen/cpp/include/scarborough/Vision_objects.h: ../manifest.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/cpp_common/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rostime/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roscpp_traits/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roscpp_serialization/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/genmsg/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/genpy/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/message_runtime/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/std_msgs/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/catkin/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/gencpp/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/geneus/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/genlisp/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/message_generation/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosbuild/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosconsole/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosgraph_msgs/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/xmlrpcpp/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roscpp/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosgraph/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rospack/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roslib/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rospy/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Vision_objects.h"
+	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Vision_objects.msg
+
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp
 ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Motor_Speed.h
 ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Depth.h
 ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Desired_Directions.h
 ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/YPR.h
 ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Kill_Switch.h
+ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_objects.h
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp.dir/build.make
 .PHONY : ROSBUILD_genmsg_cpp
 

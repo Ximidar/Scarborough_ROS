@@ -18,7 +18,7 @@
 #include <iostream>
 #include "timer.h"
 #include "ros/ros.h"
-#include "scarborough/Desired_Directions"
+#include "scarborough/Desired_Directions.h"
 #include "scarborough/YPR.h"
 #include "scarborough/Kill_Switch.h"
 #include "scarborough/Depth.h"

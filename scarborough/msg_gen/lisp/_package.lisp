@@ -11,5 +11,7 @@
    "YPR"
    "<KILL_SWITCH>"
    "KILL_SWITCH"
+   "<VISION_OBJECTS>"
+   "VISION_OBJECTS"
   ))
 

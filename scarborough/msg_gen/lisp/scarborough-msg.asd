@@ -14,4 +14,6 @@
     (:file "_package_YPR" :depends-on ("_package"))
     (:file "Kill_Switch" :depends-on ("_package_Kill_Switch"))
     (:file "_package_Kill_Switch" :depends-on ("_package"))
+    (:file "Vision_objects" :depends-on ("_package_Vision_objects"))
+    (:file "_package_Vision_objects" :depends-on ("_package"))
   ))

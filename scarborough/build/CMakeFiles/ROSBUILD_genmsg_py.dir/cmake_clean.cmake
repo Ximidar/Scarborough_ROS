@@ -9,6 +9,7 @@ FILE(REMOVE_RECURSE
   "../src/scarborough/msg/_Desired_Directions.py"
   "../src/scarborough/msg/_YPR.py"
   "../src/scarborough/msg/_Kill_Switch.py"
+  "../src/scarborough/msg/_Vision_objects.py"
 )
 
 # Per-language clean rules from dependency scanning.

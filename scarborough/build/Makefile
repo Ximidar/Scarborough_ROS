@@ -169,6 +169,19 @@ Hal/fast:
 .PHONY : Hal/fast
 
 #=============================================================================
+# Target rules for targets named Heimdall
+
+# Build rule for target.
+Heimdall: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Heimdall
+.PHONY : Heimdall
+
+# fast build rule for target.
+Heimdall/fast:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/build
+.PHONY : Heimdall/fast
+
+#=============================================================================
 # Target rules for targets named IMU
 
 # Build rule for target.
@@ -639,6 +652,78 @@ src/Hal9000/hal.cpp.s:
 	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/hal.cpp.s
 .PHONY : src/Hal9000/hal.cpp.s
 
+src/Heimdall/Heimdall.o: src/Heimdall/Heimdall.cpp.o
+.PHONY : src/Heimdall/Heimdall.o
+
+# target to build an object file
+src/Heimdall/Heimdall.cpp.o:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Heimdall.cpp.o
+.PHONY : src/Heimdall/Heimdall.cpp.o
+
+src/Heimdall/Heimdall.i: src/Heimdall/Heimdall.cpp.i
+.PHONY : src/Heimdall/Heimdall.i
+
+# target to preprocess a source file
+src/Heimdall/Heimdall.cpp.i:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Heimdall.cpp.i
+.PHONY : src/Heimdall/Heimdall.cpp.i
+
+src/Heimdall/Heimdall.s: src/Heimdall/Heimdall.cpp.s
+.PHONY : src/Heimdall/Heimdall.s
+
+# target to generate assembly for a file
+src/Heimdall/Heimdall.cpp.s:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Heimdall.cpp.s
+.PHONY : src/Heimdall/Heimdall.cpp.s
+
+src/Heimdall/Heimdall_main.o: src/Heimdall/Heimdall_main.cpp.o
+.PHONY : src/Heimdall/Heimdall_main.o
+
+# target to build an object file
+src/Heimdall/Heimdall_main.cpp.o:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Heimdall_main.cpp.o
+.PHONY : src/Heimdall/Heimdall_main.cpp.o
+
+src/Heimdall/Heimdall_main.i: src/Heimdall/Heimdall_main.cpp.i
+.PHONY : src/Heimdall/Heimdall_main.i
+
+# target to preprocess a source file
+src/Heimdall/Heimdall_main.cpp.i:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Heimdall_main.cpp.i
+.PHONY : src/Heimdall/Heimdall_main.cpp.i
+
+src/Heimdall/Heimdall_main.s: src/Heimdall/Heimdall_main.cpp.s
+.PHONY : src/Heimdall/Heimdall_main.s
+
+# target to generate assembly for a file
+src/Heimdall/Heimdall_main.cpp.s:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Heimdall_main.cpp.s
+.PHONY : src/Heimdall/Heimdall_main.cpp.s
+
+src/Heimdall/Helper_Functions/Scarborough_Vision.o: src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.o
+.PHONY : src/Heimdall/Helper_Functions/Scarborough_Vision.o
+
+# target to build an object file
+src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.o:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.o
+.PHONY : src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.o
+
+src/Heimdall/Helper_Functions/Scarborough_Vision.i: src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.i
+.PHONY : src/Heimdall/Helper_Functions/Scarborough_Vision.i
+
+# target to preprocess a source file
+src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.i:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.i
+.PHONY : src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.i
+
+src/Heimdall/Helper_Functions/Scarborough_Vision.s: src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.s
+.PHONY : src/Heimdall/Helper_Functions/Scarborough_Vision.s
+
+# target to generate assembly for a file
+src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.s:
+	$(MAKE) -f CMakeFiles/Heimdall.dir/build.make CMakeFiles/Heimdall.dir/src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.s
+.PHONY : src/Heimdall/Helper_Functions/Scarborough_Vision.cpp.s
+
 src/IMU/I2Cdev.o: src/IMU/I2Cdev.cpp.o
 .PHONY : src/IMU/I2Cdev.o
 
@@ -767,6 +852,7 @@ help:
 	@echo "... depend"
 	@echo "... ArdI2C"
 	@echo "... Hal"
+	@echo "... Heimdall"
 	@echo "... IMU"
 	@echo "... Motor_Controller"
 	@echo "... ROSBUILD_genmsg_cpp"
@@ -815,6 +901,15 @@ help:
 	@echo "... src/Hal9000/hal.o"
 	@echo "... src/Hal9000/hal.i"
 	@echo "... src/Hal9000/hal.s"
+	@echo "... src/Heimdall/Heimdall.o"
+	@echo "... src/Heimdall/Heimdall.i"
+	@echo "... src/Heimdall/Heimdall.s"
+	@echo "... src/Heimdall/Heimdall_main.o"
+	@echo "... src/Heimdall/Heimdall_main.i"
+	@echo "... src/Heimdall/Heimdall_main.s"
+	@echo "... src/Heimdall/Helper_Functions/Scarborough_Vision.o"
+	@echo "... src/Heimdall/Helper_Functions/Scarborough_Vision.i"
+	@echo "... src/Heimdall/Helper_Functions/Scarborough_Vision.s"
 	@echo "... src/IMU/I2Cdev.o"
 	@echo "... src/IMU/I2Cdev.i"
 	@echo "... src/IMU/I2Cdev.s"

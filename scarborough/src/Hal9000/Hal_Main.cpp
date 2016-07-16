@@ -31,15 +31,14 @@ void getdata_DEPTH(const scarborough::Depth& msg){
 	depth = msg.depth;
 }
 
-
 ////////////////////////////////////MAIN CODE///////////////////////////////
 
 Hal hal;
-Handler handler;
+Handler scarborough_handler;
 
 int main(int argc, char **argv){
 
-	ros::init(argc, argv, handler.HAL_CHATTER);
+	ros::init(argc, argv, scarborough_handler.HAL_CHATTER);
 
 	while(ros::ok()){
 		hal.set_killer(killer);

@@ -18,6 +18,9 @@ FILE(REMOVE_RECURSE
   "../msg_gen/lisp/Kill_Switch.lisp"
   "../msg_gen/lisp/_package.lisp"
   "../msg_gen/lisp/_package_Kill_Switch.lisp"
+  "../msg_gen/lisp/Vision_objects.lisp"
+  "../msg_gen/lisp/_package.lisp"
+  "../msg_gen/lisp/_package_Vision_objects.lisp"
 )
 
 # Per-language clean rules from dependency scanning.
