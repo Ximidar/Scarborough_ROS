@@ -1,0 +1,20 @@
+<launch>
+	
+	<group ns="scarborough">
+		<node pkg="scarborough" name="imu" type="IMU"/>
+	</group>
+	
+	<group ns="scarborough">
+		<node pkg="scarborough" name="Arduino" type="ArdI2C"/>
+	</group>
+	
+	<group ns="scarborough">
+		<node pkg="scarborough" name="motor_controls" type="Motor_Controller"/>
+	</group>
+	
+	<group ns="scarborough">
+		<node pkg="scarborough" name="hal" type="Hal"/>
+	</group>
+	
+
+</launch>

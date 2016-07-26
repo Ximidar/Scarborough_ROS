@@ -18,11 +18,14 @@
 #include <iostream>
 #include "timer.h"
 #include "ros/ros.h"
+#include "../Heimdall/OBJECT_CONSTANTS.h"
 #include "scarborough/Desired_Directions.h"
 #include "scarborough/YPR.h"
 #include "scarborough/Kill_Switch.h"
 #include "scarborough/Depth.h"
+#include "scarborough/Vision_objects.h"
 #include "../HandlerNames/HANDLER_NAMES.h"
+#include "scarborough/Hal.h"
 
 
 
@@ -63,13 +66,31 @@ class Hal{
 		void reset();
 		void state_loop(Hal_State state);
 		void set_killer(bool _killed);
-
-
+		void set_rot(double _rotation[3]);
+		void set_depth(double _depth);
+		void set_vision(scarborough::Vision_objects _vision);
+		void maintain_heading();
 		Hal_State check_status();
 
+		string state_check; //Alex 2016-07-25: is state check supposed to always be a string of the current state?
+							//if that's the case, it would make sense to replace it with a function that returns the state as a string
+							//instead of always updating state_check
+
 		bool killed;
+		double rotation[3];
+		double depth;
+		scarborough::Vision_objects gate;
+		scarborough::Vision_objects red_bouy;
+		scarborough::Vision_objects green_bouy;
+		scarborough::Vision_objects yellow_bouy;
+		scarborough::Vision_objects flourish_gate;
+		scarborough::Vision_objects path_marker;
+
+
 
 		Timer time;
+		long timer;
+
 
 		//desired values
 
@@ -80,19 +101,14 @@ class Hal{
 
 		Hal_State current_state;
 
+		int bumped;
+
 		//desired message
 		scarborough::Desired_Directions desired;
 
-
-
-
-
-	private:
-		ros::NodeHandle n;
-		ros::Publisher desired_direction;
-
-
-
+		//object names
+		VISION_OBJECTS object_names;
+private:
 
 };
 

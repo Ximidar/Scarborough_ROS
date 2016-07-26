@@ -108,8 +108,9 @@ void ArdComm::interperet_message(string message){
 				if(atoi(parse.substr(1,2).c_str()) >= 0 && atoi(parse.substr(1,2).c_str()) <=6 ){
 
 					//populate the correct motor with the correct value
-					motor.motor[atoi(parse.substr(1,2).c_str()) - 1] = atoi(message.substr(3,pos).c_str());
-
+					motor.motor[atoi(parse.substr(1,2).c_str()) - 1] = atoi(parse.substr(3,pos).c_str());
+					//cout << atoi(parse.substr(1,2).c_str()) -1 << " " ;
+					//cout << atoi(parse.substr(3,pos).c_str()) << endl;
 					//set cursor to next variable location.
 					i = pos;
 					//erase parsed values
@@ -133,10 +134,10 @@ void ArdComm::interperet_message(string message){
 
 					switch(_kill_switch){
 					case 1:
-						kill_switch.killed = true;
+						kill_switch.killed = false;
 						break;
 					case 0:
-						kill_switch.killed = false;
+						kill_switch.killed = true;
 						break;
 					default:
 						break;

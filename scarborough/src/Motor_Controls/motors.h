@@ -35,6 +35,7 @@ public:
 	bool check_kill_switch();
 	int arraySize(double array[]);
 	int i2cConvert(int address);
+	void kill_motors();
 	int motor_val[6];
 	bool killer;
 

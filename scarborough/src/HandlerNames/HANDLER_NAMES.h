@@ -16,19 +16,27 @@ using namespace std;
 class Handler{
 public:
 	//message names
-	const string IMU = "IMU";
-	const string DEPTH_SENSOR = "DEPTH";
-	const string KILL = "KILL";
-	const string MOTORS = "MOTORS";
-	const string DESIRED = "DESIRED";
-	const string HAL = "HAL";
-	const string CV_MESSAGES = "CV_MESSAGES";
+	//Alex 2016-07-25: changed from in-class initialization to an initializer list in the constructor
+	const string IMU;
+	const string DEPTH_SENSOR;
+	const string KILL;
+	const string MOTORS;
+	const string DESIRED;
+	const string HAL;
+	const string CV_MESSAGES;
 	//chatter names
-	const string HEMDALL_CHATTER = "HEIMDALL_CHATTER";
-	const string ARD_I2C_CHATTER = "ARD_I2C_CHATTER";
-	const string IMU_CHATTER = "IMU_CHATTER";
-	const string MOTOR_CHATTER = "MOTOR_CHATTER";
-	const string HAL_CHATTER = "HAL_CHATTER";
+	const string HEMDALL_CHATTER; //TODO: rename HEMDALL_CHATTER to HEIMDALL_CHATTER
+	const string ARD_I2C_CHATTER;
+	const string IMU_CHATTER;
+	const string MOTOR_CHATTER;
+	const string HAL_CHATTER;
+
+	Handler()
+	: IMU("IMU"), DEPTH_SENSOR("DEPTH_SENSOR"), KILL("KILL"),
+	  MOTORS("MOTORS"), DESIRED("DESIRED"), HAL("HAL"),
+	  CV_MESSAGES("CV_MESSAGES"), HEMDALL_CHATTER("HEIMDALL_CHATTER"), ARD_I2C_CHATTER("ARD_I2C_CHATTER"),
+	  IMU_CHATTER("IMU_CHATTER"), MOTOR_CHATTER("MOTOR_CHATTER"), HAL_CHATTER("HAL_CHATTER")
+	  {}
 
 };
 

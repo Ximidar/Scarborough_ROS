@@ -94,7 +94,8 @@ int Scarborough_Vision::filter_image (  Mat detect, Mat src ,  int height , int 
     return 0;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////	void path_marker( Mat final_image , double yawI , vector<Point2i> cent_i , vector<double> area1 ,  int thresh, int max_thresh , RNG rng , int g);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int Scarborough_Vision::filterImageHSV (  Mat detect, Mat src ,  int height , int width , vector<Point2i> cent_i , int red , int green , int blue)
 {
     int r[height ][width], g[height ][width] ,b[height][width];
@@ -258,9 +259,6 @@ int Scarborough_Vision::filter_image_green (  Mat detect, Mat src ,  int height 
 
     return 0;
 }
-
-
-
 
 
 /** @function thresh_callback */
@@ -461,10 +459,6 @@ void Scarborough_Vision::thresh_callback( Mat final_image , double yawO , vector
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
 void Scarborough_Vision::setLabel(cv::Mat& im, const std::string label, std::vector<cv::Point>& contour)
 {
     int fontface = cv::FONT_HERSHEY_SIMPLEX;
@@ -531,15 +525,7 @@ bool isGreen(double hue)
 }
 
 
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////AllBOUY///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-vector<Point>   Scarborough_Vision::all_bouy( Mat detect , Mat final_image , double yawI , vector<Point2i> cent_i , vector<double> area1 ,  int thresh, int max_thresh , RNG rng , int g , vector<vector<Point> > contours , int color)
+vector<Point> Scarborough_Vision::all_bouy( Mat detect , Mat final_image , double yawI , vector<Point2i> cent_i , vector<double> area1 ,  int thresh, int max_thresh , RNG rng , int g , vector<vector<Point> > contours , int color)
 {
 
     Mat threshold_output;
@@ -612,206 +598,7 @@ vector<Point>   Scarborough_Vision::all_bouy( Mat detect , Mat final_image , dou
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void Scarborough_Vision::drawcontours(Mat final_image  , vector<vector<Point> > contours , int color_bouy , vector<Point> contour_r , vector<Point> contour_g , vector<Point> contour_y )
-    {
-       vector<vector<Point> > contours_poly( contours.size() );
-        vector<Rect> boundRect( contours.size() );
-     //   vector<Point2f>center( contours.size() );
-     //   vector<float>radius( contours.size() );
-
-        for( int i = 0; i < contours.size(); i++ )
-        { approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
-            boundRect[i] = boundingRect( Mat(contours_poly[i]) );
-         //   minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );
-        }
-
-        for( int i = 0; i< contours.size(); i++ )
-        {
-           // Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
-         //   drawContours( drawing, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
-            rectangle( final_image, boundRect[i].tl(), boundRect[i].br(),  Scalar( 0 , 0, 255 ), 2, 8, 0 );
-        //    circle( final_image, center[i], (int)radius[i], color, 2, 8, 0 );
-        }
-//    if( contour_r.size() > 0  )  {  /// checking if any countour is detected
-//
-////
-////        vector<Point> bouy;
-////        bouy.reserve( contour_r.size() + contour_g.size() + contour_y.size() ); // preallocate memory
-////        bouy.insert( bouy.end(), contour_r.begin(), contour_r.end() );
-////        bouy.insert( bouy.end(), contour_g.begin(), contour_g.end() );
-////        bouy.insert( bouy.end(), contour_y.begin(), contour_y.end() );
-////
-////
-////        /// Approximate contours to polygons + get bounding rects and circles
-////
-////               vector<Rect> boundRect( bouy.size() );
-////        vector<vector<Point> > contours_poly( bouy.size() );
-//
-//
-//         vector<Rect> boundRect_r( contour_r.size() );
-//         vector<Rect> boundRect_g( contour_g.size() );
-//         vector<Rect> boundRect_y( contour_y.size() );
-//
-//
-//
-//        for( int i = 0; i < contour_r.size(); i++ )
-//        {   //approxPolyDP( Mat(bouy[i]), contours_poly[i], 3, true );
-//           boundRect_r[i] = boundingRect( Mat(contour_r[i]) );
-//            cout<<"red"<< boundRect_r[i] << endl;
-//        }
-//        for( int i = 0; i < contour_g.size(); i++ )
-//        {   //approxPolyDP( Mat(bouy[i]), contours_poly[i], 3, true );
-//            boundRect_g[i] = boundingRect( Mat(contour_g[i]) );
-//            cout<<"green"<< boundRect_g[i] << endl;
-//        }
-//        for( int i = 0; i < contour_r.size(); i++ )
-//        {   //approxPolyDP( Mat(bouy[i]), contours_poly[i], 3, true );
-//            boundRect_y[i] = boundingRect( Mat(contour_y[i]) );
-//            cout<<"yellow"<<boundRect_y[i] << endl;
-//        }
-//
-////        for (int j = 0 ; j < bo; <#increment#>) {
-////            <#statements#>
-////        }
-//
-//     //   Mat drawing = Mat::zeros( threshold_output.size(), CV_8UC3 );
-//
-//
-//        // red contour coordinates =0
-//        // green contour coordinates = 1
-//        // yellow contour coordinates = 2
-//
-////            rectangle( final_image, boundRect_r[0].tl(), boundRect_r[0].br(),  Scalar( 0 , 0, 255 ), 2, 8, 0 );
-////            setLabel(final_image, "Target red", contour_r);
-////
-////            rectangle( final_image, boundRect_g[1].tl(), boundRect_g[1].br(), Scalar( 0, 255, 0 ), 2, 8, 0 );
-////            setLabel(final_image, "Target green", contour_g);
-////
-////            rectangle( final_image, boundRect_y[2].tl(), boundRect_y[2].br(), Scalar( 0, 255, 255 ), 2, 8, 0 );
-////            setLabel(final_image, "Target yellow", contour_y);
-//
-//
-       if(!final_image.empty()){
-            imshow( "Contours", final_image );
-     }
- //   }
-}
-
-
-
-
-//        /////////////////////////////////////////////////////////////////////////////////////////
-//
-//        /////////////////// putting the label //////////////////////////////////
-//
-//        /////////////////////////////////////////////////////////////////////////////////////
-//        ///////  drawing the lines n the image //////////////////////////////////////////////
-//
-//
-//        int rec_top_w =  boundRect[l_c_i].tl().x + ( boundRect[l_c_i].br().x - boundRect[l_c_i].tl().x ) /2 ;
-//        //   int rec_bot_w = rec_top_w + (boundRect[l_c_i].br().y - boundRect[l_c_i].tl().y);
-//
-//        {   std::vector<cv::Point> c_print;
-//            Point temp;
-//
-//            temp.x = rec_top_w;
-//            temp.y = boundRect[l_c_i].tl().y;
-//            c_print.push_back(temp);
-//
-//            temp.x = rec_top_w;
-//            temp.y = boundRect[l_c_i].br().y;
-//            c_print.push_back(temp);
-//
-//            MyLine(final_image , (c_print[0] ), (c_print[1])); // or drawing
-//        }
-//        //   cout << boundRect[l_c_i].br() << boundRect[l_c_i].tl() << endl;
-//        //   cout << boundRect[l_c_i]<< endl;
-//
-//
-//        ////////////////////////////////////////////////////////////////////////////////
-//
-//        // string x = -ang;
-//
-//
-//        std::vector<cv::Point> c_print;
-//
-//        Point temp;
-//
-//        temp.x = 10;
-//        temp.y = 10;
-//        c_print.push_back(temp);
-//
-//        temp.x = 100;
-//        temp.y = 10;
-//        c_print.push_back(temp);
-//
-//        temp.x = 10;
-//        temp.y = 20;
-//        c_print.push_back(temp);
-//        temp.x = 100;
-//        temp.y = 20;
-//        c_print.push_back(temp);
-//
-//
-//        setLabel(final_image, "Property of SDCR" , c_print); // or drawing
-//
-//        stringstream ang_s;
-//        ang_s<< -ang;
-//        string ang_s1 = ang_s.str();
-//        string s = "The angle of the target from x-axis is " + ang_s1;
-//
-//        temp.x = 10;
-//        temp.y = 30;
-//        c_print.push_back(temp);
-//
-//        temp.x = 100;
-//        temp.y = 30;
-//        c_print.push_back(temp);
-//
-//        temp.x = 10;
-//        temp.y = 40;
-//        c_print.push_back(temp);
-//        temp.x = 100;
-//        temp.y = 40;
-//        c_print.push_back(temp);
-//
-//        setLabel(final_image, s , c_print); // or drawing
-//        /// Show in a window
-//     //   namedWindow( "Contours", CV_WINDOW_AUTOSIZE );
-//        if(!final_image.empty()){
-//           imshow( "Contours", final_image );
-//        }
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////Path Marker////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Scarborough_Vision::path_marker( Mat final_image , double yawI , vector<Point2i> cent_i , vector<double> area1 ,  int thresh, int max_thresh , RNG rng , int g)
+void Scarborough_Vision::pathmarker( Mat final_image , double yawI , vector<Point2i> cent_i , vector<double> area1 ,  int thresh, int max_thresh , RNG rng , int g)
 {
 
     Mat threshold_output;
@@ -854,106 +641,333 @@ void Scarborough_Vision::path_marker( Mat final_image , double yawI , vector<Poi
             }
         }
 
-        // minEnclosingCircle( (Mat)contours_poly[largest_contour_index], center[largest_contour_index], radius[largest_contour_index] );
 
         /// Draw  bonding rects
         Mat drawing = Mat::zeros( threshold_output.size(), CV_8UC3 );
 
 
 
-            Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
+        Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
 
-            rectangle( drawing, boundRect[l_c_i].tl(), boundRect[l_c_i].br(), color, 2, 8, 0 );
-
-            setLabel(drawing, "Target", contours[0]);
+         //   rectangle( drawing, boundRect[l_c_i].tl(), boundRect[l_c_i].br(), color, 2, 8, 0 );
 
 
+        //    setLabel(drawing, "Target", contours[0]);
 
-        /////////////////////////////////////////////////////////////////////////////////////////
-
-        /////////////////// putting the label //////////////////////////////////
-
-        /////////////////////////////////////////////////////////////////////////////////////
-        ///////  drawing the lines n the image //////////////////////////////////////////////
+       // Mat fit_line_image = drawing.clone();
 
 
+////////////////////////// Making the line at the center of the rectangle ////////////////////////////
         int rec_top_w =  boundRect[l_c_i].tl().x + ( boundRect[l_c_i].br().x - boundRect[l_c_i].tl().x ) /2 ;
      //   int rec_bot_w = rec_top_w + (boundRect[l_c_i].br().y - boundRect[l_c_i].tl().y);
 
-        {   std::vector<cv::Point> c_print;
+        {   std::vector<cv::Point> rect_center;
             Point temp;
 
             temp.x = rec_top_w;
             temp.y = boundRect[l_c_i].tl().y;
-            c_print.push_back(temp);
+            rect_center.push_back(temp);
 
             temp.x = rec_top_w;
             temp.y = boundRect[l_c_i].br().y;
-            c_print.push_back(temp);
+            rect_center.push_back(temp);
 
-            MyLine(drawing , (c_print[0] ), (c_print[1]));
+         //   MyLine(drawing , rect_center[0] , rect_center[1]);
 
-
-
-
+         //   MyLine(drawing , boundRect[l_c_i].tl(), boundRect[l_c_i].br());
 
 
         }
-     //   cout << boundRect[l_c_i].br() << boundRect[l_c_i].tl() << endl;
-     //   cout << boundRect[l_c_i]<< endl;
+        vector<float> fit_line(4);
+
+        fitLine(contours_poly[l_c_i], fit_line, CV_DIST_L2, 0, 0.01, 0.01);
+
+        Point fitline_start ;
+        fitline_start.x = fit_line[2] - fit_line[0] * 200;
+        fitline_start.y = fit_line[3] - fit_line[1] * 200;
+
+        Point fitline_end ;
+
+        fitline_end.x = fit_line[2] + fit_line[0] * 200;
+        fitline_end.y = fit_line[3] + fit_line[1] * 200;
 
 
-        ////////////////////////////////////////////////////////////////////////////////
 
-        // string x = -ang;
+        line(final_image, fitline_start, fitline_end, color , 5 , 8 , 0  );
 
-
-        std::vector<cv::Point> c_print;
-
-        Point temp;
-
-        temp.x = 10;
-        temp.y = 10;
-        c_print.push_back(temp);
-
-        temp.x = 100;
-        temp.y = 10;
-        c_print.push_back(temp);
-
-        temp.x = 10;
-        temp.y = 20;
-        c_print.push_back(temp);
-        temp.x = 100;
-        temp.y = 20;
-        c_print.push_back(temp);
+       // if( ang > 0 &&  ang ) {
 
 
-        setLabel(drawing, "Property of Somi" , c_print);
 
-        stringstream ang_s;
-        ang_s<< -ang;
-        string ang_s1 = ang_s.str();
-        string s = "The angle of the target from x-axis is " + ang_s1;
+        ///  fit_line[1] the y -axis angle and fit_line[0] x-axis. We make fit_line[0] -ve because in image processing the z values decrease as we go down
+        ang = atan(-(fit_line[0]) /fit_line[1]) * 180 / PI;
+            cout<<"The angle of the pathmarker is " << ang <<endl;
+       // }
 
-        temp.x = 10;
-        temp.y = 30;
-        c_print.push_back(temp);
-
-        temp.x = 100;
-        temp.y = 30;
-        c_print.push_back(temp);
-
-        temp.x = 10;
-        temp.y = 40;
-        c_print.push_back(temp);
-        temp.x = 100;
-        temp.y = 40;
-        c_print.push_back(temp);
-
-        setLabel(drawing, s , c_print);
-        /// Show in a window
-        namedWindow( "Contours", CV_WINDOW_AUTOSIZE );
-        imshow( "Contours", drawing );
+            path_marker.rotation[0] = ang;
+            path_marker.rotation[1] = 0 ;
+            path_marker.rotation[2] = 0 ;
+            path_marker.in_sight = true ;
+            path_marker.depth = 0 ;
+            path_marker.object = "PATH_MARKER";
     }
+
+
+
+}
+void Scarborough_Vision::filterImageHSVRed(  Mat detect, Mat src ,  int height , int width , vector<Point2i> cent_i )
+{
+    int r[height ][width], g[height ][width] ,b[height][width];
+
+    Mat hsv;     // = src.clone();
+    cvtColor(src, hsv, CV_BGR2HSV);
+
+    vector<Mat> channels;
+    split(hsv, channels);
+
+    imshow("Hue", channels[0]);
+    imshow("Saturation", channels[1]);
+    imshow("Value", channels[2]);
+
+//    for(int col = 0; col < width ; col++){
+//        for(int row = 0; row < height ; row++){
+//
+//            r[row][col] = 0;
+//            g[col][row] = 0;
+//            b[col][row] = 0;
+//        }
+//    }
+
+
+    for(int col = 0; col < width ; col++){
+        for(int row = 0; row < height ; row++){
+
+
+            b[row][col] = src.template at<Vec3b>(row,col)[0];
+            g[row][col] = src.template at<Vec3b>(row,col)[1];
+            r[row][col] = src.template at<Vec3b>(row,col)[2];
+
+            // cout<<g[row][col]<<endl;
+        }
+    }
+
+    for(int col = 0; col < width ; col++){
+        for(int row = 0; row < height ; row++){
+
+
+            // WORKING PRETTY GOOD (120, 80, 140)
+            // 120 , 100 , 150
+
+            Vec3b hsv_vec = hsv.at<Vec3b>(row ,col);
+
+            if( (hsv_vec.val[0] < 15 || hsv_vec.val[0] > 172) && hsv_vec.val[1] > 0  )
+            {
+
+                detect.template at<Vec3b>(row, col)[0] = 0;
+                detect.template at<Vec3b>(row, col)[1] = 0;
+                detect.template at<Vec3b>(row, col)[2] = 255;
+            }
+            else
+            {
+                detect.template at<Vec3b>(row, col)[0] = 0;
+                detect.template at<Vec3b>(row, col)[1] = 0;
+                detect.template at<Vec3b>(row, col)[2] = 0;
+
+
+            }
+        }
+    }
+//    imshow("after thresholding", detect);
+
+}
+
+void Scarborough_Vision::filterImageHSVGreen(  Mat detect, Mat src ,  int height , int width , vector<Point2i> cent_i )
+{
+    int r[height ][width], g[height ][width] ,b[height][width];
+
+    Mat hsv;     // = src.clone();
+    cvtColor(src, hsv, CV_BGR2HSV);
+
+
+    for(int col = 0; col < width ; col++){
+        for(int row = 0; row < height ; row++){
+
+
+            b[row][col] = src.template at<Vec3b>(row,col)[0];
+            g[row][col] = src.template at<Vec3b>(row,col)[1];
+            r[row][col] = src.template at<Vec3b>(row,col)[2];
+
+            // cout<<g[row][col]<<endl;
+        }
+    }
+
+    for(int col = 0; col < width ; col++){
+        for(int row = 0; row < height ; row++){
+
+
+            // WORKING PRETTY GOOD (120, 80, 140)
+            // 120 , 100 , 150
+
+            Vec3b hsv_vec = hsv.at<Vec3b>(row ,col);
+
+            if( hsv_vec.val[0] < 75 && hsv_vec.val[0] > 50   && hsv_vec.val[1] > 0 )
+            {
+
+                detect.template at<Vec3b>(row, col)[0] = 0;
+                detect.template at<Vec3b>(row, col)[1] = 255;
+                detect.template at<Vec3b>(row, col)[2] = 0;
+            }
+            else
+            {
+                detect.template at<Vec3b>(row, col)[0] = 0;
+                detect.template at<Vec3b>(row, col)[1] = 0;
+                detect.template at<Vec3b>(row, col)[2] = 0;
+
+
+            }
+        }
+    }
+    //    imshow("after thresholding", detect);
+
+}
+
+void Scarborough_Vision::filterImageHSVYellow(  Mat detect, Mat src ,  int height , int width , vector<Point2i> cent_i )
+{
+    int r[height ][width], g[height ][width] ,b[height][width];
+
+    Mat hsv;     // = src.clone();
+    cvtColor(src, hsv, CV_BGR2HSV);
+
+
+    for(int col = 0; col < width ; col++){
+        for(int row = 0; row < height ; row++){
+
+
+            b[row][col] = src.template at<Vec3b>(row,col)[0];
+            g[row][col] = src.template at<Vec3b>(row,col)[1];
+            r[row][col] = src.template at<Vec3b>(row,col)[2];
+
+            // cout<<g[row][col]<<endl;
+        }
+    }
+
+    for(int col = 0; col < width ; col++){
+        for(int row = 0; row < height ; row++){
+
+
+            // WORKING PRETTY GOOD (120, 80, 140)
+            // 120 , 100 , 150
+
+            Vec3b hsv_vec = hsv.at<Vec3b>(row ,col);
+
+            if( hsv_vec.val[0] <  38 && hsv_vec.val[0] > 27  && hsv_vec.val[1] > 0 )
+            {
+
+                detect.template at<Vec3b>(row, col)[0] = 0;
+                detect.template at<Vec3b>(row, col)[1] = 255;
+                detect.template at<Vec3b>(row, col)[2] = 255;
+            }
+            else
+            {
+                detect.template at<Vec3b>(row, col)[0] = 0;
+                detect.template at<Vec3b>(row, col)[1] = 0;
+                detect.template at<Vec3b>(row, col)[2] = 0;
+
+
+            }
+        }
+    }
+    //    imshow("after thresholding", detect);
+
+}
+
+
+void Scarborough_Vision::direction(vector<Point>  target ,  double yawO , vector<Point2i> cent_i  , int framecounter , vector<double> area1 , double curr_depth){
+
+    double yaw_ang = 0;
+    double pitch_ang = 0;
+
+    double largest_area = contourArea( target , false);
+
+    Point2f center;
+    float   radius;
+    //  vector<Point>  contours_poly( target.size() );
+
+    // approxPolyDP( Mat(target), contours_poly , 3, true );
+    minEnclosingCircle( target , center, radius);
+
+    //////////////////////////////////////////////////////////////////////////////////
+    /////////// FInding the angle ////////////////////////////////////////////////////
+
+//    cout<<"Center of the image" << cent_i << endl;
+//    cout<<"Center of the target" << center << endl;
+
+    int dist_x = center.x - cent_i[0].x;
+    int dist_y = center.y - cent_i[0].y;
+
+    cout<< " dist_x = " << dist_x << " dist_y =" << dist_y <<endl;
+
+     double camera_calib = 0.0005375 * min(2560/(cent_i[0].x * 2), 1440/(cent_i[0].y * 2));
+
+
+ ////////////// Calculating the angle /////////////////////////////////////
+
+
+    ////////// calculating the Yaw axis ///////////////
+
+    yaw_ang = atan ( (dist_x) * camera_calib ) * 180 / PI;
+    cout<< "The output yaw is "<<yaw_ang<<endl;
+
+
+    ////////////////// calculating the PITCH ///////////////////////////////
+    pitch_ang = - atan ( (dist_y) * camera_calib ) * 180 / PI;
+    cout<< "The output pitch is "<<pitch_ang<<endl;
+
+
+    int area = (int)largest_area;
+
+    cout<<"area = "<<area<<endl;
+    cout<<"frame no. = " << framecounter << endl;
+
+    area1.push_back(area);
+
+    double real_bouy_width = 0.1905 ; // in meters
+    double dist = real_bouy_width/ (  camera_calib * (radius*2) );
+
+
+    cout << "Distance to the bouy " << dist << endl;
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    double depth , desired_depth;
+
+    depth = dist * camera_calib * dist_y;
+
+    desired_depth = curr_depth + depth;  /// the final desired depth
+
+
+	red_bouy.object = "RED_BOUY";
+	red_bouy.color = "RED";
+
+	red_bouy.rotation[0] = yaw_ang;
+	red_bouy.rotation[1] = 0;
+	red_bouy.rotation[2] = 0;
+	red_bouy.depth = desired_depth;
+	red_bouy.in_sight = true;
+
+
+
+    ///  vague description if we are going in correct direction
+    /// comparing past 3 areas if the area has increased or not
+    if( framecounter > 3)
+    {
+        if( (area1[framecounter-2] + area1[framecounter-1] + area1[framecounter])/3 > area )
+            cout<<"Wrong direction "<<endl;
+        else
+            cout<<"Right direction "<<endl;
+    }
+
+
+    cout<<endl;
 
 }

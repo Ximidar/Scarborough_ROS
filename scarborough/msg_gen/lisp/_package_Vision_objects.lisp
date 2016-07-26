@@ -5,4 +5,8 @@
           COLOR
           ROTATION-VAL
           ROTATION
+          DEPTH-VAL
+          DEPTH
+          IN_SIGHT-VAL
+          IN_SIGHT
 ))

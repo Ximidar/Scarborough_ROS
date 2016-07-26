@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include "I2Cdev.h"
 #include "scarborough/YPR.h"
+#include "scarborough/Desired_Directions.h"
 #include "../HandlerNames/HANDLER_NAMES.h"
 #include <math.h>
 #include <stdint.h>
@@ -44,7 +45,7 @@ public:
 	void ardWrite(double imu_data[3]); //write the current IMU data to the arduino over the i2c bus
 	string ardRead();
 	void init(); //this will initialize the i2c bus for the arduino.
-	void update_desired(int type, int value);
+	void update_desired(scarborough::Desired_Directions _desired);
 	void pid_Control(int motor, int mode);
 	void pid_monitor();
 

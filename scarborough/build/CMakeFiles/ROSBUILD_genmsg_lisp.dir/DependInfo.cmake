@@ -13,6 +13,7 @@ SET(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/_package.lisp" "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/Motor_Speed.lisp"
   "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/_package_Depth.lisp" "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/Depth.lisp"
   "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/_package_Desired_Directions.lisp" "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/Desired_Directions.lisp"
+  "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/_package_Hal.lisp" "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/Hal.lisp"
   "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/_package_Kill_Switch.lisp" "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/Kill_Switch.lisp"
   "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/_package_Motor_Speed.lisp" "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/Motor_Speed.lisp"
   "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/_package_Vision_objects.lisp" "/home/ubuntu/workspace/sandbox/scarborough/msg_gen/lisp/Vision_objects.lisp"

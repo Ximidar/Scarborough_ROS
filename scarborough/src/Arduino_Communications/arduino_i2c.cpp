@@ -15,6 +15,8 @@ Handler handler;
 
 double imu_data[3];
 
+scarborough::Desired_Directions desired_directions;
+
 /*
  * This function takes the data from the IMU_DATA publisher and throws it into a double that we can use.
  */
@@ -27,6 +29,14 @@ void getdata(const scarborough::YPR& msg){
 
 }
 
+
+
+void getdata_DESIRED(const scarborough::Desired_Directions& msg){
+
+	desired_directions = msg;
+
+}
+
 //Main function for ArdI2C executable
 int main(int argc, char **argv){
 
@@ -35,27 +45,30 @@ int main(int argc, char **argv){
 	ros::NodeHandle n;
 
 	ros::Subscriber imu;
-	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>(handler.MOTORS, 200);
-	ros::Publisher depth_pub = n.advertise<scarborough::Depth>(handler.DEPTH_SENSOR, 200);
-	ros::Publisher kill_pub = n.advertise<scarborough::Kill_Switch>(handler.KILL, 200);
+	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>(handler.MOTORS, 100);
+	ros::Publisher depth_pub = n.advertise<scarborough::Depth>(handler.DEPTH_SENSOR, 100);
+	ros::Publisher kill_pub = n.advertise<scarborough::Kill_Switch>(handler.KILL, 10);
+
+	ros::Subscriber sub;
 
 	i2c.init(); // does nothing.
+
+	imu = IMU.subscribe(handler.IMU, 200, getdata);
+	sub = n.subscribe(handler.DESIRED, 200, getdata_DESIRED);
 
 
 	while(ros::ok()){
 
-		//get IMU data
-		imu = IMU.subscribe(handler.MOTORS, 200, getdata);
 
-		//write imu data to the arduino
+		//write imu data to the arduino and update the desired direction
 		i2c.ardWrite(imu_data);
+		i2c.update_desired(desired_directions);
 
-		string teensy_message = i2c.ardRead();
-		cout << teensy_message << " change "<< endl;
+
+
 
 		//read message from arduino and parse it
-		ardcomm.interperet_message(teensy_message);
-		teensy_message = "";
+		ardcomm.interperet_message(i2c.ardRead());
 
 		//publish motor data to the ARD_I2C
 		ard_pub.publish(ardcomm.motor);
@@ -65,7 +78,9 @@ int main(int argc, char **argv){
 		cout << ardcomm.depth << endl;
 		cout << ardcomm.kill_switch << endl;
 
-		//spin once to let ROS you are alive.
+
+
+
 		ros::spinOnce();
 	}
 
@@ -84,12 +99,6 @@ ArdI2C::ArdI2C(){
 }
 //use this if ever needed... It used to do something but is now a ghost of algorithms past
 void ArdI2C::init(){
-
-
-	//when started this will set the desired yaw to 0 and the desired depth to 4 feet
-	update_desired(YAW, 0);
-	update_desired(DEPTH, 4);
-
 
 
 }
@@ -212,144 +221,38 @@ string ArdI2C::ardRead(){
 
 
 /*
- * This function will update the desired yaw(reg 9) and desired depth (reg 10)
- * Then write it to the arduino.
- */
-void ArdI2C::update_desired(int type, int value){
-
-	switch(type){
-
-		case YAW:
-			i2cdev.writeWord(4, 9, (uint16_t)value);
-			desired_yaw = value;
-			break;
-
-		case DEPTH:
-			i2cdev.writeWord(4, 10, (uint16_t)value);
-			desired_depth = value;
-			break;
-	}
-
-}
-
-/*
- * This function writes to the i2c bus the values for kp, ki, and kd. The number it writes
- * will be divided by 100 on the arduino side so 100 would turn into 1, while 25 would turn into 0.25.
- * This is because we cannot send doubles and its such a small number that it works well this way.
+ * yaw 9
+ * pitch 10
+ * roll 11
+ * depth 12
+ * throttle 13
  *
- * TODO Matt Pedler: In the future we need to expand this to be able to switch any motors PID value
- * TODO Matt Pedler: check the registers on this to make sure they are the correct ones
  */
+void ArdI2C::update_desired(scarborough::Desired_Directions _desired){
 
-void ArdI2C::pid_Control(int motor, int mode){
+	//write desired YPR
 
-	//Set up bool for switching
-	bool switcher = false;
+	int desiredYPR[3];
 
-	int kp_addr;
-	int ki_addr;
-	int kd_addr;
-
-	//detirmine motor addresses TODO Matt Pedler
-	while(switcher != true){
-			switch(motor){
-			case 1:
-				kp_addr = 6;
-				ki_addr = 7;
-				kd_addr = 8;
-				switcher = false;
-				break;
-
-			case 2:
-				kp_addr = 6;
-				ki_addr = 7;
-				kd_addr = 8;
-				switcher = false;
-				break;
-
-			case 3:
-				kp_addr = 6;
-				ki_addr = 7;
-				kd_addr = 8;
-				switcher = false;
-				break;
-
-			case 4:
-				kp_addr = 6;
-				ki_addr = 7;
-				kd_addr = 8;
-				switcher = false;
-				break;
-
-			case 5:
-				kp_addr = 6;
-				ki_addr = 7;
-				kd_addr = 8;
-				switcher = false;
-				break;
-
-			case 6:
-				kp_addr = 6;
-				ki_addr = 7;
-				kd_addr = 8;
-				switcher = false;
-				break;
-			}
-		}
-	switcher = false;
-
-	//set up while loop for switching
-
-	switch(mode){
-
-		case AGRESSIVE:
-			i2cdev.writeWord(4, (uint8_t)kp_addr, 100);
-			i2cdev.writeWord(4, (uint8_t)ki_addr, 100);
-			i2cdev.writeWord(4, (uint8_t)kd_addr, 100);
-			switcher = true;
-			break;
-		case MEDIUM:
-			i2cdev.writeWord(4, (uint8_t)kp_addr, 100);
-			i2cdev.writeWord(4, (uint8_t)ki_addr, 25);
-			i2cdev.writeWord(4, (uint8_t)kd_addr, 5);
-			switcher = true;
-			break;
-
-		case FINE:
-			i2cdev.writeWord(4, (uint8_t)kp_addr, 100);
-			i2cdev.writeWord(4, (uint8_t)ki_addr, 5);
-			i2cdev.writeWord(4, (uint8_t)kd_addr, 1);
-			switcher = true;
-			break;
+	for (int i = 0 ; i < 3 ; i++){
+		desiredYPR[i] = (int)_desired.rotation[i];
 	}
+
+	for (int i = 0 ; i < 3 ; i++){
+	i2cdev.writeWord(4 , (uint8_t)9+i,(uint16_t)desiredYPR[i]);
+	}
+
+	//update depth
+	i2cdev.writeWord(4 , (uint8_t)12,(uint16_t) _desired.depth);
+
+	//update throttle
+	i2cdev.writeWord(4 , (uint8_t)13, (uint16_t) _desired.throttle);
+
+	cout << _desired << endl;
 
 
 }
 
-/*
- * This function monitors desired values vs reference values and changes the PID state accordingly
- */
-
-void ArdI2C::pid_monitor(){
-
-	double disparity = fabs(imu_data[0] - desired_yaw);
-
-	if(disparity > 10){
-
-		pid_Control(1, AGRESSIVE);
-		pid_Control(2, AGRESSIVE);
-
-	}
-	else if(disparity <= 9 && disparity > 5){
-		pid_Control(1, MEDIUM);
-		pid_Control(2, MEDIUM);
-	}
-	else if(disparity <= 5){
-		pid_Control(1, FINE);
-		pid_Control(2, FINE);
-	}
-
-}
 
 
 

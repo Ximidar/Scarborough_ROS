@@ -4,6 +4,7 @@
 CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: ../src/IMU/I2Cdev.cpp
 CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: ../src/IMU/I2Cdev.h
 
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: ../msg_gen/cpp/include/scarborough/Kill_Switch.h
 CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: ../msg_gen/cpp/include/scarborough/YPR.h
 CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: ../src/HandlerNames/HANDLER_NAMES.h
 CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: ../src/IMU/I2Cdev.h

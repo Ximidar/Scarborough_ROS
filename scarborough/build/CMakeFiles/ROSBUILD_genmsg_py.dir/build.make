@@ -51,6 +51,7 @@ include CMakeFiles/ROSBUILD_genmsg_py.dir/progress.make
 CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 
 ../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Motor_Speed.py
+../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Hal.py
 ../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Depth.py
 ../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Desired_Directions.py
 ../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_YPR.py
@@ -58,7 +59,7 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ../src/scarborough/msg/__init__.py: ../src/scarborough/msg/_Vision_objects.py
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/__init__.py"
-	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/ubuntu/workspace/sandbox/scarborough/msg/Motor_Speed.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Depth.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Desired_Directions.msg /home/ubuntu/workspace/sandbox/scarborough/msg/YPR.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Kill_Switch.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Vision_objects.msg
+	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/ubuntu/workspace/sandbox/scarborough/msg/Motor_Speed.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Hal.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Depth.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Desired_Directions.msg /home/ubuntu/workspace/sandbox/scarborough/msg/YPR.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Kill_Switch.msg /home/ubuntu/workspace/sandbox/scarborough/msg/Vision_objects.msg
 
 ../src/scarborough/msg/_Motor_Speed.py: ../msg/Motor_Speed.msg
 ../src/scarborough/msg/_Motor_Speed.py: /opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -90,6 +91,36 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Motor_Speed.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Motor_Speed.msg
 
+../src/scarborough/msg/_Hal.py: ../msg/Hal.msg
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/roslib/cmake/../../../lib/roslib/gendeps
+../src/scarborough/msg/_Hal.py: ../manifest.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/cpp_common/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rostime/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/roscpp_traits/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/roscpp_serialization/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/genmsg/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/genpy/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/message_runtime/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/std_msgs/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/catkin/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/gencpp/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/geneus/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/genlisp/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/message_generation/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rosbuild/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rosconsole/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rosgraph_msgs/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/xmlrpcpp/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/roscpp/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rosgraph/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rospack/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/roslib/package.xml
+../src/scarborough/msg/_Hal.py: /opt/ros/jade/share/rospy/package.xml
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Hal.py"
+	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Hal.msg
+
 ../src/scarborough/msg/_Depth.py: ../msg/Depth.msg
 ../src/scarborough/msg/_Depth.py: /opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py
 ../src/scarborough/msg/_Depth.py: /opt/ros/jade/share/roslib/cmake/../../../lib/roslib/gendeps
@@ -116,7 +147,7 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ../src/scarborough/msg/_Depth.py: /opt/ros/jade/share/rospack/package.xml
 ../src/scarborough/msg/_Depth.py: /opt/ros/jade/share/roslib/package.xml
 ../src/scarborough/msg/_Depth.py: /opt/ros/jade/share/rospy/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Depth.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Depth.msg
 
@@ -146,7 +177,7 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rospack/package.xml
 ../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/roslib/package.xml
 ../src/scarborough/msg/_Desired_Directions.py: /opt/ros/jade/share/rospy/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Desired_Directions.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Desired_Directions.msg
 
@@ -176,7 +207,7 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/rospack/package.xml
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/roslib/package.xml
 ../src/scarborough/msg/_YPR.py: /opt/ros/jade/share/rospy/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_YPR.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/YPR.msg
 
@@ -206,7 +237,7 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rospack/package.xml
 ../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/roslib/package.xml
 ../src/scarborough/msg/_Kill_Switch.py: /opt/ros/jade/share/rospy/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Kill_Switch.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Kill_Switch.msg
 
@@ -236,13 +267,14 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ../src/scarborough/msg/_Vision_objects.py: /opt/ros/jade/share/rospack/package.xml
 ../src/scarborough/msg/_Vision_objects.py: /opt/ros/jade/share/roslib/package.xml
 ../src/scarborough/msg/_Vision_objects.py: /opt/ros/jade/share/rospy/package.xml
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../src/scarborough/msg/_Vision_objects.py"
 	/opt/ros/jade/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/ubuntu/workspace/sandbox/scarborough/msg/Vision_objects.msg
 
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/__init__.py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/_Motor_Speed.py
+ROSBUILD_genmsg_py: ../src/scarborough/msg/_Hal.py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/_Depth.py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/_Desired_Directions.py
 ROSBUILD_genmsg_py: ../src/scarborough/msg/_YPR.py

@@ -72,7 +72,8 @@ rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors.cpp
 ##############################################################################
 
 rosbuild_add_executable(Hal src/Hal9000/Hal_Main.cpp
-							 src/Hal9000/hal.cpp)
+							 src/Hal9000/hal.cpp
+							 src/Hal9000/timer.cpp)
 
 ##############################################################################
 #Heimdall Executable

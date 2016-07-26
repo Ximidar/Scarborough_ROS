@@ -14,16 +14,19 @@
 #include <ctime>
 #include <sys/time.h>
 #include <math.h>
+#include "OBJECT_CONSTANTS.h"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/photo/photo.hpp"
-#include "Helper_Functions/allbouy.hpp"
-#include "Helper_Functions/pathmarker.hpp"
+//#include "Helper_Functions/allbouy.hpp"
+//#include "Helper_Functions/pathmarker.hpp"
 #include "Helper_Functions/Scarborough_Vision.hpp"
 #include "scarborough/Vision_objects.h"
+#include "scarborough/Depth.h"
 #include "../HandlerNames/HANDLER_NAMES.h"
 #include "ros/ros.h"
+#include "scarborough/Hal.h"
 
 using namespace std;
 using namespace cv;
@@ -38,13 +41,21 @@ public:
 		};
 	bool init();
 	void heimdall_bouy(gui interface);
+	void heimdall_pathmarker(gui interface );
+	void get_depth(double _depth);
+	void get_state(string _state);
+	void test_camera( );
+
+	double depth;
+	string state;
 
 
-
+	Scarborough_Vision scarborough;
 	double yawI;
 	int thresh;
 	int max_thresh;
 	RNG rng;
+	vector<Point2i> cent_i;
 
 	VideoCapture forward;
 	VideoCapture downward;
@@ -52,19 +63,14 @@ public:
 	//variables for sharing object data
 
 	scarborough::Vision_objects path_marker;
-	scarborough::Vision_objects bouy;
+	scarborough::Vision_objects red_bouy;
 	scarborough::Vision_objects gate;
 
-	const string BOUY = "BOUY";
-	const string GATE = "GATE";
-	const string PATH_MARKER = "PATH_MARKER";
-	const string RED = "RED";
-	const string GREEN = "GREEN";
-	const string YELLOW = "YELLOW";
+	VISION_OBJECTS objects;
 
 
 	/// Global variables
-	Mat src, detect_r , detect_g , detect_y ; //, final_image;
+	Mat src, detect_r , detect_g , detect_y  , down; //, final_image;
 
 	vector<double> area1;
 

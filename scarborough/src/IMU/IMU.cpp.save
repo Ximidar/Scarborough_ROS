@@ -5,7 +5,7 @@
  *      Author: ubuntu
  */
 //#define NO_I2C
-
+#define NORMAL_OP
 
 #include "IMU.h"
 
@@ -15,7 +15,7 @@ IMU imu;
 bool killer;
 
 void getdata_KILL(const scarborough::Kill_Switch& msg){
-	cout << msg << " GETDATA" << endl;
+
 	killer = msg.killed;
 
 
@@ -28,54 +28,63 @@ int main(int argc, char **argv) {
 	ros::init(argc, argv, handler.IMU_CHATTER);
 
 	ros::NodeHandle n;
-	ros::NodeHandle kill;
 	ros::Subscriber sub;
 
 
 
 	ros::Publisher imu_pub = n.advertise<scarborough::YPR>(handler.IMU, 200);
-        sub = kill.subscribe(handler.KILL, 20, getdata_KILL);
 
-
-	
-    cout << "Initializing IMU" << endl;
+//Do normal operations if normal op is defined
+#ifdef NORMAL_OP
+	cout << "Initializing IMU" << endl;
     imu.IMU_init();
     //imu.set_zero(); // many offsets have calculated this number as YPR_OFFSET: -13.1352 -0.686341 -0.702521
-    bool restart = false;
-    while(ros::ok()){
-    	
-	
+
+   
+    	sub = n.subscribe(handler.KILL, 200, getdata_KILL);
+	cout << killer << endl;
     	if(!killer){
-		 
-
-		if(restart){
-			cout<< "INITIALIZING IMU" << endl;
-			imu.IMU_init();
-			restart = false;
-		}
-
     		imu.read_IMU();
 
     		imu_pub.publish(imu.ypr_ROS.YPR);
-		ros::spinOnce();
+
     	}
     	else{
-		
+    		while(killer && ros::ok() ){
+    			//sit here while the switch is off
+    			sub = n.subscribe(handler.KILL, 200, getdata_KILL);
+    			cout << "Waiting " << killer <<  endl;
+    			ros::spinOnce();
+    		}
+    		cout << "Initializing IMU" << endl;
+    		imu.IMU_init();
 
-		if(!restart){
-    			restart = true;
-		}
-		//sit here while the switch is off
-    		cout << "Waiting " << killer <<  endl;
-		ros::spinOnce();
     	}
 
 
-    	
+    	ros::spinOnce();
 
     }
+#endif
+//if there's no I2C on the computer then use this to spit out some numbers.
+#ifdef NO_I2C
 
-
+    //set up a loop rate since we are sending debug data
+    ros::Rate loop_rate(100);
+    //initialize debug_d to 0;
+    imu.debug_d = 0;
+    //while ros isn't shut down send out all the data
+    while(ros::ok()){
+    	//Dont call up any of imu's actual functions. This is for testing at home.
+    	imu.debug_d++;
+    	//fill the publisher with the debug data
+    	imu.ypr_ROS.YPR = {imu.debug_d, imu.debug_d, imu.debug_d};
+    	//publish the debug data
+    	ard_pub.publish(imu.ypr_ROS.YPR);
+    	ros::spinOnce();
+    	loop_rate.sleep();
+    }
+#endif
 
 
 }

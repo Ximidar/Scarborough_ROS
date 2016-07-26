@@ -40,19 +40,25 @@ int main(int argc, char **argv){
 
 	//Make node handler
 	ros::NodeHandle motor_handle;
-	ros::Subscriber motor_subscriber;
-	ros::Subscriber kill_Switch;
+	ros::Subscriber motor_subscriber = motor_handle.subscribe(handler.MOTORS, 200, getdata);
+	ros::Subscriber kill_Switch = motor_handle.subscribe(handler.KILL, 200, getdata_kill);
 	motors.init();
 
 	//main loop
 	while(ros::ok()){
 
-		kill_Switch = motor_handle.subscribe(handler.KILL, 200, getdata_kill);
 
-		//if the kill switch isn't connected dont write to the motors.
-		if(motors.check_kill_switch()){
-			motor_subscriber = motor_handle.subscribe(handler.MOTORS, 200, getdata);
+
+		//if the kill switch is off do not send motor signals
+		if(!motors.killer){
+
 			motors.set_motor_speed();
+			cout << motors.motor_val << endl;
+		}
+		else{
+			cout << "killing motors" << endl;
+			motors.kill_motors();
+
 		}
 
 
@@ -60,11 +66,11 @@ int main(int argc, char **argv){
 	}
 }
 
-/*
- * init should be used for braking here until the killswitch is pushed
- */
+
 void Motors::init(){
 
+	//set killswitch to true until it gets updated
+	motors.killer = true;
 
 
 }
@@ -74,23 +80,22 @@ void Motors::init(){
  *
  * motor addresses will be:
  * bus: 1
- * M1: 33
- * M2: 34
- * M3: 35
- * M4: 36
- * M5: 37
- * M6: 38
+ * M1: 39 Left
+ * M2: 35 Right
+ * M3: 36 Right Front
+ * M4: 37 Left Front
+ * M5: 38 Left Back
+ * M6: 34 Right Back
  */
 void Motors::set_motor_speed(){
-//	for(int i = 0 ; i < 6 ; i++){
-//		//write number to the motor over i2c
-//		i2cdev.writeWord(i2cConvert(i+33), 0, (uint16_t)motor_val[i] );
-//
-//	}
-	if(motor_val[0] > 5000){
-		motor_val[0] = 5000;
-	}
-	i2cdev.writeWord(0x38 , 0x00 ,(uint16_t)motor_val[0]);
+
+
+	i2cdev.writeWord(0x39, 0, (uint16_t)motor_val[0] ); //motor1
+	i2cdev.writeWord(0x35, 0, (uint16_t)motor_val[1] ); // motor2
+	i2cdev.writeWord(0x36, 0, (uint16_t)motor_val[2] ); // motor3
+	i2cdev.writeWord(0x37, 0, (uint16_t)motor_val[3] ); // motor4
+	i2cdev.writeWord(0x38, 0, (uint16_t)motor_val[4] ); //motor 5
+	i2cdev.writeWord(0x34, 0, (uint16_t)motor_val[5] ); //motor 6
 }
 
 /*
@@ -146,6 +151,15 @@ bool Motors::check_kill_switch(){
 
 	return killer;
 
+}
+
+void Motors::kill_motors(){
+	i2cdev.writeWord(0x39, 0, (uint16_t)0 ); //motor1
+	i2cdev.writeWord(0x35, 0, (uint16_t)0 ); // motor2
+	i2cdev.writeWord(0x36, 0, (uint16_t)0 ); // motor3
+	i2cdev.writeWord(0x37, 0, (uint16_t)0 ); // motor4
+	i2cdev.writeWord(0x38, 0, (uint16_t)0 ); //motor 5
+	i2cdev.writeWord(0x34, 0, (uint16_t)0 ); //motor 6
 }
 
 

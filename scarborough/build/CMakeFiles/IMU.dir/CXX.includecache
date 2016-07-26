@@ -6,6 +6,28 @@
 
 #IncludeRegexTransform: 
 
+../msg_gen/cpp/include/scarborough/Kill_Switch.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+../msg_gen/cpp/include/scarborough/ros/serialization.h
+ros/builtin_message_traits.h
+../msg_gen/cpp/include/scarborough/ros/builtin_message_traits.h
+ros/message_operations.h
+../msg_gen/cpp/include/scarborough/ros/message_operations.h
+ros/time.h
+../msg_gen/cpp/include/scarborough/ros/time.h
+ros/macros.h
+../msg_gen/cpp/include/scarborough/ros/macros.h
+ros/assert.h
+../msg_gen/cpp/include/scarborough/ros/assert.h
+
 ../msg_gen/cpp/include/scarborough/YPR.h
 string
 -
@@ -47,6 +69,8 @@ std_msgs/String.h
 /home/ubuntu/workspace/sandbox/scarborough/src/IMU/std_msgs/String.h
 scarborough/YPR.h
 /home/ubuntu/workspace/sandbox/scarborough/src/IMU/scarborough/YPR.h
+scarborough/Kill_Switch.h
+/home/ubuntu/workspace/sandbox/scarborough/src/IMU/scarborough/Kill_Switch.h
 stdio.h
 -
 stdlib.h

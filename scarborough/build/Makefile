@@ -652,6 +652,30 @@ src/Hal9000/hal.cpp.s:
 	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/hal.cpp.s
 .PHONY : src/Hal9000/hal.cpp.s
 
+src/Hal9000/timer.o: src/Hal9000/timer.cpp.o
+.PHONY : src/Hal9000/timer.o
+
+# target to build an object file
+src/Hal9000/timer.cpp.o:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/timer.cpp.o
+.PHONY : src/Hal9000/timer.cpp.o
+
+src/Hal9000/timer.i: src/Hal9000/timer.cpp.i
+.PHONY : src/Hal9000/timer.i
+
+# target to preprocess a source file
+src/Hal9000/timer.cpp.i:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/timer.cpp.i
+.PHONY : src/Hal9000/timer.cpp.i
+
+src/Hal9000/timer.s: src/Hal9000/timer.cpp.s
+.PHONY : src/Hal9000/timer.s
+
+# target to generate assembly for a file
+src/Hal9000/timer.cpp.s:
+	$(MAKE) -f CMakeFiles/Hal.dir/build.make CMakeFiles/Hal.dir/src/Hal9000/timer.cpp.s
+.PHONY : src/Hal9000/timer.cpp.s
+
 src/Heimdall/Heimdall.o: src/Heimdall/Heimdall.cpp.o
 .PHONY : src/Heimdall/Heimdall.o
 
@@ -901,6 +925,9 @@ help:
 	@echo "... src/Hal9000/hal.o"
 	@echo "... src/Hal9000/hal.i"
 	@echo "... src/Hal9000/hal.s"
+	@echo "... src/Hal9000/timer.o"
+	@echo "... src/Hal9000/timer.i"
+	@echo "... src/Hal9000/timer.s"
 	@echo "... src/Heimdall/Heimdall.o"
 	@echo "... src/Heimdall/Heimdall.i"
 	@echo "... src/Heimdall/Heimdall.s"

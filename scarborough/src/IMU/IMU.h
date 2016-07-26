@@ -8,6 +8,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "scarborough/YPR.h"
+#include "scarborough/Kill_Switch.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

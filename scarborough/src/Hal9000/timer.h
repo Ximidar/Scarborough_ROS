@@ -13,6 +13,7 @@
 #include <inttypes.h>
 
 class Timer{
+public:
 	long return_ms();
 
 };

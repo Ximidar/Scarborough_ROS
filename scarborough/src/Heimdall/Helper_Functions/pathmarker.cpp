@@ -8,7 +8,7 @@
 
 #include "pathmarker.hpp"
 
-#include "Scarborough_Vision.hpp"
+//#include "Scarborough_Vision.hpp"
 
 void path_marker( Mat final_image , double yawI , vector<Point2i> cent_i , vector<double> area1 ,  int thresh, int max_thresh , RNG rng , int g)
 {
@@ -23,7 +23,8 @@ void path_marker( Mat final_image , double yawI , vector<Point2i> cent_i , vecto
     /// Detect edges using Threshold
     threshold( final_image, threshold_output, thresh, 255, THRESH_BINARY );
     cvtColor(threshold_output, threshold_output, CV_BGR2GRAY);
-    /// Find contours
+    /// Find contours#include "Scarborough_Vision.hpp"
+
     findContours( threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
     
     if( contours.size() > 0  )  {  /// checking if any countour is detected
@@ -46,7 +47,8 @@ void path_marker( Mat final_image , double yawI , vector<Point2i> cent_i , vecto
         
         for( int i = 0; i< contours.size(); i++ ) // iterate through each contour.
         {
-            double a = contourArea( contours_poly[i],false);  //  Find the area of contour
+            double a = con#include "Scarborough_Vision.hpp"
+tourArea( contours_poly[i],false);  //  Find the area of contour
             if(a>l_area){
                 l_area=a;
                 l_c_i = i;                //Store the index of largest contour

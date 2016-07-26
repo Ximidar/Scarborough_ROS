@@ -3,6 +3,8 @@
   (:export
    "<MOTOR_SPEED>"
    "MOTOR_SPEED"
+   "<HAL>"
+   "HAL"
    "<DEPTH>"
    "DEPTH"
    "<DESIRED_DIRECTIONS>"

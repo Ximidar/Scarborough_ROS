@@ -25,6 +25,8 @@ struct Vision_objects_ {
   : object()
   , color()
   , rotation()
+  , depth(0.0)
+  , in_sight(false)
   {
     rotation.assign(0.0);
   }
@@ -33,6 +35,8 @@ struct Vision_objects_ {
   : object(_alloc)
   , color(_alloc)
   , rotation()
+  , depth(0.0)
+  , in_sight(false)
   {
     rotation.assign(0.0);
   }
@@ -45,6 +49,12 @@ struct Vision_objects_ {
 
   typedef boost::array<float, 3>  _rotation_type;
   boost::array<float, 3>  rotation;
+
+  typedef float _depth_type;
+  float depth;
+
+  typedef uint8_t _in_sight_type;
+  uint8_t in_sight;
 
 
   typedef boost::shared_ptr< ::scarborough::Vision_objects_<ContainerAllocator> > Ptr;
@@ -74,12 +84,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::scarborough::Vision_objects_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "434cb4ca12d6ae62eab8601c42fd4e45";
+    return "cc757b2b6dad7807a7e68ec68f3c3641";
   }
 
   static const char* value(const  ::scarborough::Vision_objects_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x434cb4ca12d6ae62ULL;
-  static const uint64_t static_value2 = 0xeab8601c42fd4e45ULL;
+  static const uint64_t static_value1 = 0xcc757b2b6dad7807ULL;
+  static const uint64_t static_value2 = 0xa7e68ec68f3c3641ULL;
 };
 
 template<class ContainerAllocator>
@@ -99,6 +109,8 @@ struct Definition< ::scarborough::Vision_objects_<ContainerAllocator> > {
     return "string object\n\
 string color\n\
 float32[3] rotation\n\
+float32 depth\n\
+bool in_sight\n\
  \n\
 ";
   }
@@ -121,6 +133,8 @@ template<class ContainerAllocator> struct Serializer< ::scarborough::Vision_obje
     stream.next(m.object);
     stream.next(m.color);
     stream.next(m.rotation);
+    stream.next(m.depth);
+    stream.next(m.in_sight);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -148,6 +162,10 @@ struct Printer< ::scarborough::Vision_objects_<ContainerAllocator> >
       s << indent << "  rotation[" << i << "]: ";
       Printer<float>::stream(s, indent + "  ", v.rotation[i]);
     }
+    s << indent << "depth: ";
+    Printer<float>::stream(s, indent + "  ", v.depth);
+    s << indent << "in_sight: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.in_sight);
   }
 };
 

@@ -5,6 +5,7 @@ CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o
  /home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.cpp
  /home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.h
 CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o
+ ../msg_gen/cpp/include/scarborough/Kill_Switch.h
  ../msg_gen/cpp/include/scarborough/YPR.h
  /home/ubuntu/workspace/sandbox/scarborough/src/HandlerNames/HANDLER_NAMES.h
  /home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.h
