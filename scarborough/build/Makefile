@@ -820,6 +820,30 @@ src/IMU/MPU6050.cpp.s:
 	$(MAKE) -f CMakeFiles/IMU.dir/build.make CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.s
 .PHONY : src/IMU/MPU6050.cpp.s
 
+src/Motor_Controls/Helm.o: src/Motor_Controls/Helm.cpp.o
+.PHONY : src/Motor_Controls/Helm.o
+
+# target to build an object file
+src/Motor_Controls/Helm.cpp.o:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/Helm.cpp.o
+.PHONY : src/Motor_Controls/Helm.cpp.o
+
+src/Motor_Controls/Helm.i: src/Motor_Controls/Helm.cpp.i
+.PHONY : src/Motor_Controls/Helm.i
+
+# target to preprocess a source file
+src/Motor_Controls/Helm.cpp.i:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/Helm.cpp.i
+.PHONY : src/Motor_Controls/Helm.cpp.i
+
+src/Motor_Controls/Helm.s: src/Motor_Controls/Helm.cpp.s
+.PHONY : src/Motor_Controls/Helm.s
+
+# target to generate assembly for a file
+src/Motor_Controls/Helm.cpp.s:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/Helm.cpp.s
+.PHONY : src/Motor_Controls/Helm.cpp.s
+
 src/Motor_Controls/I2Cdev.o: src/Motor_Controls/I2Cdev.cpp.o
 .PHONY : src/Motor_Controls/I2Cdev.o
 
@@ -844,29 +868,29 @@ src/Motor_Controls/I2Cdev.cpp.s:
 	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/I2Cdev.cpp.s
 .PHONY : src/Motor_Controls/I2Cdev.cpp.s
 
-src/Motor_Controls/motors.o: src/Motor_Controls/motors.cpp.o
-.PHONY : src/Motor_Controls/motors.o
+src/Motor_Controls/motors_scarborough.o: src/Motor_Controls/motors_scarborough.cpp.o
+.PHONY : src/Motor_Controls/motors_scarborough.o
 
 # target to build an object file
-src/Motor_Controls/motors.cpp.o:
-	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors.cpp.o
-.PHONY : src/Motor_Controls/motors.cpp.o
+src/Motor_Controls/motors_scarborough.cpp.o:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors_scarborough.cpp.o
+.PHONY : src/Motor_Controls/motors_scarborough.cpp.o
 
-src/Motor_Controls/motors.i: src/Motor_Controls/motors.cpp.i
-.PHONY : src/Motor_Controls/motors.i
+src/Motor_Controls/motors_scarborough.i: src/Motor_Controls/motors_scarborough.cpp.i
+.PHONY : src/Motor_Controls/motors_scarborough.i
 
 # target to preprocess a source file
-src/Motor_Controls/motors.cpp.i:
-	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors.cpp.i
-.PHONY : src/Motor_Controls/motors.cpp.i
+src/Motor_Controls/motors_scarborough.cpp.i:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors_scarborough.cpp.i
+.PHONY : src/Motor_Controls/motors_scarborough.cpp.i
 
-src/Motor_Controls/motors.s: src/Motor_Controls/motors.cpp.s
-.PHONY : src/Motor_Controls/motors.s
+src/Motor_Controls/motors_scarborough.s: src/Motor_Controls/motors_scarborough.cpp.s
+.PHONY : src/Motor_Controls/motors_scarborough.s
 
 # target to generate assembly for a file
-src/Motor_Controls/motors.cpp.s:
-	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors.cpp.s
-.PHONY : src/Motor_Controls/motors.cpp.s
+src/Motor_Controls/motors_scarborough.cpp.s:
+	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/motors_scarborough.cpp.s
+.PHONY : src/Motor_Controls/motors_scarborough.cpp.s
 
 # Help Target
 help:
@@ -946,12 +970,15 @@ help:
 	@echo "... src/IMU/MPU6050.o"
 	@echo "... src/IMU/MPU6050.i"
 	@echo "... src/IMU/MPU6050.s"
+	@echo "... src/Motor_Controls/Helm.o"
+	@echo "... src/Motor_Controls/Helm.i"
+	@echo "... src/Motor_Controls/Helm.s"
 	@echo "... src/Motor_Controls/I2Cdev.o"
 	@echo "... src/Motor_Controls/I2Cdev.i"
 	@echo "... src/Motor_Controls/I2Cdev.s"
-	@echo "... src/Motor_Controls/motors.o"
-	@echo "... src/Motor_Controls/motors.i"
-	@echo "... src/Motor_Controls/motors.s"
+	@echo "... src/Motor_Controls/motors_scarborough.o"
+	@echo "... src/Motor_Controls/motors_scarborough.i"
+	@echo "... src/Motor_Controls/motors_scarborough.s"
 .PHONY : help
 
 

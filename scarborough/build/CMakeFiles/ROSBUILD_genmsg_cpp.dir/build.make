@@ -82,6 +82,16 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_object
 ../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/rospack/package.xml
 ../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/roslib/package.xml
 ../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/rospy/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/cmake_modules/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/roslz4/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/rosbag_storage/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/topic_tools/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/rosbag/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/rosmsg/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/rosservice/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/realtime_tools/package.xml
+../msg_gen/cpp/include/scarborough/Motor_Speed.h: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Motor_Speed.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Motor_Speed.msg
@@ -112,6 +122,16 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_object
 ../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/rospack/package.xml
 ../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/roslib/package.xml
 ../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/rospy/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/cmake_modules/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/roslz4/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/rosbag_storage/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/topic_tools/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/rosbag/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/rosmsg/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/rosservice/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/realtime_tools/package.xml
+../msg_gen/cpp/include/scarborough/Hal.h: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Hal.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Hal.msg
@@ -142,6 +162,16 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_object
 ../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/rospack/package.xml
 ../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/roslib/package.xml
 ../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/rospy/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/cmake_modules/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/roslz4/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/rosbag_storage/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/topic_tools/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/rosbag/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/rosmsg/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/rosservice/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/realtime_tools/package.xml
+../msg_gen/cpp/include/scarborough/Depth.h: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Depth.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Depth.msg
@@ -172,6 +202,16 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_object
 ../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/rospack/package.xml
 ../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/roslib/package.xml
 ../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/rospy/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/cmake_modules/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/roslz4/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/rosbag_storage/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/topic_tools/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/rosbag/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/rosmsg/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/rosservice/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/realtime_tools/package.xml
+../msg_gen/cpp/include/scarborough/Desired_Directions.h: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Desired_Directions.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Desired_Directions.msg
@@ -202,6 +242,16 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_object
 ../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/rospack/package.xml
 ../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/roslib/package.xml
 ../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/rospy/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/cmake_modules/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/roslz4/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/rosbag_storage/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/topic_tools/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/rosbag/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/rosmsg/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/rosservice/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/realtime_tools/package.xml
+../msg_gen/cpp/include/scarborough/YPR.h: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/YPR.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/YPR.msg
@@ -232,6 +282,16 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_object
 ../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/rospack/package.xml
 ../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/roslib/package.xml
 ../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/rospy/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/cmake_modules/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/roslz4/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/rosbag_storage/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/topic_tools/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/rosbag/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/rosmsg/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/rosservice/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/realtime_tools/package.xml
+../msg_gen/cpp/include/scarborough/Kill_Switch.h: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Kill_Switch.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Kill_Switch.msg
@@ -262,6 +322,16 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/scarborough/Vision_object
 ../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rospack/package.xml
 ../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roslib/package.xml
 ../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rospy/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/cmake_modules/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/roslz4/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosbag_storage/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/topic_tools/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosbag/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosmsg/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/rosservice/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/realtime_tools/package.xml
+../msg_gen/cpp/include/scarborough/Vision_objects.h: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../msg_gen/cpp/include/scarborough/Vision_objects.h"
 	/opt/ros/jade/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/ubuntu/workspace/sandbox/scarborough/msg/Vision_objects.msg

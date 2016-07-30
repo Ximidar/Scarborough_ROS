@@ -71,10 +71,11 @@ int main(int argc, char **argv){
 		ardcomm.interperet_message(i2c.ardRead());
 
 		//publish motor data to the ARD_I2C
-		ard_pub.publish(ardcomm.motor);
+		//ard_pub.publish(ardcomm.motor);
 		depth_pub.publish(ardcomm.depth);
 		kill_pub.publish(ardcomm.kill_switch);
-		cout << ardcomm.motor << endl;
+		
+		//cout << ardcomm.motor << endl;
 		cout << ardcomm.depth << endl;
 		cout << ardcomm.kill_switch << endl;
 
@@ -99,6 +100,9 @@ ArdI2C::ArdI2C(){
 }
 //use this if ever needed... It used to do something but is now a ghost of algorithms past
 void ArdI2C::init(){
+
+	//write the pid values to the teensy
+	//pid_Set();
 
 
 }
@@ -250,6 +254,123 @@ void ArdI2C::update_desired(scarborough::Desired_Directions _desired){
 
 	cout << _desired << endl;
 
+
+}
+
+//reg 15 - 38
+void ArdI2C::pid_Set(){
+	cout<<"Initializing pid values" <<endl;
+	
+	double yaw_pid[3] = {4.0 ,1.0, 1.0};
+
+	double pitch_pid[3] = {4.0 ,1.0, 1.0};
+
+	double roll_pid[3]  = {4.0 ,1.0, 1.0};
+
+	double depth_pid[3] = {4.0 ,1.0, 1.0};
+
+	//final_pid_reference = {15,15};
+	//write the yaw PID values
+	for( int i = 0 ; i < 3 ; i++ ){
+		//takes first part of the number IE: 123.456 turns into 123
+		final_pid_reference[0] = yaw_pid[i] - (fmod(yaw_pid[i], 1));
+
+		//takes second part of number IE: 123.456 turns into 456
+		final_pid_reference[1] = fmod(yaw_pid[i], 1) * 1000;
+
+		//write both parts of the number to the i2c bus on different registers
+
+		if(i == 0){
+			i2cdev.writeWord(4 , (uint8_t)15 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)16 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 1){
+			i2cdev.writeWord(4 , (uint8_t)17 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)18 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 2){
+			i2cdev.writeWord(4 , (uint8_t)19 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)20 ,(uint16_t)final_pid_reference[1]);
+		}
+		
+	}
+
+	//write the pitch PID values
+	for( int i = 0 ; i < 3 ; i++ ){
+		//takes first part of the number IE: 123.456 turns into 123
+		final_pid_reference[0] = pitch_pid[i] - (fmod(pitch_pid[i], 1));
+
+		//takes second part of number IE: 123.456 turns into 456
+		final_pid_reference[1] = fmod(pitch_pid[i], 1) * 1000;
+
+		//write both parts of the number to the i2c bus on different registers
+		//rawr im a comment
+		if(i == 0){
+			i2cdev.writeWord(4 , (uint8_t)21 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)22 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 1){
+			i2cdev.writeWord(4 , (uint8_t)23 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)24 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 2){
+			i2cdev.writeWord(4 , (uint8_t)25 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)26 ,(uint16_t)final_pid_reference[1]);
+		}
+		
+	}
+
+	//write the Roll pid values
+	for( int i = 0 ; i < 3 ; i++ ){
+		//takes first part of the number IE: 123.456 turns into 123
+		final_pid_reference[0] = roll_pid[i] - (fmod(roll_pid[i], 1));
+
+		//takes second part of number IE: 123.456 turns into 456
+		final_pid_reference[1] = fmod(roll_pid[i], 1) * 1000;
+
+		//write both parts of the number to the i2c bus on different registers
+
+		if(i == 0){
+			i2cdev.writeWord(4 , (uint8_t)27 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)28 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 1){
+			i2cdev.writeWord(4 , (uint8_t)29 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)30 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 2){
+			i2cdev.writeWord(4 , (uint8_t)31 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)32 ,(uint16_t)final_pid_reference[1]);
+		}
+		
+	}
+
+	//write depth pid values
+	for( int i = 0 ; i < 3 ; i++ ){
+		//takes first part of the number IE: 123.456 turns into 123
+		final_pid_reference[0] = depth_pid[i] - (fmod(depth_pid[i], 1));
+
+		//takes second part of number IE: 123.456 turns into 456
+		final_pid_reference[1] = fmod(depth_pid[i], 1) * 1000;
+
+		//write both parts of the number to the i2c bus on different registers
+
+		if(i == 0){
+			i2cdev.writeWord(4 , (uint8_t)33 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)34 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 1){
+			i2cdev.writeWord(4 , (uint8_t)35 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)36 ,(uint16_t)final_pid_reference[1]);
+		}
+		else if(i == 2){
+			i2cdev.writeWord(4 , (uint8_t)37 ,(uint16_t)final_pid_reference[0]);
+			i2cdev.writeWord(4 , (uint8_t)38 ,(uint16_t)final_pid_reference[1]);
+		}
+		
+	}
+
+	
 
 }
 

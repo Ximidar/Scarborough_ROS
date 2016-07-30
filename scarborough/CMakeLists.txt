@@ -64,8 +64,9 @@ rosbuild_add_executable(IMU src/IMU/IMU.cpp
 #Motor Executable
 ##############################################################################
 
-rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors.cpp
-										 src/Motor_Controls/I2Cdev.cpp)
+rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors_scarborough.cpp
+										 src/Motor_Controls/I2Cdev.cpp
+										 src/Motor_Controls/Helm.cpp)
 										 
 ##############################################################################
 #Hal Executable

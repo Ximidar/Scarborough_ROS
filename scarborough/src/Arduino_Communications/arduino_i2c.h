@@ -46,8 +46,8 @@ public:
 	string ardRead();
 	void init(); //this will initialize the i2c bus for the arduino.
 	void update_desired(scarborough::Desired_Directions _desired);
-	void pid_Control(int motor, int mode);
-	void pid_monitor();
+	void pid_Set();
+	
 
 private:
 	unsigned long concat(unsigned long x, unsigned long y); //concatenates two unsigned numbers
@@ -56,6 +56,7 @@ private:
 	int sign; //1 = negative 2 = positive
 
 	int final_reference[2];
+	int final_pid_reference[2];
 	int desired_yaw;
 	int desired_depth;
 

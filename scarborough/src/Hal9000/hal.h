@@ -88,8 +88,9 @@ class Hal{
 
 
 
-		Timer time;
-		long timer;
+		double time;
+		double timer;
+
 
 
 		//desired values

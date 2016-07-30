@@ -55,10 +55,11 @@ void Hal::reset(){
 			desired.rotation[i] = 0;
 		}
 		desired.throttle = 0;
-		desired.depth = 4;
+		desired.depth = 2;
 		bumped = 0;
 
-		timer = time.return_ms() + 10000;
+		ros::Duration d(10.0);
+		timer = ros::Time::now().toSec() + d.toSec();
 
 		if(rotation[0] == 0){
 			update_state(RESET);
@@ -112,8 +113,8 @@ void Hal::state_loop(Hal_State state){
 			state_check = "GATE";
 			cout << "Gate Detection" << endl;
 			//keep the initial settings dont change the direction
-			desired.depth = 4.0;
-			desired.throttle = 5000;
+			desired.depth = 2.0;
+			desired.throttle = 1700;
 			update_state(UPDATE_HDD);
 
 
@@ -186,9 +187,9 @@ Hal::Hal_State Hal::check_status(){
 	cout << "Checking status: " ;
 	Hal_State change_state;
 
-	if(time.return_ms() > timer && gate_state){
+	if(ros::Time::now().toSec() > timer && gate_state){
 
-		desired.throttle = 1000;
+		desired.throttle = 1500;
 
 		gate_state = false;
 		path_state = true;

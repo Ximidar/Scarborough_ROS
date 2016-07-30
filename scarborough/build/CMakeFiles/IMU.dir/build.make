@@ -77,6 +77,16 @@ CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/rosgraph/package.xml
 CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/rospack/package.xml
 CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/roslib/package.xml
 CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/rospy/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/cmake_modules/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/roslz4/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/rosbag_storage/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/topic_tools/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/rosbag/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/rosmsg/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/rosservice/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/realtime_tools/package.xml
+CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/IMU.dir/src/IMU/IMU.cpp.o -c /home/ubuntu/workspace/sandbox/scarborough/src/IMU/IMU.cpp
@@ -123,6 +133,16 @@ CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/rosgraph/package.x
 CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/rospack/package.xml
 CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/roslib/package.xml
 CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/rospy/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/cmake_modules/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/roslz4/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/rosbag_storage/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/topic_tools/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/rosbag/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/rosmsg/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/rosservice/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/realtime_tools/package.xml
+CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o -c /home/ubuntu/workspace/sandbox/scarborough/src/IMU/MPU6050.cpp
@@ -169,6 +189,16 @@ CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/rosgraph/package.xm
 CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/rospack/package.xml
 CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/roslib/package.xml
 CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/rospy/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/cmake_modules/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/roslz4/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/rosbag_storage/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/topic_tools/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/rosbag/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/rosmsg/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/rosservice/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/dynamic_reconfigure/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/realtime_tools/package.xml
+CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o: /opt/ros/jade/share/control_toolbox/package.xml
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o -c /home/ubuntu/workspace/sandbox/scarborough/src/IMU/I2Cdev.cpp
@@ -203,6 +233,7 @@ IMU_EXTERNAL_OBJECTS =
 ../bin/IMU: CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.o
 ../bin/IMU: CMakeFiles/IMU.dir/src/IMU/I2Cdev.cpp.o
 ../bin/IMU: CMakeFiles/IMU.dir/build.make
+../bin/IMU: /usr/lib/arm-linux-gnueabihf/libtinyxml.so
 ../bin/IMU: /usr/lib/arm-linux-gnueabihf/libboost_signals.so
 ../bin/IMU: /usr/lib/arm-linux-gnueabihf/libboost_filesystem.so
 ../bin/IMU: /usr/lib/liblog4cxx.so

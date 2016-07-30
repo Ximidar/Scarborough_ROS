@@ -13,11 +13,11 @@
 //declare imu object
 IMU imu;
 bool killer;
-
+bool getkiller = false;
 void getdata_KILL(const scarborough::Kill_Switch& msg){
 	cout << msg << " GETDATA" << endl;
 	killer = msg.killed;
-
+	getkiller = true;
 
 }
 
@@ -38,14 +38,16 @@ int main(int argc, char **argv) {
 
 
 	
-    cout << "Initializing IMU" << endl;
-    imu.IMU_init();
+    //cout << "Initializing IMU" << endl;
+    //imu.IMU_init();
     //imu.set_zero(); // many offsets have calculated this number as YPR_OFFSET: -13.1352 -0.686341 -0.702521
-    bool restart = false;
+    bool restart = true;
+    killer = true;
     while(ros::ok()){
     	
 	
-    	if(!killer){
+	
+    	if(!killer && getkiller){
 		 
 
 		if(restart){
@@ -171,9 +173,9 @@ void IMU::read_IMU(){
 	            mpu.dmpGetGravity(&gravity, &q);
 	            mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 	            //printf("ypr  %7.2f %7.2f %7.2f    ", ypr[0] * 180/M_PI, ypr[1] * 180/M_PI, ypr[2] * 180/M_PI);
-	            imu.ypr_ROS.YPR[0] =  (ypr[0] * 180/M_PI) - ypr_offset[0] * -1;
-	            imu.ypr_ROS.YPR[2] =  (ypr[1] * 180/M_PI) - ypr_offset[1] * -1;
-	            imu.ypr_ROS.YPR[1] =  (ypr[2] * 180/M_PI) - ypr_offset[2] * -1;
+	            imu.ypr_ROS.YPR[0] =  (ypr[0] * 180/M_PI) * -1;
+	            imu.ypr_ROS.YPR[1] =  (ypr[2] * 180/M_PI) * -1;
+	            imu.ypr_ROS.YPR[2] =  (ypr[1] * 180/M_PI) * -1;
 
 	            //output current rotation
 	            cout << "YPR: " << imu.ypr_ROS.YPR[0]
