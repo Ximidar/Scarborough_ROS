@@ -28,4 +28,9 @@
 *.app
 
 #directories
-/scarborough/build
+scarborough/build
+scarborough/bin
+scarborough/lib
+scarborough/RemoteSystemTempFiles
+RemoteSystemsTempFiles
+.metadata

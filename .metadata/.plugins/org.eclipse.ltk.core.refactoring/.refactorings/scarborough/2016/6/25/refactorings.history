@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;scarborough/msg/Depth&apos; to &apos;Depth.msg&apos;" description="Rename resource &apos;Depth&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="msg/Depth" name="Depth.msg" stamp="1465870095913" updateReferences="true"/>
-</session>
