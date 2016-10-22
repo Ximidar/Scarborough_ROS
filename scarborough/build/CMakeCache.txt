@@ -373,7 +373,7 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
 
 //Path to a file.
-_file_name:FILEPATH=/home/ubuntu/workspace/sandbox/scarborough/src/Heimdall/Helper_Functions/Scarborough_Vision.cpp
+_file_name:FILEPATH=/home/ubuntu/workspace/sandbox/scarborough/src/Motor_Controls/Manual_Control/Manual_Control.cpp
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/jade/share/catkin/cmake
@@ -667,7 +667,7 @@ PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python2.7/dist-packages
 _rosbuild_EXPORTS:INTERNAL=
-_rosbuild_cached_flag_time:INTERNAL=1469831730.22
+_rosbuild_cached_flag_time:INTERNAL=1469905076.95
 _roslang_LANGS:INTERNAL=roslisp
 _rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/jade/share/cpp_common/package.xml;/opt/ros/jade/share/rostime/package.xml;/opt/ros/jade/share/roscpp_traits/package.xml;/opt/ros/jade/share/roscpp_serialization/package.xml;/opt/ros/jade/share/genmsg/package.xml;/opt/ros/jade/share/genpy/package.xml;/opt/ros/jade/share/message_runtime/package.xml;/opt/ros/jade/share/std_msgs/package.xml;/opt/ros/jade/share/catkin/package.xml;/opt/ros/jade/share/gencpp/package.xml;/opt/ros/jade/share/geneus/package.xml;/opt/ros/jade/share/genlisp/package.xml;/opt/ros/jade/share/message_generation/package.xml;/opt/ros/jade/share/rosbuild/package.xml;/opt/ros/jade/share/rosconsole/package.xml;/opt/ros/jade/share/rosgraph_msgs/package.xml;/opt/ros/jade/share/xmlrpcpp/package.xml;/opt/ros/jade/share/roscpp/package.xml;/opt/ros/jade/share/rosgraph/package.xml;/opt/ros/jade/share/rospack/package.xml;/opt/ros/jade/share/roslib/package.xml;/opt/ros/jade/share/rospy/package.xml;/opt/ros/jade/share/cmake_modules/package.xml;/opt/ros/jade/share/roslz4/package.xml;/opt/ros/jade/share/rosbag_storage/package.xml;/opt/ros/jade/share/topic_tools/package.xml;/opt/ros/jade/share/rosbag/package.xml;/opt/ros/jade/share/rosmsg/package.xml;/opt/ros/jade/share/rosservice/package.xml;/opt/ros/jade/share/dynamic_reconfigure/package.xml;/opt/ros/jade/share/realtime_tools/package.xml;/opt/ros/jade/share/control_toolbox/package.xml
 _rospack_msgsrv_gen_invoke_result:INTERNAL=

@@ -150,10 +150,12 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/Accel.dir/DependInfo.cmake"
   "CMakeFiles/ArdI2C.dir/DependInfo.cmake"
   "CMakeFiles/Hal.dir/DependInfo.cmake"
   "CMakeFiles/Heimdall.dir/DependInfo.cmake"
   "CMakeFiles/IMU.dir/DependInfo.cmake"
+  "CMakeFiles/Manual_Control.dir/DependInfo.cmake"
   "CMakeFiles/Motor_Controller.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_lisp.dir/DependInfo.cmake"

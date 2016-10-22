@@ -60,6 +60,9 @@ rosbuild_add_executable(IMU src/IMU/IMU.cpp
 						src/IMU/MPU6050.cpp
 						src/IMU/I2Cdev.cpp)
 
+rosbuild_add_executable(Accel src/IMU/accelerometer/accel_main.cpp
+							  src/IMU/accelerometer/accelerometer.cpp)
+
 ##############################################################################
 #Motor Executable
 ##############################################################################
@@ -85,5 +88,10 @@ find_package( OpenCV REQUIRED )
 rosbuild_add_executable(Heimdall src/Heimdall/Heimdall_main.cpp
 								 src/Heimdall/Heimdall.cpp
 								 src/Heimdall/Helper_Functions/Scarborough_Vision.cpp)
-target_link_libraries(Heimdall ${OpenCV_LIBS})					 
- 
+target_link_libraries(Heimdall ${OpenCV_LIBS})	
+
+##############################################################################
+#Manual Control
+##############################################################################	 
+rosbuild_add_executable(Manual_Control src/Motor_Controls/Manual_Control/Manual_Control.cpp
+						)

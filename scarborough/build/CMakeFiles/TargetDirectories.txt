@@ -1,7 +1,9 @@
+/home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/Accel.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/ArdI2C.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/Hal.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/Heimdall.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/IMU.dir
+/home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/Manual_Control.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/Motor_Controller.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir
 /home/ubuntu/workspace/sandbox/scarborough/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir

@@ -24,19 +24,34 @@ public:
 	const string DESIRED;
 	const string HAL;
 	const string CV_MESSAGES;
+	const string MANUAL_MESSAGES;
 	//chatter names
 	const string HEMDALL_CHATTER; //TODO: rename HEMDALL_CHATTER to HEIMDALL_CHATTER
 	const string ARD_I2C_CHATTER;
 	const string IMU_CHATTER;
 	const string MOTOR_CHATTER;
 	const string HAL_CHATTER;
+	const string MANUAL_CHATTER;
 
 	Handler()
-	: IMU("IMU"), DEPTH_SENSOR("DEPTH_SENSOR"), KILL("KILL"),
-	  MOTORS("MOTORS"), DESIRED("DESIRED"), HAL("HAL"),
-	  CV_MESSAGES("CV_MESSAGES"), HEMDALL_CHATTER("HEIMDALL_CHATTER"), ARD_I2C_CHATTER("ARD_I2C_CHATTER"),
-	  IMU_CHATTER("IMU_CHATTER"), MOTOR_CHATTER("MOTOR_CHATTER"), HAL_CHATTER("HAL_CHATTER")
-	  {}
+	: 
+			IMU("IMU"),
+			DEPTH_SENSOR("DEPTH_SENSOR"),
+		   	KILL("KILL"),
+	  	   	MOTORS("MOTORS"), 
+	  	   	DESIRED("DESIRED"), 
+	  	   	HAL("HAL"),
+	  	   	MANUAL_MESSAGES("MANUAL_MESSAGES"),
+	 
+	  	   	CV_MESSAGES("CV_MESSAGES"), 
+	  	   	HEMDALL_CHATTER("HEIMDALL_CHATTER"), 
+	  	   	ARD_I2C_CHATTER("ARD_I2C_CHATTER"),
+	   	   	IMU_CHATTER("IMU_CHATTER"), 
+	   	   	MOTOR_CHATTER("MOTOR_CHATTER"), 
+	   	   	HAL_CHATTER("HAL_CHATTER"), 
+	   	   	MANUAL_CHATTER("MANUAL_CHATTER")
+	  		   
+   	{}
 
 };
 

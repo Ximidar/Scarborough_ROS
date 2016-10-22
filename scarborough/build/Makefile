@@ -143,6 +143,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named Accel
+
+# Build rule for target.
+Accel: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Accel
+.PHONY : Accel
+
+# fast build rule for target.
+Accel/fast:
+	$(MAKE) -f CMakeFiles/Accel.dir/build.make CMakeFiles/Accel.dir/build
+.PHONY : Accel/fast
+
+#=============================================================================
 # Target rules for targets named ArdI2C
 
 # Build rule for target.
@@ -193,6 +206,19 @@ IMU: cmake_check_build_system
 IMU/fast:
 	$(MAKE) -f CMakeFiles/IMU.dir/build.make CMakeFiles/IMU.dir/build
 .PHONY : IMU/fast
+
+#=============================================================================
+# Target rules for targets named Manual_Control
+
+# Build rule for target.
+Manual_Control: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Manual_Control
+.PHONY : Manual_Control
+
+# fast build rule for target.
+Manual_Control/fast:
+	$(MAKE) -f CMakeFiles/Manual_Control.dir/build.make CMakeFiles/Manual_Control.dir/build
+.PHONY : Manual_Control/fast
 
 #=============================================================================
 # Target rules for targets named Motor_Controller
@@ -820,6 +846,54 @@ src/IMU/MPU6050.cpp.s:
 	$(MAKE) -f CMakeFiles/IMU.dir/build.make CMakeFiles/IMU.dir/src/IMU/MPU6050.cpp.s
 .PHONY : src/IMU/MPU6050.cpp.s
 
+src/IMU/accelerometer/accel_main.o: src/IMU/accelerometer/accel_main.cpp.o
+.PHONY : src/IMU/accelerometer/accel_main.o
+
+# target to build an object file
+src/IMU/accelerometer/accel_main.cpp.o:
+	$(MAKE) -f CMakeFiles/Accel.dir/build.make CMakeFiles/Accel.dir/src/IMU/accelerometer/accel_main.cpp.o
+.PHONY : src/IMU/accelerometer/accel_main.cpp.o
+
+src/IMU/accelerometer/accel_main.i: src/IMU/accelerometer/accel_main.cpp.i
+.PHONY : src/IMU/accelerometer/accel_main.i
+
+# target to preprocess a source file
+src/IMU/accelerometer/accel_main.cpp.i:
+	$(MAKE) -f CMakeFiles/Accel.dir/build.make CMakeFiles/Accel.dir/src/IMU/accelerometer/accel_main.cpp.i
+.PHONY : src/IMU/accelerometer/accel_main.cpp.i
+
+src/IMU/accelerometer/accel_main.s: src/IMU/accelerometer/accel_main.cpp.s
+.PHONY : src/IMU/accelerometer/accel_main.s
+
+# target to generate assembly for a file
+src/IMU/accelerometer/accel_main.cpp.s:
+	$(MAKE) -f CMakeFiles/Accel.dir/build.make CMakeFiles/Accel.dir/src/IMU/accelerometer/accel_main.cpp.s
+.PHONY : src/IMU/accelerometer/accel_main.cpp.s
+
+src/IMU/accelerometer/accelerometer.o: src/IMU/accelerometer/accelerometer.cpp.o
+.PHONY : src/IMU/accelerometer/accelerometer.o
+
+# target to build an object file
+src/IMU/accelerometer/accelerometer.cpp.o:
+	$(MAKE) -f CMakeFiles/Accel.dir/build.make CMakeFiles/Accel.dir/src/IMU/accelerometer/accelerometer.cpp.o
+.PHONY : src/IMU/accelerometer/accelerometer.cpp.o
+
+src/IMU/accelerometer/accelerometer.i: src/IMU/accelerometer/accelerometer.cpp.i
+.PHONY : src/IMU/accelerometer/accelerometer.i
+
+# target to preprocess a source file
+src/IMU/accelerometer/accelerometer.cpp.i:
+	$(MAKE) -f CMakeFiles/Accel.dir/build.make CMakeFiles/Accel.dir/src/IMU/accelerometer/accelerometer.cpp.i
+.PHONY : src/IMU/accelerometer/accelerometer.cpp.i
+
+src/IMU/accelerometer/accelerometer.s: src/IMU/accelerometer/accelerometer.cpp.s
+.PHONY : src/IMU/accelerometer/accelerometer.s
+
+# target to generate assembly for a file
+src/IMU/accelerometer/accelerometer.cpp.s:
+	$(MAKE) -f CMakeFiles/Accel.dir/build.make CMakeFiles/Accel.dir/src/IMU/accelerometer/accelerometer.cpp.s
+.PHONY : src/IMU/accelerometer/accelerometer.cpp.s
+
 src/Motor_Controls/Helm.o: src/Motor_Controls/Helm.cpp.o
 .PHONY : src/Motor_Controls/Helm.o
 
@@ -868,6 +942,30 @@ src/Motor_Controls/I2Cdev.cpp.s:
 	$(MAKE) -f CMakeFiles/Motor_Controller.dir/build.make CMakeFiles/Motor_Controller.dir/src/Motor_Controls/I2Cdev.cpp.s
 .PHONY : src/Motor_Controls/I2Cdev.cpp.s
 
+src/Motor_Controls/Manual_Control/Manual_Control.o: src/Motor_Controls/Manual_Control/Manual_Control.cpp.o
+.PHONY : src/Motor_Controls/Manual_Control/Manual_Control.o
+
+# target to build an object file
+src/Motor_Controls/Manual_Control/Manual_Control.cpp.o:
+	$(MAKE) -f CMakeFiles/Manual_Control.dir/build.make CMakeFiles/Manual_Control.dir/src/Motor_Controls/Manual_Control/Manual_Control.cpp.o
+.PHONY : src/Motor_Controls/Manual_Control/Manual_Control.cpp.o
+
+src/Motor_Controls/Manual_Control/Manual_Control.i: src/Motor_Controls/Manual_Control/Manual_Control.cpp.i
+.PHONY : src/Motor_Controls/Manual_Control/Manual_Control.i
+
+# target to preprocess a source file
+src/Motor_Controls/Manual_Control/Manual_Control.cpp.i:
+	$(MAKE) -f CMakeFiles/Manual_Control.dir/build.make CMakeFiles/Manual_Control.dir/src/Motor_Controls/Manual_Control/Manual_Control.cpp.i
+.PHONY : src/Motor_Controls/Manual_Control/Manual_Control.cpp.i
+
+src/Motor_Controls/Manual_Control/Manual_Control.s: src/Motor_Controls/Manual_Control/Manual_Control.cpp.s
+.PHONY : src/Motor_Controls/Manual_Control/Manual_Control.s
+
+# target to generate assembly for a file
+src/Motor_Controls/Manual_Control/Manual_Control.cpp.s:
+	$(MAKE) -f CMakeFiles/Manual_Control.dir/build.make CMakeFiles/Manual_Control.dir/src/Motor_Controls/Manual_Control/Manual_Control.cpp.s
+.PHONY : src/Motor_Controls/Manual_Control/Manual_Control.cpp.s
+
 src/Motor_Controls/motors_scarborough.o: src/Motor_Controls/motors_scarborough.cpp.o
 .PHONY : src/Motor_Controls/motors_scarborough.o
 
@@ -898,10 +996,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... Accel"
 	@echo "... ArdI2C"
 	@echo "... Hal"
 	@echo "... Heimdall"
 	@echo "... IMU"
+	@echo "... Manual_Control"
 	@echo "... Motor_Controller"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
@@ -970,12 +1070,21 @@ help:
 	@echo "... src/IMU/MPU6050.o"
 	@echo "... src/IMU/MPU6050.i"
 	@echo "... src/IMU/MPU6050.s"
+	@echo "... src/IMU/accelerometer/accel_main.o"
+	@echo "... src/IMU/accelerometer/accel_main.i"
+	@echo "... src/IMU/accelerometer/accel_main.s"
+	@echo "... src/IMU/accelerometer/accelerometer.o"
+	@echo "... src/IMU/accelerometer/accelerometer.i"
+	@echo "... src/IMU/accelerometer/accelerometer.s"
 	@echo "... src/Motor_Controls/Helm.o"
 	@echo "... src/Motor_Controls/Helm.i"
 	@echo "... src/Motor_Controls/Helm.s"
 	@echo "... src/Motor_Controls/I2Cdev.o"
 	@echo "... src/Motor_Controls/I2Cdev.i"
 	@echo "... src/Motor_Controls/I2Cdev.s"
+	@echo "... src/Motor_Controls/Manual_Control/Manual_Control.o"
+	@echo "... src/Motor_Controls/Manual_Control/Manual_Control.i"
+	@echo "... src/Motor_Controls/Manual_Control/Manual_Control.s"
 	@echo "... src/Motor_Controls/motors_scarborough.o"
 	@echo "... src/Motor_Controls/motors_scarborough.i"
 	@echo "... src/Motor_Controls/motors_scarborough.s"

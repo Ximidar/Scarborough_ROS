@@ -51,11 +51,14 @@ void getdata_YPR(const scarborough::YPR& msg){
 }
 
 void getdata_DEPTH(const scarborough::Depth& msg){
-	_depth = msg;
+	//_depth = msg;
+	_depth.depth = -1.5;
 }
 
 void getdara_DESIRED(const scarborough::Desired_Directions& msg){
-	_desired = msg;
+	//_desired = msg;
+	_desired.depth = 4.0;
+	_desired.throttle = 0;
 }
 
 
@@ -86,12 +89,24 @@ int main(int argc, char **argv){
 			if(restart){
 				 motors.kill_motors();
 				 helm.reset();
+
+				 _desired.depth = 4.0;
+				_desired.throttle = 0;
+				_desired.rotation[0] = _ypr.YPR[0];
+				_desired.rotation[1] = _ypr.YPR[1];
+				_desired.rotation[2] = _ypr.YPR[2];
 				restart = false;
+				helm.update_desired(_desired);
 			}
 
-			helm.update_desired(_desired);
+			
 			helm.update_YPR(_ypr);
 			helm.update_depth(_depth);
+			//add in hard codes for desired
+
+			
+
+			
 			helm.update_helm();
 			helm.computron();
 			motors.get_motor_values(helm.motor_output);
@@ -125,29 +140,20 @@ void Motors_Scarborough::init(){
 
 /*
  * Set motor speed will write the motor values to their individual motors over i2c
- *
- * motor addresses will be:
- * bus: 1
- * M1: 39 Left
- * M2: 35 Right
- * M3: 36 Right Front
- * M4: 37 Left Front
- * M5: 38 Left Back
- * M6: 34 Right Back
  */
 void Motors_Scarborough::set_motor_speed(){
-	// i2cdev.writeWord(0x04, 0, (uint16_t)input.motor[0]); //motor1
-	// i2cdev.writeWord(0x04, 1, (uint16_t)input.motor[1] ); // motor2
-	// i2cdev.writeWord(0x04, 2, (uint16_t)input.motor[2] ); // motor3
-	// i2cdev.writeWord(0x04, 3, (uint16_t)input.motor[3] ); // motor4
-	// i2cdev.writeWord(0x04, 4, (uint16_t)input.motor[4] ); //motor 5
-	// i2cdev.writeWord(0x04, 5, (uint16_t)input.motor[5] ); //motor 6
-	i2cdev.writeWord(0x04, 0, (uint16_t)1700 ); //motor1
-	i2cdev.writeWord(0x04, 1, (uint16_t)1700 ); // motor2
-	i2cdev.writeWord(0x04, 2, (uint16_t)1700 ); // motor3
-	i2cdev.writeWord(0x04, 3, (uint16_t)1700 ); // motor4
-	i2cdev.writeWord(0x04, 4, (uint16_t)1700 ); //motor 5
-	i2cdev.writeWord(0x04, 5, (uint16_t)1700 ); //motor 6
+	i2cdev.writeWord(0x04, (uint8_t)0, (uint16_t)input.motor[0]); //motor1
+	i2cdev.writeWord(0x04, (uint8_t)1, (uint16_t)input.motor[1] ); // motor2
+	i2cdev.writeWord(0x04, (uint8_t)2, (uint16_t)input.motor[2] ); // motor3
+	i2cdev.writeWord(0x04, (uint8_t)3, (uint16_t)input.motor[3] ); // motor4
+	i2cdev.writeWord(0x04, (uint8_t)4, (uint16_t)input.motor[4] ); //motor 5
+	i2cdev.writeWord(0x04, (uint8_t)5, (uint16_t)input.motor[5] ); //motor 6
+	// i2cdev.writeWord(0x04, 0, (uint16_t)1500 ); //motor1
+	// i2cdev.writeWord(0x04, 1, (uint16_t)1500 ); // motor2
+	// i2cdev.writeWord(0x04, 2, (uint16_t)1700 ); // motor3
+	// i2cdev.writeWord(0x04, 3, (uint16_t)1700 ); // motor4
+	// i2cdev.writeWord(0x04, 4, (uint16_t)1700 ); //motor 5
+	// i2cdev.writeWord(0x04, 5, (uint16_t)1700 ); //motor 6
 }
 
 /*

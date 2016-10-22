@@ -62,7 +62,7 @@ int main(int argc, char **argv){
 
 		//write imu data to the arduino and update the desired direction
 		i2c.ardWrite(imu_data);
-		i2c.update_desired(desired_directions);
+		//i2c.update_desired(desired_directions);
 
 
 
@@ -166,47 +166,47 @@ string ArdI2C::ardRead(){
 	uint8_t d[20];
 
 	//read all registeries from the arduino
-	i2cdev.readBytes(0x04, 51, 20, m1);
-	i2cdev.readBytes(0x04, 52, 20, m2);
-	i2cdev.readBytes(0x04, 53, 20, m3);
-	i2cdev.readBytes(0x04, 54, 20, m4);
-	i2cdev.readBytes(0x04, 55, 20, m5);
-	i2cdev.readBytes(0x04, 56, 20, m6);
+	//i2cdev.readBytes(0x04, 51, 20, m1);
+	//i2cdev.readBytes(0x04, 52, 20, m2);
+	//i2cdev.readBytes(0x04, 53, 20, m3);
+	//i2cdev.readBytes(0x04, 54, 20, m4);
+	//i2cdev.readBytes(0x04, 55, 20, m5);
+	//i2cdev.readBytes(0x04, 56, 20, m6);
 	i2cdev.readBytes(0x04, 57, 20, k);
 	i2cdev.readBytes(0x04, 58, 20, d);
 
 	//make all variable strings be nothing.
 	arduino_message = "";
-	 m1s = "";
-	 m2s = "";
-	 m3s = "";
-	 m4s = "";
-	 m5s = "";
-	 m6s = "";
+	 //m1s = "";
+	 //m2s = "";
+	 //m3s = "";
+	 //m4s = "";
+	 //m5s = "";
+	 //m6s = "";
 	 ks = "";
 	 ds = "";
 
 
 	//load all strings with variables from the arduino read.
 	for(int j = 0; j<20;j++){
-		if(m1[j] != delim){
-			m1s += m1[j];
-		}
-		if(m2[j] != delim){
-			m2s += m2[j];
-		}
-		if(m3[j] != delim){
-			m3s += m3[j];
-		}
-		if(m4[j] != delim){
-			m4s += m4[j];
-		}
-		if(m5[j] != delim){
-			m5s += m5[j];
-		}
-		if(m6[j] != delim){
-			m6s += m6[j];
-		}
+		//if(m1[j] != delim){
+		//	m1s += m1[j];
+		//}
+		//if(m2[j] != delim){
+		//	m2s += m2[j];
+		//}
+		//if(m3[j] != delim){
+		//	m3s += m3[j];
+		//}
+		//if(m4[j] != delim){
+		//	m4s += m4[j];
+		//}
+		//if(m5[j] != delim){
+		//	m5s += m5[j];
+		//}
+		//if(m6[j] != delim){
+		//	m6s += m6[j];
+		//}
 		if(k[j] != delim){
 			ks += k[j];
 		}
@@ -217,7 +217,7 @@ string ArdI2C::ardRead(){
 
 	//load all individual strings into one big string
 
-	arduino_message = m1s + m2s + m3s + m4s + m5s + m6s + ks + ds;
+	arduino_message = ks + ds;
 
 	//output to console for debug purposes.
 	return arduino_message;

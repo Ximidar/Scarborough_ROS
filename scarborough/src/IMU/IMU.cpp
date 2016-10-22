@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 
 	
     //cout << "Initializing IMU" << endl;
-    //imu.IMU_init();
+    imu.IMU_init();
     //imu.set_zero(); // many offsets have calculated this number as YPR_OFFSET: -13.1352 -0.686341 -0.702521
     bool restart = true;
     killer = true;
@@ -47,30 +47,31 @@ int main(int argc, char **argv) {
     	
 	
 	
-    	if(!killer && getkiller){
+    //	if(!killer && getkiller){
 		 
 
-		if(restart){
-			cout<< "INITIALIZING IMU" << endl;
-			imu.IMU_init();
-			restart = false;
-		}
+	//	if(restart){
+	//		cout<< "INITIALIZING IMU" << endl;
+	//		imu.IMU_init();
+		//	restart = false;
+		//}
 
     		imu.read_IMU();
 
     		imu_pub.publish(imu.ypr_ROS.YPR);
-		ros::spinOnce();
-    	}
-    	else{
+			ros::spinOnce();
+
+    	//}
+  //   	else{
 		
 
-		if(!restart){
-    			restart = true;
-		}
-		//sit here while the switch is off
-    		cout << "Waiting " << killer <<  endl;
-		ros::spinOnce();
-    	}
+		// if(!restart){
+  //   			restart = true;
+		// }
+		// //sit here while the switch is off
+  //   		cout << "Waiting " << killer <<  endl;
+		// ros::spinOnce();
+  //   	}
 
 
     	
@@ -154,20 +155,7 @@ void IMU::read_IMU(){
 	        // read a packet from FIFO
 	        mpu.getFIFOBytes(fifoBuffer, packetSize);
 
-	        #ifdef OUTPUT_READABLE_QUATERNION
-	            // display quaternion values in easy matrix form: w x y z
-	            mpu.dmpGetQuaternion(&q, fifoBuffer);
-	            printf("quat %7.2f %7.2f %7.2f %7.2f    ", q.w,q.x,q.y,q.z);
-	        #endif
-
-	        #ifdef OUTPUT_READABLE_EULER
-	            // display Euler angles in degrees
-	            mpu.dmpGetQuaternion(&q, fifoBuffer);
-	            mpu.dmpGetEuler(euler, &q);
-	            printf("euler %7.2f %7.2f %7.2f    ", euler[0] * 180/M_PI, euler[1] * 180/M_PI, euler[2] * 180/M_PI);
-	        #endif
-
-	        #ifdef OUTPUT_READABLE_YAWPITCHROLL
+	        OUTPUT_READABLE_YAWPITCHROLL
 	            // display Euler angles in degrees
 	            mpu.dmpGetQuaternion(&q, fifoBuffer);
 	            mpu.dmpGetGravity(&gravity, &q);
@@ -183,26 +171,9 @@ void IMU::read_IMU(){
 	                            << imu.ypr_ROS.YPR[1]
 							    << " "
 							    << imu.ypr_ROS.YPR[2];
-	        #endif
+	        
 
-	        #ifdef OUTPUT_READABLE_REALACCEL
-	            // display real acceleration, adjusted to remove gravity
-	            mpu.dmpGetQuaternion(&q, fifoBuffer);
-	            mpu.dmpGetAccel(&aa, fifoBuffer);
-	            mpu.dmpGetGravity(&gravity, &q);
-	            mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
-	            printf("areal %6d %6d %6d    ", aaReal.x, aaReal.y, aaReal.z);
-	        #endif
-
-	        #ifdef OUTPUT_READABLE_WORLDACCEL
-	            // display initial world-frame acceleration, adjusted to remove gravity
-	            // and rotated based on known orientation from quaternion
-	            mpu.dmpGetQuaternion(&q, fifoBuffer);
-	            mpu.dmpGetAccel(&aa, fifoBuffer);
-	            mpu.dmpGetGravity(&gravity, &q);
-	            mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
-	            printf("aworld %6d %6d %6d    ", aaWorld.x, aaWorld.y, aaWorld.z);
-	        #endif
+	      
 
 
 	        printf("\n");
