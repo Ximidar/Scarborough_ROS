@@ -94,4 +94,5 @@ target_link_libraries(Heimdall ${OpenCV_LIBS})
 #Manual Control
 ##############################################################################	 
 rosbuild_add_executable(Manual_Control src/Motor_Controls/Manual_Control/Manual_Control.cpp
+									   src/Motor_Controls/I2Cdev.cpp
 						)

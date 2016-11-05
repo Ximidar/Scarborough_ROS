@@ -59,14 +59,6 @@ int main(int argc, char **argv){
 
 	while(ros::ok()){
 
-
-		//write imu data to the arduino and update the desired direction
-		i2c.ardWrite(imu_data);
-		//i2c.update_desired(desired_directions);
-
-
-
-
 		//read message from arduino and parse it
 		ardcomm.interperet_message(i2c.ardRead());
 
@@ -78,9 +70,6 @@ int main(int argc, char **argv){
 		//cout << ardcomm.motor << endl;
 		cout << ardcomm.depth << endl;
 		cout << ardcomm.kill_switch << endl;
-
-
-
 
 		ros::spinOnce();
 	}
@@ -107,38 +96,6 @@ void ArdI2C::init(){
 
 }
 
-/*
- * ardWrite will take the IMU data and send it to the arduino for processing over the i2c bus.
- * Different registers will mean different things for example if we send a number to register 0 then the
- * first half of the number will be complete, but we also need to send a number to register 1 to complete
- * the number. IE:
- * 	sent to reg 0: -45
- * 	sent to reg 1: 576
- * 	final number on arduino side: -45.576
- *
- * 	only after the second register has been addressed will the number be completed and be usable.
- *
- * 	y = reg 0,1
- * 	p = reg 2,3
- * 	r = reg 4,5
- *
- */
-void ArdI2C::ardWrite(double imu_data[3]){
-
-	for(int i = 0; i < 2 ; i++){
-		//takes first part of the number IE: 123.456 turns into 123
-		final_reference[0] = imu_data[i] - (fmod(imu_data[i], 1));
-
-		//takes second part of number IE: 123.456 turns into 456
-		final_reference[1] = fmod(imu_data[i], 1) * 1000;
-
-		//write both parts of the number to the i2c bus on different registers
-		i2cdev.writeWord(4 , (uint8_t)(i*2) ,(uint16_t)final_reference[0]);
-		i2cdev.writeWord(4 , (uint8_t)(i*2+1) ,(uint16_t)final_reference[1]);
-
-
-	}
-}
 /*
  * ardRead grabs the current motor speed from the arduino in a string and returns the string.
  * this data will contain the motor speeds that the PID puts out. the "delim" variable is a

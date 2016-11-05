@@ -42,7 +42,6 @@ class ArdI2C{
 public:
 	ArdI2C();
 	void get_accel_info(); // This will query the correct ROS stream to get the IMU data
-	void ardWrite(double imu_data[3]); //write the current IMU data to the arduino over the i2c bus
 	string ardRead();
 	void init(); //this will initialize the i2c bus for the arduino.
 	void update_desired(scarborough::Desired_Directions _desired);

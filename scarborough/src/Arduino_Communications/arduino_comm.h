@@ -28,7 +28,6 @@ using namespace LibSerial;
 
 class ArdComm{
 	public:
-		string listen();
 		std_msgs::String msg;
 		scarborough::Motor_Speed motor;
 		scarborough::Kill_Switch kill_switch;

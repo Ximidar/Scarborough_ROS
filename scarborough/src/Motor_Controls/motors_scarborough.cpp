@@ -148,12 +148,6 @@ void Motors_Scarborough::set_motor_speed(){
 	i2cdev.writeWord(0x04, (uint8_t)3, (uint16_t)input.motor[3] ); // motor4
 	i2cdev.writeWord(0x04, (uint8_t)4, (uint16_t)input.motor[4] ); //motor 5
 	i2cdev.writeWord(0x04, (uint8_t)5, (uint16_t)input.motor[5] ); //motor 6
-	// i2cdev.writeWord(0x04, 0, (uint16_t)1500 ); //motor1
-	// i2cdev.writeWord(0x04, 1, (uint16_t)1500 ); // motor2
-	// i2cdev.writeWord(0x04, 2, (uint16_t)1700 ); // motor3
-	// i2cdev.writeWord(0x04, 3, (uint16_t)1700 ); // motor4
-	// i2cdev.writeWord(0x04, 4, (uint16_t)1700 ); //motor 5
-	// i2cdev.writeWord(0x04, 5, (uint16_t)1700 ); //motor 6
 }
 
 /*
