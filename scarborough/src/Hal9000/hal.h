@@ -29,6 +29,7 @@
 
 
 
+
 using namespace std;
 
 
@@ -37,6 +38,7 @@ class Hal{
 	public:
 	//different states
 		enum Hal_State {
+			DIVE,
 			MAINTAIN_HDD,
 			UPDATE_HDD,
 
@@ -106,6 +108,7 @@ class Hal{
 
 		//desired message
 		scarborough::Desired_Directions desired;
+
 
 		//object names
 		VISION_OBJECTS object_names;

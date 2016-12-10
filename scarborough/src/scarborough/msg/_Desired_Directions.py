@@ -7,15 +7,15 @@ import struct
 
 
 class Desired_Directions(genpy.Message):
-  _md5sum = "b52e1a589c56fcea3b3260406f15fe61"
+  _md5sum = "b32fd531d2ac3a4390e90c77e8c6dc13"
   _type = "scarborough/Desired_Directions"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float32[3] rotation
 int32 throttle
 float32 depth
-"""
-  __slots__ = ['rotation','throttle','depth']
-  _slot_types = ['float32[3]','int32','float32']
+string mode"""
+  __slots__ = ['rotation','throttle','depth','mode']
+  _slot_types = ['float32[3]','int32','float32','string']
 
   def __init__(self, *args, **kwds):
     """
@@ -25,7 +25,7 @@ float32 depth
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       rotation,throttle,depth
+       rotation,throttle,depth,mode
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -40,10 +40,13 @@ float32 depth
         self.throttle = 0
       if self.depth is None:
         self.depth = 0.
+      if self.mode is None:
+        self.mode = ''
     else:
       self.rotation = [0.,0.,0.]
       self.throttle = 0
       self.depth = 0.
+      self.mode = ''
 
   def _get_types(self):
     """
@@ -60,8 +63,17 @@ float32 depth
       buff.write(_struct_3f.pack(*self.rotation))
       _x = self
       buff.write(_struct_if.pack(_x.throttle, _x.depth))
-    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
-    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
+      _x = self.mode
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
+    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
+    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
   def deserialize(self, str):
     """
@@ -77,6 +89,15 @@ float32 depth
       start = end
       end += 8
       (_x.throttle, _x.depth,) = _struct_if.unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.mode = str[start:end].decode('utf-8')
+      else:
+        self.mode = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -92,8 +113,17 @@ float32 depth
       buff.write(self.rotation.tostring())
       _x = self
       buff.write(_struct_if.pack(_x.throttle, _x.depth))
-    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
-    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
+      _x = self.mode
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
+    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
+    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
   def deserialize_numpy(self, str, numpy):
     """
@@ -110,6 +140,15 @@ float32 depth
       start = end
       end += 8
       (_x.throttle, _x.depth,) = _struct_if.unpack(str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.mode = str[start:end].decode('utf-8')
+      else:
+        self.mode = str[start:end]
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

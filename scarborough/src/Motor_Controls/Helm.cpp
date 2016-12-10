@@ -1,15 +1,19 @@
 #include "Helm.h"
 
 Helm::Helm(){
+    //here are the constants for making a signal stronger or weaker. 
 	YAW_CONST = 1;
 	PITCH_CONST = 1;
-	ROLL_CONST = 2;
-	DEPTH_CONST = 4;
+	ROLL_CONST = 1;
+	DEPTH_CONST = 1;
+
+    //Here is the actual PID value for the robot
 	double pid[3] = {
 		65,
 		0,
 		0
 	};
+    //this gives the PID the P, I and D values then limits their output with a min and a max
 	yaw_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
 	pitch_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
 	roll_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
@@ -18,34 +22,67 @@ Helm::Helm(){
 }
 
 void Helm::init(){
-	//init something here maybe
+	//initialize the time
 	last_time = ros::Time::now();
 }
 
+
+//
 void Helm::update_helm(){
+    //grab the time
 	ros::Time time = ros::Time::now();
 	
+    //calculate error
 	double yaw_error = ypr_input.YPR[0] - desired_input.rotation[0];
 	double pitch_error = ypr_input.YPR[1] - desired_input.rotation[1];
 	double roll_error = ypr_input.YPR[2] - desired_input.rotation[2];
+    double depth_error = depth_input.depth - desired_input.depth;
 
-
+    //measuring error over time
 	yaw_out = yaw_pid.updatePid(yaw_error, time - last_time);
 	pitch_out = pitch_pid.updatePid(pitch_error, time - last_time);
 	roll_out = roll_pid.updatePid(roll_error, time - last_time);
-	depth_out = depth_pid.updatePid(depth_input.depth - desired_input.depth, time - last_time);
+	depth_out = depth_pid.updatePid(depth_error, time - last_time);
+
+    //grab time again
 	last_time = ros::Time::now();	
 }
 
 void Helm::computron(){
-	motor_output.motor[0] = (-YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
-    motor_output.motor[1] = (YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
 
-    //dive motors
-    motor_output.motor[2] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-    motor_output.motor[3] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-    motor_output.motor[4] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-    motor_output.motor[5] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
+    if(desired_input.mode == "DIVE"){
+
+        motor_output.motor[0] = 1500;
+        motor_output.motor[1] = 1500;
+        //calculate dive motors
+        motor_output.motor[2] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+        motor_output.motor[3] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+        motor_output.motor[4] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+        motor_output.motor[5] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
+
+    }
+    else if(desired_input.mode == "NORMAL_OP"){
+        //calculate forward motors
+        motor_output.motor[0] = (-YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
+        motor_output.motor[1] = (YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
+    
+        //calculate dive motors
+        motor_output.motor[2] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+        motor_output.motor[3] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+        motor_output.motor[4] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+        motor_output.motor[5] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
+    }
+    else{
+        motor_output.motor[0] = 1500; 
+        motor_output.motor[1] = 1500;
+        //calculate dive motors
+        motor_output.motor[2] = 1500;
+        motor_output.motor[3] = 1500;
+        motor_output.motor[4] = 1500;
+        motor_output.motor[5] = 1500;
+    }
+
+    
 
 
     //clamp the values
@@ -59,6 +96,7 @@ void Helm::computron(){
     }
 }
 
+//reset the PID
 void Helm::reset(){
 	yaw_pid.reset();
 	pitch_pid.reset();

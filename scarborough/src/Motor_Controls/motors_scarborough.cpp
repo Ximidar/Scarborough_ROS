@@ -90,7 +90,7 @@ int main(int argc, char **argv){
 				 motors.kill_motors();
 				 helm.reset();
 
-				 _desired.depth = 4.0;
+				_desired.depth = 4.0;
 				_desired.throttle = 0;
 				_desired.rotation[0] = _ypr.YPR[0];
 				_desired.rotation[1] = _ypr.YPR[1];

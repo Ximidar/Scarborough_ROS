@@ -25,6 +25,7 @@ struct Desired_Directions_ {
   : rotation()
   , throttle(0)
   , depth(0.0)
+  , mode()
   {
     rotation.assign(0.0);
   }
@@ -33,6 +34,7 @@ struct Desired_Directions_ {
   : rotation()
   , throttle(0)
   , depth(0.0)
+  , mode(_alloc)
   {
     rotation.assign(0.0);
   }
@@ -45,6 +47,9 @@ struct Desired_Directions_ {
 
   typedef float _depth_type;
   float depth;
+
+  typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _mode_type;
+  std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  mode;
 
 
   typedef boost::shared_ptr< ::scarborough::Desired_Directions_<ContainerAllocator> > Ptr;
@@ -74,12 +79,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::scarborough::Desired_Directions_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "b52e1a589c56fcea3b3260406f15fe61";
+    return "b32fd531d2ac3a4390e90c77e8c6dc13";
   }
 
   static const char* value(const  ::scarborough::Desired_Directions_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xb52e1a589c56fceaULL;
-  static const uint64_t static_value2 = 0x3b3260406f15fe61ULL;
+  static const uint64_t static_value1 = 0xb32fd531d2ac3a43ULL;
+  static const uint64_t static_value2 = 0x90e90c77e8c6dc13ULL;
 };
 
 template<class ContainerAllocator>
@@ -99,13 +104,13 @@ struct Definition< ::scarborough::Desired_Directions_<ContainerAllocator> > {
     return "float32[3] rotation\n\
 int32 throttle\n\
 float32 depth\n\
+string mode\n\
 ";
   }
 
   static const char* value(const  ::scarborough::Desired_Directions_<ContainerAllocator> &) { return value(); } 
 };
 
-template<class ContainerAllocator> struct IsFixedSize< ::scarborough::Desired_Directions_<ContainerAllocator> > : public TrueType {};
 } // namespace message_traits
 } // namespace ros
 
@@ -121,6 +126,7 @@ template<class ContainerAllocator> struct Serializer< ::scarborough::Desired_Dir
     stream.next(m.rotation);
     stream.next(m.throttle);
     stream.next(m.depth);
+    stream.next(m.mode);
   }
 
   ROS_DECLARE_ALLINONE_SERIALIZER;
@@ -148,6 +154,8 @@ struct Printer< ::scarborough::Desired_Directions_<ContainerAllocator> >
     Printer<int32_t>::stream(s, indent + "  ", v.throttle);
     s << indent << "depth: ";
     Printer<float>::stream(s, indent + "  ", v.depth);
+    s << indent << "mode: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.mode);
   }
 };
 

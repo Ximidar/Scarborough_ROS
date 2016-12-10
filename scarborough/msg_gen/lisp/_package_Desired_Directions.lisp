@@ -5,4 +5,6 @@
           THROTTLE
           DEPTH-VAL
           DEPTH
+          MODE-VAL
+          MODE
 ))

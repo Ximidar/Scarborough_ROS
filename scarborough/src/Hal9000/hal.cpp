@@ -46,17 +46,15 @@ void Hal::reset(){
 		gate_state = true;
 		path_state = false;
 
-		//get the yaw offset as the current yaw heading
-
-		desired.rotation[0] = rotation[0];
-
-		//initialize yaw and pitch to be zero since we want it to be level
+		//initialize all settings to be the initial YPR
 		for(int i =1 ; i < 3 ; i++){
-			desired.rotation[i] = 0;
+			desired.rotation[i] = rotation[0];
 		}
 		desired.throttle = 0;
 		desired.depth = 4.0;
+		desired.mode = "DIVE";
 		bumped = 0;
+
 
 		ros::Duration d(10.0);
 		timer = ros::Time::now().toSec() + d.toSec();
@@ -75,6 +73,7 @@ void Hal::reset(){
 void Hal::state_loop(Hal_State state){
 
 	switch(state){
+	
 	case MAINTAIN_HDD:
 		cout << "Maintain HDD" << endl;
 		//check flags. IE: Check if any conditions have risen up
@@ -93,6 +92,7 @@ void Hal::state_loop(Hal_State state){
 		if(path_marker.in_sight){
 			desired.rotation = path_marker.rotation;
 			desired.depth = 4;
+			desired.mode = "NORMAL_OP";
 			//Alex 2016-07-25: removed desired.throttle = 0 because as (as far as i can tell) there's no code to put it back to a normal value after the rotation
 			update_state(UPDATE_HDD);
 			//Alex 2016-07-25: removed path_state = false so that more than one path marker can be detected and this one can be followed more closely
@@ -186,14 +186,17 @@ Hal::Hal_State Hal::check_status(){
 	//if we even have any you loser
 	cout << "Checking status: " ;
 	Hal_State change_state;
+	if(int(desired.depth) == int(depth)){
+		//set mode to forward
+		desired.mode = "NORMAL_OP";
+		if(ros::Time::now().toSec() > timer && gate_state){
 
-	if(ros::Time::now().toSec() > timer && gate_state){
+			desired.throttle = 0;
 
-		desired.throttle = 0;
-
-		gate_state = false;
-		path_state = true;
-		bouy_state = true;
+			gate_state = false;
+			path_state = true;
+			bouy_state = true;
+		}
 	}
 
 	//Alex 2016-07-25: arranged status checks in order of priority; before, a path marker would take priority over a buoy

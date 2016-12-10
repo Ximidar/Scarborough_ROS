@@ -83,8 +83,8 @@ ArdI2C::ArdI2C(){
 	orientation = 0;
 	sign = 0;
 	delim = 0; //On the arduino this delimiter should be 255 on teensy it is 0
-	 desired_yaw = 0;
-	 desired_depth = 4;
+	desired_yaw = 0;
+	desired_depth = 4;
 
 }
 //use this if ever needed... It used to do something but is now a ghost of algorithms past

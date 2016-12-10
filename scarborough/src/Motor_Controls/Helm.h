@@ -20,6 +20,8 @@ class Helm{
 
 public:
 
+	
+
 	//PID updates
 	control_toolbox::Pid yaw_pid;
 	control_toolbox::Pid pitch_pid;
@@ -39,6 +41,8 @@ public:
 	static double normalizeAngle(const double& angle); //degrees
 
 	double YAW_CONST, PITCH_CONST, ROLL_CONST, DEPTH_CONST;
+
+
 
 	scarborough::Desired_Directions desired_input;
 	scarborough::YPR ypr_input;
