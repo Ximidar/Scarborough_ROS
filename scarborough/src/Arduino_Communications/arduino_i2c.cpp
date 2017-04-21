@@ -55,12 +55,20 @@ int main(int argc, char **argv){
 
 	imu = IMU.subscribe(handler.IMU, 200, getdata);
 	sub = n.subscribe(handler.DESIRED, 200, getdata_DESIRED);
+	string kill_string = "";
+	string depth_string = "";
 
 
 	while(ros::ok()){
 
 		//read message from arduino and parse it
-		ardcomm.interperet_message(i2c.ardRead());
+		
+		//try to interperet message
+		kill_string = i2c.read_kill();
+		depth_string = i2c.read_depth();
+
+		ardcomm.interperet_message(kill_string);
+		ardcomm.interperet_message(depth_string);
 
 		//publish motor data to the ARD_I2C
 		//ard_pub.publish(ardcomm.motor);
@@ -70,6 +78,8 @@ int main(int argc, char **argv){
 		//cout << ardcomm.motor << endl;
 		cout << ardcomm.depth << endl;
 		cout << ardcomm.kill_switch << endl;
+		
+		
 
 		ros::spinOnce();
 	}
@@ -109,61 +119,26 @@ void ArdI2C::init(){
  */
 string ArdI2C::ardRead(){
 
-	string m1s, m2s ,m3s, m4s, m5s, m6s, ks, ds;
+	string ks, ds;
 	string arduino_message;
 
 	//read from arduino variables
-	uint8_t m1[20];
-	uint8_t m2[20];
-	uint8_t m3[20];
-	uint8_t m4[20];
-	uint8_t m5[20];
-	uint8_t m6[20];
 	uint8_t k[20];
 	uint8_t d[20];
 
 	//read all registeries from the arduino
-	//i2cdev.readBytes(0x04, 51, 20, m1);
-	//i2cdev.readBytes(0x04, 52, 20, m2);
-	//i2cdev.readBytes(0x04, 53, 20, m3);
-	//i2cdev.readBytes(0x04, 54, 20, m4);
-	//i2cdev.readBytes(0x04, 55, 20, m5);
-	//i2cdev.readBytes(0x04, 56, 20, m6);
 	i2cdev.readBytes(0x04, 57, 20, k);
 	i2cdev.readBytes(0x04, 58, 20, d);
 
 	//make all variable strings be nothing.
 	arduino_message = "";
-	 //m1s = "";
-	 //m2s = "";
-	 //m3s = "";
-	 //m4s = "";
-	 //m5s = "";
-	 //m6s = "";
 	 ks = "";
 	 ds = "";
 
 
 	//load all strings with variables from the arduino read.
 	for(int j = 0; j<20;j++){
-		//if(m1[j] != delim){
-		//	m1s += m1[j];
-		//}
-		//if(m2[j] != delim){
-		//	m2s += m2[j];
-		//}
-		//if(m3[j] != delim){
-		//	m3s += m3[j];
-		//}
-		//if(m4[j] != delim){
-		//	m4s += m4[j];
-		//}
-		//if(m5[j] != delim){
-		//	m5s += m5[j];
-		//}
-		//if(m6[j] != delim){
-		//	m6s += m6[j];
-		//}
+		
 		if(k[j] != delim){
 			ks += k[j];
 		}
@@ -178,6 +153,50 @@ string ArdI2C::ardRead(){
 
 	//output to console for debug purposes.
 	return arduino_message;
+}
+
+string ArdI2C::read_kill(){
+	string kill_s;
+	uint8_t k_char[20];
+	kill_s = "";
+	try{
+		i2cdev.readBytes(0x04, 57, 20, k_char);
+	}
+	catch(int e){
+		cout << "I2C Read error"<< endl;
+		return kill_s;
+	}	
+	for(int j = 0; j<20;j++){
+		
+		if(k_char[j] != delim){
+			kill_s += k_char[j];
+		}
+	}
+	return kill_s;
+
+}
+
+string ArdI2C::read_depth(){
+	string ds;
+	uint8_t d[20];
+	ds = "";
+	try{
+		i2cdev.readBytes(0x04, 58, 20, d);
+	}
+	catch(int e){
+		cout << "I2C Read error"<< endl;
+		return ds;
+	}
+	
+	
+	for(int j = 0; j<20;j++){
+		
+		if(d[j] != delim){
+			ds += d[j];
+		}
+	}
+	return ds;
+
 }
 
 

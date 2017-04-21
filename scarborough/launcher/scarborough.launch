@@ -1,8 +1,7 @@
 <launch>
 	
 	<group ns="scarborough">
-		<node pkg="scarborough" name="imu" 
-		type="IMU"/>
+		<node pkg="scarborough" name="imu" type="IMU"/>
 	</group>
 	
 	<group ns="scarborough">
@@ -11,6 +10,10 @@
 	
 	<group ns="scarborough">
 		<node pkg="scarborough" name="motor_controls" type="Motor_Controller"/>
+	</group>
+
+	<group ns="scarborough">
+		<node pkg="scarborough" name="hal_9000" type="Hal"/>
 	</group>
 	
 	

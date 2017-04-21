@@ -14,6 +14,7 @@
 IMU imu;
 bool killer;
 bool getkiller = false;
+
 void getdata_KILL(const scarborough::Kill_Switch& msg){
 	cout << msg << " GETDATA" << endl;
 	killer = msg.killed;
@@ -44,37 +45,11 @@ int main(int argc, char **argv) {
     bool restart = true;
     killer = true;
     while(ros::ok()){
-    	
-	
-	
-    //	if(!killer && getkiller){
-		 
-
-	//	if(restart){
-	//		cout<< "INITIALIZING IMU" << endl;
-	//		imu.IMU_init();
-		//	restart = false;
-		//}
 
     		imu.read_IMU();
 
     		imu_pub.publish(imu.ypr_ROS.YPR);
 			ros::spinOnce();
-
-    	//}
-  //   	else{
-		
-
-		// if(!restart){
-  //   			restart = true;
-		// }
-		// //sit here while the switch is off
-  //   		cout << "Waiting " << killer <<  endl;
-		// ros::spinOnce();
-  //   	}
-
-
-    	
 
     }
 

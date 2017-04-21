@@ -42,6 +42,10 @@ void ArdComm::interperet_message(string message){
 	cout << corrected << endl;
 	while( corrected != ""){
 		pos = corrected.find(delimiter);
+
+		if(pos == -1){
+			break;
+		}
 		parse = corrected.substr(0, pos +1);
 
 		for(int i = 0 ; i < parse.length() ; i++){
@@ -96,6 +100,7 @@ void ArdComm::interperet_message(string message){
 			}//end switch
 		}//end for
 	}//end while
+	cout << "This While loop exited" << endl;
 }//end function
 
 
