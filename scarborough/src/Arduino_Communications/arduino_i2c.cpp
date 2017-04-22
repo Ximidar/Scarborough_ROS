@@ -184,8 +184,8 @@ int ArdI2C::read_kill(){
 float ArdI2C::read_depth(){
 	
 	unsigned char d[2];
-	uint16_t combined;
-	uint16_t combined2;
+	int16_t combined;
+	
 	
 	try{
 		i2cdev.readBytes(0x04, 58, 2, d);
@@ -196,11 +196,9 @@ float ArdI2C::read_depth(){
 	}
 
 	combined = d[0] | (d[1] << 8);
-	combined2 = d[1] | (d[0] << 8);
 
 
 	cout << combined << endl;
-	cout << combined2 << endl;
 
 	//we multiplied it by 1000 on the arduino side
 	float result = (float)(combined) / 1000.00;
