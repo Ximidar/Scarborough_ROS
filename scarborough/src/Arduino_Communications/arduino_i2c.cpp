@@ -55,8 +55,8 @@ int main(int argc, char **argv){
 
 	imu = IMU.subscribe(handler.IMU, 200, getdata);
 	sub = n.subscribe(handler.DESIRED, 200, getdata_DESIRED);
-	string kill_string = "";
-	string depth_string = "";
+	int kill;
+	double depth;
 
 
 	while(ros::ok()){
@@ -64,11 +64,18 @@ int main(int argc, char **argv){
 		//read message from arduino and parse it
 		
 		//try to interperet message
-		kill_string = i2c.read_kill();
-		depth_string = i2c.read_depth();
+		kill = i2c.read_kill();
+		depth = i2c.read_depth();
 
-		ardcomm.interperet_message(kill_string);
-		ardcomm.interperet_message(depth_string);
+		ardcomm.depth.depth = depth;
+
+		if(kill == 1){
+			ardcomm.kill_switch.killed = false;
+		}
+		else{
+			ardcomm.kill_switch.killed = true;
+		}
+	    
 
 		//publish motor data to the ARD_I2C
 		//ard_pub.publish(ardcomm.motor);
@@ -154,48 +161,52 @@ string ArdI2C::ardRead(){
 	//output to console for debug purposes.
 	return arduino_message;
 }
+//int16_t combined = low | (high<<8);
 
-string ArdI2C::read_kill(){
-	string kill_s;
-	uint8_t k_char[20];
-	kill_s = "";
+int ArdI2C::read_kill(){
+	
+	unsigned char k_char[2];
+	uint16_t combined;
+	
 	try{
-		i2cdev.readBytes(0x04, 57, 20, k_char);
+		i2cdev.readBytes(0x04, 57, 2, k_char);
 	}
 	catch(int e){
 		cout << "I2C Read error"<< endl;
-		return kill_s;
+		return 0;
 	}	
-	for(int j = 0; j<20;j++){
-		
-		if(k_char[j] != delim){
-			kill_s += k_char[j];
-		}
-	}
-	return kill_s;
+	combined = k_char[0] | (k_char[1] << 8);
+	int result = (int)combined;
+	return result;
 
 }
 
-string ArdI2C::read_depth(){
-	string ds;
-	uint8_t d[20];
-	ds = "";
+float ArdI2C::read_depth(){
+	
+	unsigned char d[2];
+	uint16_t combined;
+	uint16_t combined2;
+	
 	try{
-		i2cdev.readBytes(0x04, 58, 20, d);
+		i2cdev.readBytes(0x04, 58, 2, d);
 	}
 	catch(int e){
-		cout << "I2C Read error"<< endl;
-		return ds;
+		cout << "I2C Read error" << endl;
+		return 0;
 	}
-	
-	
-	for(int j = 0; j<20;j++){
-		
-		if(d[j] != delim){
-			ds += d[j];
-		}
-	}
-	return ds;
+
+	combined = d[0] | (d[1] << 8);
+	combined2 = d[1] | (d[0] << 8);
+
+
+	cout << combined << endl;
+	cout << combined2 << endl;
+
+	//we multiplied it by 1000 on the arduino side
+	float result = (float)(combined) / 1000.00;
+
+
+	return result;
 
 }
 
