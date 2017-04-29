@@ -12,7 +12,9 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <string>
-
+#include <iostream>
+#include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -36,11 +38,13 @@ public:
 	void update_depth(scarborough::Depth _depth);
 	void computron();
 	void reset();
+	void load_yaml();
 
 	//returns the smallest absolute value angle equivalent to the given angle
 	static double normalizeAngle(const double& angle); //degrees
 
 	double YAW_CONST, PITCH_CONST, ROLL_CONST, DEPTH_CONST;
+	double pid[3];
 
 
 

@@ -5,12 +5,10 @@
  *      Author: sdcr
  */
 #include "arduino_i2c.h"
-#include "arduino_comm.h"
 
 I2Cdev i2cdev;
 
 ArdI2C i2c;
-ArdComm ardcomm;
 Handler handler;
 
 double imu_data[3];
@@ -45,18 +43,19 @@ int main(int argc, char **argv){
 	ros::NodeHandle n;
 
 	ros::Subscriber imu;
-	ros::Publisher ard_pub = n.advertise<scarborough::Motor_Speed>(handler.MOTORS, 100);
 	ros::Publisher depth_pub = n.advertise<scarborough::Depth>(handler.DEPTH_SENSOR, 100);
 	ros::Publisher kill_pub = n.advertise<scarborough::Kill_Switch>(handler.KILL, 10);
 
 	ros::Subscriber sub;
 
-	i2c.init(); // does nothing.
+	i2c.init(); 
 
 	imu = IMU.subscribe(handler.IMU, 200, getdata);
 	sub = n.subscribe(handler.DESIRED, 200, getdata_DESIRED);
 	int kill;
 	double depth;
+	scarborough::Kill_Switch kill_switch;
+	scarborough::Depth depth_sensor;
 
 
 	while(ros::ok()){
@@ -67,24 +66,24 @@ int main(int argc, char **argv){
 		kill = i2c.read_kill();
 		depth = i2c.read_depth();
 
-		ardcomm.depth.depth = depth;
+		depth_sensor.depth = depth;
 
 		if(kill == 1){
-			ardcomm.kill_switch.killed = false;
+			kill_switch.killed = false;
 		}
 		else{
-			ardcomm.kill_switch.killed = true;
+			kill_switch.killed = true;
 		}
 	    
 
 		//publish motor data to the ARD_I2C
 		//ard_pub.publish(ardcomm.motor);
-		depth_pub.publish(ardcomm.depth);
-		kill_pub.publish(ardcomm.kill_switch);
+		depth_pub.publish(depth_sensor);
+		kill_pub.publish(kill_switch);
 		
 		//cout << ardcomm.motor << endl;
-		cout << ardcomm.depth << endl;
-		cout << ardcomm.kill_switch << endl;
+		cout << depth_sensor << endl;
+		cout << kill_switch << endl;
 		
 		
 
@@ -107,8 +106,7 @@ ArdI2C::ArdI2C(){
 //use this if ever needed... It used to do something but is now a ghost of algorithms past
 void ArdI2C::init(){
 
-	//write the pid values to the teensy
-	//pid_Set();
+	restart_arduino();
 
 
 }
@@ -197,9 +195,6 @@ float ArdI2C::read_depth(){
 
 	combined = d[0] | (d[1] << 8);
 
-
-	cout << combined << endl;
-
 	//we multiplied it by 1000 on the arduino side
 	float result = (float)(combined) / 1000.00;
 
@@ -239,6 +234,17 @@ void ArdI2C::update_desired(scarborough::Desired_Directions _desired){
 
 	cout << _desired << endl;
 
+
+}
+
+void ArdI2C::restart_arduino(){
+	//write 1 to the arduino at the 15 address to restart it
+	i2cdev.writeByte(0x04, 15, 1);
+
+}
+void ArdI2C::restart_depth_sensor(){
+	//write 1 to the arduino at the 15 address to reinitialize the depth sensor
+	i2cdev.writeByte(0x04, 16, 1);
 
 }
 

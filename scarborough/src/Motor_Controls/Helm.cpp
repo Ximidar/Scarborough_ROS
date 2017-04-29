@@ -7,12 +7,8 @@ Helm::Helm(){
 	ROLL_CONST = 1;
 	DEPTH_CONST = 1;
 
-    //Here is the actual PID value for the robot
-	double pid[3] = {
-		65,
-		0,
-		0
-	};
+    //this will initialize the PID value
+	load_yaml();
     //this gives the PID the P, I and D values then limits their output with a min and a max
 	yaw_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
 	pitch_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
@@ -23,7 +19,48 @@ Helm::Helm(){
 
 void Helm::init(){
 	//initialize the time
-	last_time = ros::Time::now();
+	last_time = ros::Time::now();   
+
+
+}
+
+void Helm::load_yaml(){
+    ifstream config("/home/ros/PID_config.txt");
+
+    double P = 0.00;
+    double I = 0.00;
+    double D = 0.00;
+
+
+    for( string line; getline( config, line ); )
+    {
+        cout << line << endl;
+        switch(line[0]){
+
+            case 'P':
+                P = atof( line.substr(1, line.length()).c_str() );
+                break;
+            case 'I':
+                I = atof( line.substr(1, line.length()).c_str() );
+                break;
+            case 'D':
+                D = atof( line.substr(1, line.length()).c_str() );
+                break;
+            default:
+                break;
+
+
+        }
+    }
+
+    cout << "P: " << P << endl;
+    cout << "I: " << I << endl;
+    cout << "D: " << D << endl;
+
+    pid[0] = P;
+    pid[1] = I;
+    pid[2] = D;
+
 }
 
 

@@ -85,7 +85,6 @@ int main(int argc, char **argv){
 	
 		//if the kill switch is off do not send motor signals
 		if(!killed){
-			cout << "Get Data for PID" << endl;
 			if(restart){
 				 motors.kill_motors();
 				 helm.reset();

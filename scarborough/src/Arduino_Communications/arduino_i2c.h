@@ -31,6 +31,8 @@
 #include "scarborough/YPR.h"
 #include "scarborough/Desired_Directions.h"
 #include "../HandlerNames/HANDLER_NAMES.h"
+#include "scarborough/Kill_Switch.h"
+#include "scarborough/Depth.h"
 #include <math.h>
 #include <stdint.h>
 #include <inttypes.h>
@@ -42,6 +44,8 @@ class ArdI2C{
 public:
 	ArdI2C();
 	void get_accel_info(); // This will query the correct ROS stream to get the IMU data
+	void restart_arduino();
+	void restart_depth_sensor();
 	string ardRead();
 	int read_kill();
 	float read_depth();
