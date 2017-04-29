@@ -46,8 +46,7 @@ FIND_LIBRARY(LOCAL_LIBS libserial.so libserial.a  /usr/local/lib/)
 
 #Add ArdComm executable and add required external libraries for it.
 
-rosbuild_add_executable(ArdI2C src/Arduino_Communications/arduino_i2c.cpp
-							   src/Arduino_Communications/arduino_comm.cpp
+rosbuild_add_executable(ArdI2C src/Arduino_Communications/arduino_i2c.cpp							   
 							   src/Arduino_Communications/I2Cdev.cpp)
 target_link_libraries(ArdI2C ${LOCAL_LIBS})
 
@@ -66,11 +65,10 @@ rosbuild_add_executable(Accel src/IMU/accelerometer/accel_main.cpp
 ##############################################################################
 #Motor Executable
 ##############################################################################
-
 rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors_scarborough.cpp
 										 src/Motor_Controls/I2Cdev.cpp
-										 src/Motor_Controls/Helm.cpp)
-										 
+										 src/Motor_Controls/Helm.cpp)	
+
 ##############################################################################
 #Hal Executable
 ##############################################################################

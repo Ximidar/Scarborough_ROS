@@ -15,8 +15,7 @@ string color
 float32[3] rotation
 float32 depth
 bool in_sight
- 
-"""
+ """
   __slots__ = ['object','color','rotation','depth','in_sight']
   _slot_types = ['string','string','float32[3]','float32','bool']
 
@@ -42,7 +41,7 @@ bool in_sight
       if self.color is None:
         self.color = ''
       if self.rotation is None:
-        self.rotation = [0.,0.,0.]
+        self.rotation = [0.] * 3
       if self.depth is None:
         self.depth = 0.
       if self.in_sight is None:
@@ -50,7 +49,7 @@ bool in_sight
     else:
       self.object = ''
       self.color = ''
-      self.rotation = [0.,0.,0.]
+      self.rotation = [0.] * 3
       self.depth = 0.
       self.in_sight = False
 
@@ -71,24 +70,18 @@ bool in_sight
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self.color
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
-      buff.write(_struct_3f.pack(*self.rotation))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(_get_struct_3f().pack(*self.rotation))
       _x = self
-      buff.write(_struct_fB.pack(_x.depth, _x.in_sight))
-    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
-    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
+      buff.write(_get_struct_fB().pack(_x.depth, _x.in_sight))
+    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
+    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
   def deserialize(self, str):
     """
@@ -117,11 +110,11 @@ bool in_sight
         self.color = str[start:end]
       start = end
       end += 12
-      self.rotation = _struct_3f.unpack(str[start:end])
+      self.rotation = _get_struct_3f().unpack(str[start:end])
       _x = self
       start = end
       end += 5
-      (_x.depth, _x.in_sight,) = _struct_fB.unpack(str[start:end])
+      (_x.depth, _x.in_sight,) = _get_struct_fB().unpack(str[start:end])
       self.in_sight = bool(self.in_sight)
       return self
     except struct.error as e:
@@ -140,24 +133,18 @@ bool in_sight
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self.color
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       buff.write(self.rotation.tostring())
       _x = self
-      buff.write(_struct_fB.pack(_x.depth, _x.in_sight))
-    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
-    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
+      buff.write(_get_struct_fB().pack(_x.depth, _x.in_sight))
+    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
+    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
   def deserialize_numpy(self, str, numpy):
     """
@@ -191,12 +178,25 @@ bool in_sight
       _x = self
       start = end
       end += 5
-      (_x.depth, _x.in_sight,) = _struct_fB.unpack(str[start:end])
+      (_x.depth, _x.in_sight,) = _get_struct_fB().unpack(str[start:end])
       self.in_sight = bool(self.in_sight)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_fB = struct.Struct("<fB")
-_struct_3f = struct.Struct("<3f")
+def _get_struct_I():
+    global _struct_I
+    return _struct_I
+_struct_fB = None
+def _get_struct_fB():
+    global _struct_fB
+    if _struct_fB is None:
+        _struct_fB = struct.Struct("<fB")
+    return _struct_fB
+_struct_3f = None
+def _get_struct_3f():
+    global _struct_3f
+    if _struct_3f is None:
+        _struct_3f = struct.Struct("<3f")
+    return _struct_3f

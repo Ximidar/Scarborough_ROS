@@ -10,8 +10,7 @@ class YPR(genpy.Message):
   _md5sum = "932fd5a1b0efdafe2ac005ed95f2acb3"
   _type = "scarborough/YPR"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """float64[3] YPR
-"""
+  _full_text = """float64[3] YPR"""
   __slots__ = ['YPR']
   _slot_types = ['float64[3]']
 
@@ -33,9 +32,9 @@ class YPR(genpy.Message):
       super(YPR, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.YPR is None:
-        self.YPR = [0.,0.,0.]
+        self.YPR = [0.] * 3
     else:
-      self.YPR = [0.,0.,0.]
+      self.YPR = [0.] * 3
 
   def _get_types(self):
     """
@@ -49,9 +48,9 @@ class YPR(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_3d.pack(*self.YPR))
-    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
-    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
+      buff.write(_get_struct_3d().pack(*self.YPR))
+    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
+    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
   def deserialize(self, str):
     """
@@ -62,7 +61,7 @@ class YPR(genpy.Message):
       end = 0
       start = end
       end += 24
-      self.YPR = _struct_3d.unpack(str[start:end])
+      self.YPR = _get_struct_3d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -76,8 +75,8 @@ class YPR(genpy.Message):
     """
     try:
       buff.write(self.YPR.tostring())
-    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(_x))))
-    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(_x))))
+    except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
+    except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
   def deserialize_numpy(self, str, numpy):
     """
@@ -95,4 +94,12 @@ class YPR(genpy.Message):
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_3d = struct.Struct("<3d")
+def _get_struct_I():
+    global _struct_I
+    return _struct_I
+_struct_3d = None
+def _get_struct_3d():
+    global _struct_3d
+    if _struct_3d is None:
+        _struct_3d = struct.Struct("<3d")
+    return _struct_3d
