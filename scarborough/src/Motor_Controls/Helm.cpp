@@ -53,13 +53,15 @@ void Helm::load_yaml(){
         }
     }
 
-    cout << "P: " << P << endl;
-    cout << "I: " << I << endl;
-    cout << "D: " << D << endl;
+    
 
     pid[0] = P;
     pid[1] = I;
     pid[2] = D;
+
+    cout << "P: " << pid[0] << endl;
+    cout << "I: " << pid[1] << endl;
+    cout << "D: " << pid[2] << endl;
 
 }
 
