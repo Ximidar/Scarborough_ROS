@@ -106,7 +106,7 @@ ArdI2C::ArdI2C(){
 //use this if ever needed... It used to do something but is now a ghost of algorithms past
 void ArdI2C::init(){
 
-	restart_arduino();
+	restart_depth_sensor();
 
 
 }
@@ -239,12 +239,12 @@ void ArdI2C::update_desired(scarborough::Desired_Directions _desired){
 
 void ArdI2C::restart_arduino(){
 	//write 1 to the arduino at the 15 address to restart it
-	i2cdev.writeByte(0x04, 15, 1);
+	i2cdev.writeByte(0x04, 0xF, 1);
 
 }
 void ArdI2C::restart_depth_sensor(){
 	//write 1 to the arduino at the 15 address to reinitialize the depth sensor
-	i2cdev.writeByte(0x04, 16, 1);
+	i2cdev.writeByte(0x04, 0x10, 1);
 
 }
 
