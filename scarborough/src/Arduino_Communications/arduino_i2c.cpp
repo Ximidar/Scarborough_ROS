@@ -56,6 +56,7 @@ int main(int argc, char **argv){
 	double depth;
 	scarborough::Kill_Switch kill_switch;
 	scarborough::Depth depth_sensor;
+	ros::Rate loop_rate(10);
 
 
 	while(ros::ok()){
@@ -86,7 +87,7 @@ int main(int argc, char **argv){
 		cout << kill_switch << endl;
 		
 		
-
+		loop_rate.sleep();
 		ros::spinOnce();
 	}
 
