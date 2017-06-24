@@ -25,7 +25,7 @@ void Helm::init(){
 }
 
 void Helm::load_yaml(){
-    ifstream config("/home/ros/PID_config.txt");
+    ifstream config("/home/ubuntu/PID_config.txt");
 
     double P = 0.00;
     double I = 0.00;
