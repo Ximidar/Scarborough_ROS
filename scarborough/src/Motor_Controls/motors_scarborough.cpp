@@ -84,22 +84,24 @@ int main(int argc, char **argv){
 
 	
 		//if the kill switch is off do not send motor signals
-		if(!killed){
+		if(killed == 1){
 			if(restart){
 				 motors.kill_motors();
 				 helm.reset();
 
-				_desired.depth = 4.0;
+				_desired.depth = 1.5;
 				_desired.throttle = 0;
 				_desired.rotation[0] = _ypr.YPR[0];
 				_desired.rotation[1] = _ypr.YPR[1];
 				_desired.rotation[2] = _ypr.YPR[2];
+				_desired.mode = "NORMAL_OP";
 				restart = false;
 				helm.update_desired(_desired);
 			}
 
 			
 			helm.update_YPR(_ypr);
+			cout << _ypr << endl;
 			helm.update_depth(_depth);
 			//add in hard codes for desired
 
@@ -114,9 +116,9 @@ int main(int argc, char **argv){
 			
 		}
 		else{
-			cout << "killing motors" << endl;
 			if(!restart){
 				restart = true;
+				cout << "killing motors" << endl;
 			}
 			//wait here while off
 			motors.kill_motors();
@@ -141,12 +143,18 @@ void Motors_Scarborough::init(){
  * Set motor speed will write the motor values to their individual motors over i2c
  */
 void Motors_Scarborough::set_motor_speed(){
-	i2cdev.writeWord(0x04, (uint8_t)0, (uint16_t)input.motor[0]); //motor1
-	i2cdev.writeWord(0x04, (uint8_t)1, (uint16_t)input.motor[1] ); // motor2
-	i2cdev.writeWord(0x04, (uint8_t)2, (uint16_t)input.motor[2] ); // motor3
-	i2cdev.writeWord(0x04, (uint8_t)3, (uint16_t)input.motor[3] ); // motor4
-	i2cdev.writeWord(0x04, (uint8_t)4, (uint16_t)input.motor[4] ); //motor 5
-	i2cdev.writeWord(0x04, (uint8_t)5, (uint16_t)input.motor[5] ); //motor 6
+	i2cdev.writeWord(0x04, (uint8_t)10, (uint16_t)input.motor[0]); //motor1
+	i2cdev.writeWord(0x04, (uint8_t)11, (uint16_t)input.motor[1] ); // motor2
+	i2cdev.writeWord(0x04, (uint8_t)12, (uint16_t)input.motor[2] ); // motor3
+	i2cdev.writeWord(0x04, (uint8_t)13, (uint16_t)input.motor[3] ); // motor4
+	i2cdev.writeWord(0x04, (uint8_t)14, (uint16_t)input.motor[4] ); //motor 5
+	i2cdev.writeWord(0x04, (uint8_t)15, (uint16_t)input.motor[5] ); //motor 6
+
+	for(int i =0 ; i < 5 ; i++){
+		cout << input.motor[0] << endl;
+
+	}
+	cout << endl;
 }
 
 /*
@@ -154,50 +162,6 @@ void Motors_Scarborough::set_motor_speed(){
  */
 void Motors_Scarborough::get_motor_values(scarborough::Motor_Speed _input){
 	input = _input;
-}
-
-int Motors_Scarborough::i2cConvert(int address){
-
-	//load int into string stream
-	stringstream ss;
-	ss << address;
-	string ss_return;
-	//load ss into string
-	ss >> ss_return;
-
-	int length;
-
-	//get length of the string
-	length = ss_return.length();
-	int temp = 0;
-	int _length = length;
-
-	//this will convert the number from hex to decimal
-	//this only works for hex numbers that do not contain a letter in them.
-
-	for(int i = 0; i < length ;i++){
-
-		//add a modifier based upon where it is at in the string
-		int moder = (16 * (_length -1));
-		//if the modifier is zero make it 1
-		moder = max(moder, 1);
-
-		//convert the string from the hex number to the decimal int
-		temp += atoi(ss_return.substr(i,1).c_str()) * moder;
-		_length--;
-
-		//cout << temp << " / " << atoi(ss_return.substr(i,1).c_str())  << " / " << moder<< endl;
-
-	}
-	//return the decimal int number we can use to access the device on the i2c
-	return temp;
-
-}
-
-bool Motors_Scarborough::check_kill_switch(){
-
-	return killer;
-
 }
 
 void Motors_Scarborough::kill_motors(){

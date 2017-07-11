@@ -89,41 +89,17 @@ void Helm::update_helm(){
 
 void Helm::computron(){
 
-    if(desired_input.mode == "DIVE"){
-
-        motor_output.motor[0] = 1500;
-        motor_output.motor[1] = 1500;
-        //calculate dive motors
-        motor_output.motor[2] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-        motor_output.motor[3] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-        motor_output.motor[4] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-        motor_output.motor[5] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
-
-    }
-    else if(desired_input.mode == "NORMAL_OP"){
-        //calculate forward motors
-        motor_output.motor[0] = (-YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
-        motor_output.motor[1] = (YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
     
-        //calculate dive motors
-        motor_output.motor[2] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-        motor_output.motor[3] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-        motor_output.motor[4] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-        motor_output.motor[5] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
-    }
-    else{
-        motor_output.motor[0] = 1500; 
-        motor_output.motor[1] = 1500;
-        //calculate dive motors
-        motor_output.motor[2] = 1500;
-        motor_output.motor[3] = 1500;
-        motor_output.motor[4] = 1500;
-        motor_output.motor[5] = 1500;
-    }
+    //calculate forward motors
+    motor_output.motor[0] = (-YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
+    motor_output.motor[1] = (YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
 
+    //calculate dive motors
+    motor_output.motor[2] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+    motor_output.motor[3] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+    motor_output.motor[4] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+    motor_output.motor[5] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
     
-
-
     //clamp the values
     for(int i = 0 ; i < 6 ; i++){
     	if(motor_output.motor[i] > 1800){

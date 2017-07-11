@@ -34,32 +34,32 @@ void Hal::update_state(Hal_State state){
 }
 
 void Hal::reset(){
-	if(killed){
+	if(killed == 0){
 		current_state = HALT;
 		update_state(HALT);
 	}
 	else{
 
-		cout << "Reset Initiated"<< endl;
+		//cout << "Reset Initiated"<< endl;
 		
 		bouy_state = false;
 		gate_state = true;
 		path_state = false;
 
 		//initialize all settings to be the initial YPR
-		for(int i =1 ; i < 3 ; i++){
-			desired.rotation[i] = rotation[0];
+		for(int i =0 ; i < 3 ; i++){
+			desired.rotation[i] = rotation[i];
 		}
 		desired.throttle = 0;
-		desired.depth = 4.0;
-		desired.mode = "DIVE";
+		desired.depth = 1.5;
+		desired.mode = "NORMAL_OP";
 		bumped = 0;
 
 
 		ros::Duration d(10.0);
 		timer = ros::Time::now().toSec() + d.toSec();
 
-		if(rotation[0] == 0){
+		if(killed == 0){
 			update_state(RESET);
 		}
 		else{
@@ -91,7 +91,7 @@ void Hal::state_loop(Hal_State state){
 		state_check = "PATH";
 		if(path_marker.in_sight){
 			desired.rotation = path_marker.rotation;
-			desired.depth = 4;
+			desired.depth = 1.5;
 			desired.mode = "NORMAL_OP";
 			//Alex 2016-07-25: removed desired.throttle = 0 because as (as far as i can tell) there's no code to put it back to a normal value after the rotation
 			update_state(UPDATE_HDD);
@@ -113,7 +113,7 @@ void Hal::state_loop(Hal_State state){
 			state_check = "GATE";
 			cout << "Gate Detection" << endl;
 			//keep the initial settings dont change the direction
-			desired.depth = 4.0;
+			desired.depth = 1.5;
 			desired.throttle = 0;
 			update_state(UPDATE_HDD);
 
@@ -156,7 +156,7 @@ void Hal::state_loop(Hal_State state){
 		break;
 
 	case HALT:
-		if(!killed){
+		if(killed == 1){
 			update_state(Hal::RESET);
 		}
 		else{
@@ -186,38 +186,16 @@ Hal::Hal_State Hal::check_status(){
 	//if we even have any you loser
 	cout << "Checking status: " ;
 	Hal_State change_state;
-	if(int(desired.depth) == int(depth)){
-		//set mode to forward
-		desired.mode = "NORMAL_OP";
-		if(ros::Time::now().toSec() > timer && gate_state){
-
-			desired.throttle = 0;
-
-			gate_state = false;
-			path_state = true;
-			bouy_state = true;
-		}
-	}
 
 	//Alex 2016-07-25: arranged status checks in order of priority; before, a path marker would take priority over a buoy
 	if(killed){ //Alex 2016-07-25: added check for the kill switch; Not checking the switch here may be why the motors turned on unexpectedly.
 		change_state = HALT;
 	}
-	else if(bouy_state && red_bouy.in_sight){
-		change_state = BOUY_BUMP;
-	}
-	else if(path_state && path_marker.in_sight){
-		change_state =  PATH_DETECT;
-	}
-	else if(gate_state){
-		change_state =  GATE_DETECT;   
-	}
-	else if (!gate_state)
-	{
+	
 		// if we stay in this state too long should we just surface?
 		// are we human or are we dancer?
-		change_state = MAINTAIN_HDD;
-	}
+	change_state = MAINTAIN_HDD;
+	
 	cout << change_state << endl;
 
 	return change_state;
@@ -231,11 +209,11 @@ void Hal::maintain_heading(){
 }
 
 void Hal::set_rot(double _rotation[3]){
-	for (int i = 0 ; i < 3 ; i++){
+	for(int i =0 ; i < 3 ; i++){
 		rotation[i] = _rotation[i];
-		cout << i << " " << rotation[i] << endl;
 	}
 }
+
 void Hal::set_depth(double _depth){
 	depth = _depth;
 }

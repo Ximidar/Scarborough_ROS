@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 
 
 	ros::Publisher imu_pub = n.advertise<scarborough::YPR>(handler.IMU, 200);
-        sub = kill.subscribe(handler.KILL, 20, getdata_KILL);
+    sub = kill.subscribe(handler.KILL, 20, getdata_KILL);
 
 
 	
@@ -130,7 +130,7 @@ void IMU::read_IMU(){
 	        // read a packet from FIFO
 	        mpu.getFIFOBytes(fifoBuffer, packetSize);
 
-	        OUTPUT_READABLE_YAWPITCHROLL
+	        //OUTPUT_READABLE_YAWPITCHROLL
 	            // display Euler angles in degrees
 	            mpu.dmpGetQuaternion(&q, fifoBuffer);
 	            mpu.dmpGetGravity(&gravity, &q);

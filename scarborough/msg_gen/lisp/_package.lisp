@@ -1,19 +1,19 @@
 (cl:defpackage scarborough-msg
   (:use )
   (:export
-   "<YPR>"
-   "YPR"
-   "<DESIRED_DIRECTIONS>"
-   "DESIRED_DIRECTIONS"
-   "<VISION_OBJECTS>"
-   "VISION_OBJECTS"
-   "<DEPTH>"
-   "DEPTH"
    "<MOTOR_SPEED>"
    "MOTOR_SPEED"
-   "<KILL_SWITCH>"
-   "KILL_SWITCH"
    "<HAL>"
    "HAL"
+   "<DEPTH>"
+   "DEPTH"
+   "<DESIRED_DIRECTIONS>"
+   "DESIRED_DIRECTIONS"
+   "<YPR>"
+   "YPR"
+   "<KILL_SWITCH>"
+   "KILL_SWITCH"
+   "<VISION_OBJECTS>"
+   "VISION_OBJECTS"
   ))
 

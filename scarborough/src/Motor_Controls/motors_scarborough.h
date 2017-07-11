@@ -33,9 +33,7 @@ public:
 	void init();
 	void set_motor_speed();
 	void get_motor_values(scarborough::Motor_Speed _input);
-	bool check_kill_switch();
 	int arraySize(double array[]);
-	int i2cConvert(int address);
 	void kill_motors();
 	scarborough::Motor_Speed input;
 	bool killer;
