@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <string>
+#include <unistd.h>
 
 
 using namespace std;

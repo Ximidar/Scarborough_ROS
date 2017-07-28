@@ -48,7 +48,7 @@ class Depth(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_get_struct_f().pack(self.depth))
+      buff.write(_struct_f.pack(self.depth))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -61,7 +61,7 @@ class Depth(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.depth,) = _get_struct_f().unpack(str[start:end])
+      (self.depth,) = _struct_f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -74,7 +74,7 @@ class Depth(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      buff.write(_get_struct_f().pack(self.depth))
+      buff.write(_struct_f.pack(self.depth))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -88,18 +88,10 @@ class Depth(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.depth,) = _get_struct_f().unpack(str[start:end])
+      (self.depth,) = _struct_f.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-def _get_struct_I():
-    global _struct_I
-    return _struct_I
-_struct_f = None
-def _get_struct_f():
-    global _struct_f
-    if _struct_f is None:
-        _struct_f = struct.Struct("<f")
-    return _struct_f
+_struct_f = struct.Struct("<f")

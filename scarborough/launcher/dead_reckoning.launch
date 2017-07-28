@@ -9,7 +9,7 @@
 	</group>
 	
 	<group ns="scarborough">
-		<node pkg="scarborough" name="motor_controls" type="Motor_Controller"/>
+		<node pkg="scarborough" name="dead_motors" type="Dead_Motors"/>
 	</group>
 	
 

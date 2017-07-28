@@ -55,9 +55,17 @@ target_link_libraries(ArdI2C ${LOCAL_LIBS})
 ##############################################################################
 
 #This executable will be used for getting IMU data from the IMU and publishing it.
-rosbuild_add_executable(IMU src/IMU/IMU.cpp
-						src/IMU/MPU6050.cpp
-						src/IMU/I2Cdev.cpp)
+#rosbuild_add_executable(IMU src/IMU/IMU.cpp
+#						src/IMU/MPU6050.cpp
+#						src/IMU/I2Cdev.cpp)
+#
+#backup IMU2 executable
+FIND_LIBRARY(RT_LIBS libRTIMULib.so libRTIMULib.so.8 libRTIMULib.so.8.0.0 libRTIMULibGL.so libRTIMULibGL.so.8 libRTIMULibGL.so.8.0.0  /usr/local/lib/)
+
+rosbuild_add_executable(IMU2 src/IMU/RTLIB/IMU_main.cpp
+							 src/IMU/RTLIB/IMU2.cpp
+						)
+target_link_libraries(IMU2 ${RT_LIBS})
 
 #rosbuild_add_executable(Accel src/IMU/accelerometer/accel_main.cpp
 #							  src/IMU/accelerometer/accelerometer.cpp)
@@ -67,7 +75,15 @@ rosbuild_add_executable(IMU src/IMU/IMU.cpp
 ##############################################################################
 rosbuild_add_executable(Motor_Controller src/Motor_Controls/motors_scarborough.cpp
 									 src/Motor_Controls/I2Cdev.cpp
-									 src/Motor_Controls/Helm.cpp)	
+									 src/Motor_Controls/Helm.cpp
+									 )	
+
+##############################################################################
+#Dead Motors
+##############################################################################
+rosbuild_add_executable(Dead_Motors src/Dead_Motors/Dead_Motors_Main.cpp
+									src/Dead_Motors/Dead_Motors.cpp
+									src/Dead_Motors/I2Cdev.cpp)
 ##############################################################################
 #Hal Executable
 ##############################################################################

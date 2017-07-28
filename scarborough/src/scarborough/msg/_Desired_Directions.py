@@ -35,7 +35,7 @@ string mode"""
       super(Desired_Directions, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.rotation is None:
-        self.rotation = [0.] * 3
+        self.rotation = [0.,0.,0.]
       if self.throttle is None:
         self.throttle = 0
       if self.depth is None:
@@ -43,7 +43,7 @@ string mode"""
       if self.mode is None:
         self.mode = ''
     else:
-      self.rotation = [0.] * 3
+      self.rotation = [0.,0.,0.]
       self.throttle = 0
       self.depth = 0.
       self.mode = ''
@@ -60,15 +60,18 @@ string mode"""
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_get_struct_3f().pack(*self.rotation))
+      buff.write(_struct_3f.pack(*self.rotation))
       _x = self
-      buff.write(_get_struct_if().pack(_x.throttle, _x.depth))
+      buff.write(_struct_if.pack(_x.throttle, _x.depth))
       _x = self.mode
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -81,11 +84,11 @@ string mode"""
       end = 0
       start = end
       end += 12
-      self.rotation = _get_struct_3f().unpack(str[start:end])
+      self.rotation = _struct_3f.unpack(str[start:end])
       _x = self
       start = end
       end += 8
-      (_x.throttle, _x.depth,) = _get_struct_if().unpack(str[start:end])
+      (_x.throttle, _x.depth,) = _struct_if.unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -109,13 +112,16 @@ string mode"""
     try:
       buff.write(self.rotation.tostring())
       _x = self
-      buff.write(_get_struct_if().pack(_x.throttle, _x.depth))
+      buff.write(_struct_if.pack(_x.throttle, _x.depth))
       _x = self.mode
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
+      if python3:
+        buff.write(struct.pack('<I%sB'%length, length, *_x))
+      else:
+        buff.write(struct.pack('<I%ss'%length, length, _x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -133,7 +139,7 @@ string mode"""
       _x = self
       start = end
       end += 8
-      (_x.throttle, _x.depth,) = _get_struct_if().unpack(str[start:end])
+      (_x.throttle, _x.depth,) = _struct_if.unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -148,18 +154,5 @@ string mode"""
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-def _get_struct_I():
-    global _struct_I
-    return _struct_I
-_struct_3f = None
-def _get_struct_3f():
-    global _struct_3f
-    if _struct_3f is None:
-        _struct_3f = struct.Struct("<3f")
-    return _struct_3f
-_struct_if = None
-def _get_struct_if():
-    global _struct_if
-    if _struct_if is None:
-        _struct_if = struct.Struct("<if")
-    return _struct_if
+_struct_3f = struct.Struct("<3f")
+_struct_if = struct.Struct("<if")

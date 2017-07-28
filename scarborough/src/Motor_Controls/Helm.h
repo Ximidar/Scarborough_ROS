@@ -1,6 +1,7 @@
 #ifndef HELM_H
 #define HELM_H
 #include <control_toolbox/pid.h> 
+//#include <angles/angles.h>
 #include <iostream>
 #include "scarborough/Motor_Speed.h"
 #include "scarborough/Kill_Switch.h"
@@ -15,6 +16,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <boost/algorithm/clamp.hpp>
 
 using namespace std;
 
@@ -39,12 +41,18 @@ public:
 	void computron();
 	void reset();
 	void load_yaml();
+	double scale_output(double min_a, double max_a, double min_b, double max_b, double input);
 
-	//returns the smallest absolute value angle equivalent to the given angle
-	static double normalizeAngle(const double& angle); //degrees
+	//variables for pid init
+	double p;
+    double i ;
+    double d ;
+    double imax ;
+    double imin ;
 
 	double YAW_CONST, PITCH_CONST, ROLL_CONST, DEPTH_CONST;
 	double pid[3];
+	double yaw_out, pitch_out, roll_out, depth_out;
 
 
 
@@ -52,7 +60,7 @@ public:
 	scarborough::YPR ypr_input;
 	scarborough::Depth depth_input;
 	scarborough::Motor_Speed motor_output;
-	double yaw_out, pitch_out, roll_out, depth_out;
+	
 	ros::Time last_time;
 
 };

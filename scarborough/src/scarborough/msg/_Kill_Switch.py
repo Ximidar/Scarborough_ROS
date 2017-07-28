@@ -48,7 +48,7 @@ class Kill_Switch(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_get_struct_B().pack(self.killed))
+      buff.write(_struct_B.pack(self.killed))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -61,7 +61,7 @@ class Kill_Switch(genpy.Message):
       end = 0
       start = end
       end += 1
-      (self.killed,) = _get_struct_B().unpack(str[start:end])
+      (self.killed,) = _struct_B.unpack(str[start:end])
       self.killed = bool(self.killed)
       return self
     except struct.error as e:
@@ -75,7 +75,7 @@ class Kill_Switch(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      buff.write(_get_struct_B().pack(self.killed))
+      buff.write(_struct_B.pack(self.killed))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -89,19 +89,11 @@ class Kill_Switch(genpy.Message):
       end = 0
       start = end
       end += 1
-      (self.killed,) = _get_struct_B().unpack(str[start:end])
+      (self.killed,) = _struct_B.unpack(str[start:end])
       self.killed = bool(self.killed)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-def _get_struct_I():
-    global _struct_I
-    return _struct_I
-_struct_B = None
-def _get_struct_B():
-    global _struct_B
-    if _struct_B is None:
-        _struct_B = struct.Struct("<B")
-    return _struct_B
+_struct_B = struct.Struct("<B")

@@ -23,21 +23,7 @@ bool killed;
 scarborough::YPR _ypr;
 scarborough::Depth _depth;
 scarborough::Desired_Directions _desired;
-void getdata(const scarborough::Motor_Speed& msg){
 
-	//convert from boost int to c++ int
-	//for(int i = 0; i < 6 ; i++){
-
-	//	motors.motor_val[i] = msg.motor[i]; //boost::lexical_cast<int>(msg.motor[i]);
-
-	//}
-	//send values to class variable for further analysis
-
-	//motors.motor_val[0] = 1000;
-	//motors.motor_val[1] = 1000;
-	
-
-}
 void getdata_kill(const scarborough::Kill_Switch& msg){
 
 	killed = msg.killed;
@@ -51,13 +37,13 @@ void getdata_YPR(const scarborough::YPR& msg){
 }
 
 void getdata_DEPTH(const scarborough::Depth& msg){
-	//_depth = msg;
-	_depth.depth = -1.5;
+	_depth = msg;
+	//_depth.depth = -1.5;
 }
 
 void getdara_DESIRED(const scarborough::Desired_Directions& msg){
 	//_desired = msg;
-	_desired.depth = 4.0;
+	_desired.depth = 2;
 	_desired.throttle = 0;
 }
 
@@ -89,20 +75,26 @@ int main(int argc, char **argv){
 				 motors.kill_motors();
 				 helm.reset();
 
-				_desired.depth = 1.5;
+				_desired.depth = 2;
 				_desired.throttle = 0;
 				_desired.rotation[0] = _ypr.YPR[0];
 				_desired.rotation[1] = _ypr.YPR[1];
 				_desired.rotation[2] = _ypr.YPR[2];
 				_desired.mode = "NORMAL_OP";
 				restart = false;
+				cout << "Sleeping for 5 seconds" << endl;
+				motors.kill_motors();
+				sleep(5);
+				motors.kill_motors();
+				cout << "End Sleep" << endl;
 				helm.update_desired(_desired);
 			}
 
 			
 			helm.update_YPR(_ypr);
-			cout << _ypr << endl;
+			//cout << _ypr << endl;
 			helm.update_depth(_depth);
+			//cout << _depth << endl;
 			//add in hard codes for desired
 
 			
@@ -110,7 +102,6 @@ int main(int argc, char **argv){
 			
 			helm.update_helm();
 			helm.computron();
-			motors.get_motor_values(helm.motor_output);
 			motors.set_motor_speed();
 			
 			
@@ -128,6 +119,8 @@ int main(int argc, char **argv){
 
 		ros::spinOnce();
 	}
+	motors.kill_motors();
+
 }
 
 
@@ -143,34 +136,26 @@ void Motors_Scarborough::init(){
  * Set motor speed will write the motor values to their individual motors over i2c
  */
 void Motors_Scarborough::set_motor_speed(){
-	i2cdev.writeWord(0x04, (uint8_t)10, (uint16_t)input.motor[0]); //motor1
-	i2cdev.writeWord(0x04, (uint8_t)11, (uint16_t)input.motor[1] ); // motor2
-	i2cdev.writeWord(0x04, (uint8_t)12, (uint16_t)input.motor[2] ); // motor3
-	i2cdev.writeWord(0x04, (uint8_t)13, (uint16_t)input.motor[3] ); // motor4
-	i2cdev.writeWord(0x04, (uint8_t)14, (uint16_t)input.motor[4] ); //motor 5
-	i2cdev.writeWord(0x04, (uint8_t)15, (uint16_t)input.motor[5] ); //motor 6
+	i2cdev.writeWord(0x04, (uint8_t)10, (uint16_t)helm.motor_output.motor[0]); //motor1
+	i2cdev.writeWord(0x04, (uint8_t)11, (uint16_t)helm.motor_output.motor[1] ); // motor2
+	i2cdev.writeWord(0x04, (uint8_t)12, (uint16_t)helm.motor_output.motor[2] ); // motor3
+	i2cdev.writeWord(0x04, (uint8_t)13, (uint16_t)helm.motor_output.motor[3] ); // motor4
+	i2cdev.writeWord(0x04, (uint8_t)14, (uint16_t)helm.motor_output.motor[4] ); //motor 5
+	i2cdev.writeWord(0x04, (uint8_t)15, (uint16_t)helm.motor_output.motor[5] ); //motor 6
 
-	for(int i =0 ; i < 5 ; i++){
-		cout << input.motor[0] << endl;
+	cout<< helm.motor_output << endl;
 
-	}
+	
 	cout << endl;
 }
 
-/*
- * Get motor values will grab the motor values from the ROS system and set them to some class variables
- */
-void Motors_Scarborough::get_motor_values(scarborough::Motor_Speed _input){
-	input = _input;
-}
-
 void Motors_Scarborough::kill_motors(){
-	i2cdev.writeWord(0x04, 0, (uint16_t)1500); //motor1
-	i2cdev.writeWord(0x04, 1, (uint16_t)1500 ); // motor2
-	i2cdev.writeWord(0x04, 2, (uint16_t)1500 ); // motor3
-	i2cdev.writeWord(0x04, 3, (uint16_t)1500 ); // motor4
-	i2cdev.writeWord(0x04, 4, (uint16_t)1500 ); //motor 5
-	i2cdev.writeWord(0x04, 5, (uint16_t)1500 ); //motor 6
+	i2cdev.writeWord(0x04, 10, (uint16_t)1500); //motor1
+	i2cdev.writeWord(0x04, 11, (uint16_t)1500 ); // motor2
+	i2cdev.writeWord(0x04, 12, (uint16_t)1500 ); // motor3
+	i2cdev.writeWord(0x04, 13, (uint16_t)1500 ); // motor4
+	i2cdev.writeWord(0x04, 14, (uint16_t)1500 ); //motor 5
+	i2cdev.writeWord(0x04, 15, (uint16_t)1500 ); //motor 6
 }
 
 

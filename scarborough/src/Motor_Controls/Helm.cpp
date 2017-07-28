@@ -2,18 +2,24 @@
 
 Helm::Helm(){
     //here are the constants for making a signal stronger or weaker. 
-	YAW_CONST = 1;
-	PITCH_CONST = 1;
-	ROLL_CONST = 1;
-	DEPTH_CONST = 1;
+	YAW_CONST = 1.0;
+	PITCH_CONST = 1.0;
+	ROLL_CONST = 1.0;
+	DEPTH_CONST = 1.0;
 
     //this will initialize the PID value
 	load_yaml();
     //this gives the PID the P, I and D values then limits their output with a min and a max
-	yaw_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
-	pitch_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
-	roll_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
-	depth_pid.initPid(pid[0], pid[1], pid[2], 1200, 1800);
+
+    p = pid[0];
+    i = pid[1];
+    d = pid[2];
+    imax = 0.00;
+    imin = 2.00;
+	yaw_pid.initPid(p, i, d, imin, imax);
+	pitch_pid.initPid(p, i, d, imin, imax);
+	roll_pid.initPid(p, i, d, imin, imax);
+	depth_pid.initPid(p, i, d, imin, imax);
 
 }
 
@@ -46,6 +52,18 @@ void Helm::load_yaml(){
             case 'D':
                 D = atof( line.substr(1, line.length()).c_str() );
                 break;
+            case 'Y':
+                YAW_CONST = atof( line.substr(1, line.length()).c_str() );
+                break;
+            case 'O':
+                PITCH_CONST = atof( line.substr(1, line.length()).c_str() );
+                break;
+            case 'R':
+                ROLL_CONST = atof( line.substr(1, line.length()).c_str() );
+                break;
+            case 'S':
+                DEPTH_CONST = atof( line.substr(1, line.length()).c_str() );
+                break;
             default:
                 break;
 
@@ -62,6 +80,10 @@ void Helm::load_yaml(){
     cout << "P: " << pid[0] << endl;
     cout << "I: " << pid[1] << endl;
     cout << "D: " << pid[2] << endl;
+    cout << "YC" << YAW_CONST << endl;
+    cout << "PC" << PITCH_CONST << endl;
+    cout << "RC" << ROLL_CONST << endl; 
+    cout << "DC" << DEPTH_CONST << endl;
 
 }
 
@@ -78,10 +100,17 @@ void Helm::update_helm(){
     double depth_error = depth_input.depth - desired_input.depth;
 
     //measuring error over time
-	yaw_out = yaw_pid.updatePid(yaw_error, time - last_time);
-	pitch_out = pitch_pid.updatePid(pitch_error, time - last_time);
-	roll_out = roll_pid.updatePid(roll_error, time - last_time);
-	depth_out = depth_pid.updatePid(depth_error, time - last_time);
+	yaw_out = yaw_pid.computeCommand(yaw_error, time - last_time);
+    yaw_out = yaw_pid.computeCommand(yaw_error, yaw_out, time - last_time);
+
+	pitch_out = pitch_pid.computeCommand(pitch_error, time - last_time);
+    pitch_out = pitch_pid.computeCommand(pitch_error, pitch_out, time - last_time);
+
+	roll_out = roll_pid.computeCommand(roll_error, time - last_time);
+    roll_out = roll_pid.computeCommand(roll_error, roll_out, time - last_time);
+
+	depth_out = depth_pid.computeCommand(depth_error, time - last_time);
+    depth_out = depth_pid.computeCommand(depth_error, depth_out, time - last_time);
 
     //grab time again
 	last_time = ros::Time::now();	
@@ -91,23 +120,33 @@ void Helm::computron(){
 
     
     //calculate forward motors
-    motor_output.motor[0] = (-YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
-    motor_output.motor[1] = (YAW_CONST * yaw_out) + (PITCH_CONST * pitch_out) + desired_input.throttle;
+    motor_output.motor[0] = (-YAW_CONST * yaw_out) + desired_input.throttle;
+    motor_output.motor[1] = (YAW_CONST * yaw_out) + desired_input.throttle;
 
     //calculate dive motors
-    motor_output.motor[2] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-    motor_output.motor[3] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-    motor_output.motor[4] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
-    motor_output.motor[5] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
+    motor_output.motor[2] = (-PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+    motor_output.motor[3] = (-PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+    motor_output.motor[4] = (PITCH_CONST * pitch_out) + (ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out);
+    motor_output.motor[5] = (PITCH_CONST * pitch_out) + (-ROLL_CONST * roll_out) + (-DEPTH_CONST * depth_out );
     
     //clamp the values
     for(int i = 0 ; i < 6 ; i++){
-    	if(motor_output.motor[i] > 1800){
-    		motor_output.motor[i] = 1800;
-    	}
-    	if(motor_output.motor[i] < 1200){
-    		motor_output.motor[i] = 1200;
-    	}
+
+        //clamp motor output to 50000
+        if( motor_output.motor[i] > 10000){
+            motor_output.motor[i] = 10000;
+        }
+        else if (motor_output.motor[i] < -10000){
+            motor_output.motor[i] = -10000;
+        }
+
+        if (motor_output.motor[i] > 0){
+            motor_output.motor[i] = (int)scale_output(0, 10000.00, 1525.00, 1800.00, (double)motor_output.motor[i]);
+        }
+        else if (motor_output.motor[i] <= 0){
+            motor_output.motor[i] = (int)scale_output(-10000.00, 0.00, 1200.00, 1475.00, (double)motor_output.motor[i]);
+        }
+    	
     }
 }
 
@@ -131,15 +170,9 @@ void Helm::update_depth(scarborough::Depth _depth){
 	depth_input = _depth;
 }
 
-double Helm::normalizeAngle(const double& angle)
-{
-	double result = angle;
-	
-	if (result > 180)
-		result -= 360;
-	
-	if (result < -180)
-		result += 360;
-	
-	return result;
+double Helm::scale_output(double istart, double istop, double ostart, double ostop, double value){
+    
+    double output = ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
+    //cout << output << endl;
+    return output;
 }

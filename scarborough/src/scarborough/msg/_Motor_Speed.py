@@ -33,9 +33,9 @@ class Motor_Speed(genpy.Message):
       super(Motor_Speed, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.motor is None:
-        self.motor = [0] * 6
+        self.motor = [0,0,0,0,0,0]
     else:
-      self.motor = [0] * 6
+      self.motor = [0,0,0,0,0,0]
 
   def _get_types(self):
     """
@@ -49,7 +49,7 @@ class Motor_Speed(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_get_struct_6i().pack(*self.motor))
+      buff.write(_struct_6i.pack(*self.motor))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -62,7 +62,7 @@ class Motor_Speed(genpy.Message):
       end = 0
       start = end
       end += 24
-      self.motor = _get_struct_6i().unpack(str[start:end])
+      self.motor = _struct_6i.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -95,12 +95,4 @@ class Motor_Speed(genpy.Message):
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-def _get_struct_I():
-    global _struct_I
-    return _struct_I
-_struct_6i = None
-def _get_struct_6i():
-    global _struct_6i
-    if _struct_6i is None:
-        _struct_6i = struct.Struct("<6i")
-    return _struct_6i
+_struct_6i = struct.Struct("<6i")
